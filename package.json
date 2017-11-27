@@ -1,0 +1,14 @@
+{
+  "name": "daedalusBot",
+  "version": "0.0.1",
+  "description": "Do the labrynth game",
+  "main": "Daedalus.js",
+  "author": "Andrew Barrett",
+  "license": "Northeastern",
+  "dependencies": {
+    "body-parser": "^1.x.x",
+    "botkit": "^0.6.7",
+    "express": "^4.x.x",
+    "request": "2.56.x"
+  }
+}
