@@ -22,7 +22,7 @@ var labyrinthchannelid = 'C7TBY98TS';
 var daedalusemoji = "https://avatars.slack-edge.com/2017-11-08/269162770516_e2c4553016a99b14da83_72.png";
 var bot = controller.spawn({
 
-  token: "xoxb-270188256679-NbLhI1dDJq2KoEnsBVE0pfBN"
+  token: "xoxb-270188256679-Q6pS3lHq9nLwT7QW2cPsxFFN"
 
 })
 
