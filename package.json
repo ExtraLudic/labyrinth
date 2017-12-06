@@ -5,6 +5,7 @@
   "main": "Daedalus.js",
   "author": "Andrew Barrett",
   "license": "Northeastern",
+  "scripts": { "start": "node Daedalus.js" },
   "dependencies": {
     "body-parser": "^1.x.x",
     "botkit": "^0.6.7",
