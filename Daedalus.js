@@ -7,8 +7,28 @@ var port = process.env.PORT || 1337;
 var Botkit = require('botkit');
 
 var controller = Botkit.slackbot({
+  json_file_store: './db_slackbutton_bot/',
   interactive_replies: true,
   require_delivery: true
+}).configureSlackApp({
+    clientId: 265980639123.282171652369,
+    clientSecret: '35babee62ecaff4b61f46e5a21e32d49',
+    scopes: ['commands', 'bot', 'client'],
+});;
+
+controller.setupWebserver((port), function(err, webserver) {
+    controller.createWebhookEndpoints(controller.webserver);
+
+    controller.createOauthEndpoints(controller.webserver, function(err, req, res) {
+        if (err) {
+            res.status(500).send('ERROR: ' + err);
+        } else {
+            res.send('Success!');
+        }
+    });
+
+    // If not also opening an RTM connection
+    controller.startTicking();
 });
 
 var currentRoom = 1;
@@ -23,7 +43,7 @@ var labyrinthchannelid = 'C7TBY98TS';
 var daedalusemoji = "https://avatars.slack-edge.com/2017-11-08/269162770516_e2c4553016a99b14da83_72.png";
 var bot = controller.spawn({
 
-  token: "xoxb-270188256679-jETUTA0D57vxXNuJIt0LezfD"
+  token: "xoxb-283934994183-2GR7HDgIz31GR5MnyHnpcXL9"
 
 })
 
@@ -69,10 +89,10 @@ bot.startRTM(function(err,bot,payload) {
 
 controller.on('interactive_message_callback', function(bot, message) {
 
-    bot.say({
+    bot.reply(message, {
         username: 'Daedalus',
         title: "Room 1 - Daedalus",
-        text: message.text,
+        text: "I'm sorry, what?",
         channel: bottestingid,
         icon_url: daedalusemoji
     });
