@@ -60,6 +60,7 @@ bot.startRTM(function(err,bot,payload) {
   bot.say(
         {
         username: 'Daedalus',
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments:
         [
@@ -92,6 +93,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(message.actions[0].name.match("enterlabyrinth") || message.actions[0].name.match("newlabyrinth")){ 
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -134,6 +136,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(solvedPuzzles[0] == "default") {
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -166,6 +169,7 @@ controller.on('interactive_message_callback', function(bot, message) {
       bot.reply(message,
         {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -204,6 +208,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(solvedPuzzles[1] == "default") {
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -251,6 +256,7 @@ controller.on('interactive_message_callback', function(bot, message) {
       bot.reply(message,
         {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -289,6 +295,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(solvedPuzzles[2] == "default") {
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -330,6 +337,7 @@ controller.on('interactive_message_callback', function(bot, message) {
       bot.reply(message,
         {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -368,6 +376,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(solvedPuzzles[3] == "default") {
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -409,6 +418,7 @@ controller.on('interactive_message_callback', function(bot, message) {
       bot.reply(message,
         {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -447,6 +457,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(solvedPuzzles[4] == "default") {
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -488,6 +499,7 @@ controller.on('interactive_message_callback', function(bot, message) {
       bot.reply(message,
         {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -526,6 +538,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(solvedPuzzles[5] == "default") {
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -573,6 +586,7 @@ controller.on('interactive_message_callback', function(bot, message) {
       bot.reply(message,
         {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -624,6 +638,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     }
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -637,6 +652,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(presevenroom == 3) {
       bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -675,6 +691,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     else if(presevenroom == 4) {
       bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -713,6 +730,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     else if(presevenroom == 8) {
       bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -751,6 +769,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     else if(presevenroom == 9) {
       bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -791,6 +810,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     bot.reply(message,
         {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -829,6 +849,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(solvedPuzzles[7] == "default") {
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -870,6 +891,7 @@ controller.on('interactive_message_callback', function(bot, message) {
       bot.reply(message,
         {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -908,6 +930,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(solvedPuzzles[8] == "default") {
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -949,6 +972,7 @@ controller.on('interactive_message_callback', function(bot, message) {
       bot.reply(message,
         {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -987,6 +1011,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(solvedPuzzles[9] == "default") {
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1028,6 +1053,7 @@ controller.on('interactive_message_callback', function(bot, message) {
       bot.reply(message,
         {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1066,6 +1092,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(lockedPuzzles[0] == false){
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1083,6 +1110,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         {
         username: 'Daedalus',
         text: "Puzzle 1 is locked. Please wait until I tell you the puzzle is unlocked.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         }
         );
@@ -1092,6 +1120,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(lockedPuzzles[1] == false){
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1109,6 +1138,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         {
         username: 'Daedalus',
         text: "Puzzle 2 is locked. Please wait until I tell you the puzzle is unlocked.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         }
         );
@@ -1118,6 +1148,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(lockedPuzzles[2] == false){
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1135,6 +1166,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         {
         username: 'Daedalus',
         text: "Puzzle 3 is locked. Please wait until I tell you the puzzle is unlocked.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         }
         );
@@ -1144,6 +1176,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(lockedPuzzles[3] == false) {
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1161,6 +1194,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         {
         username: 'Daedalus',
         text: "Puzzle 4 is locked. Please wait until I tell you the puzzle is unlocked.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         }
         );
@@ -1171,6 +1205,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(lockedPuzzles[4] == false) {
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1188,6 +1223,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         {
         username: 'Daedalus',
         text: "Puzzle 5 is locked. Please wait until I tell you the puzzle is unlocked.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         }
         );
@@ -1198,6 +1234,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(lockedPuzzles[5] == false) {
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1215,6 +1252,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         {
         username: 'Daedalus',
         text: "Puzzle 6 is locked. Please wait until I tell you the puzzle is unlocked.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         }
         );
@@ -1225,6 +1263,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(lockedPuzzles[6] == false) {
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1242,6 +1281,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         {
         username: 'Daedalus',
         text: "Puzzle 7 is locked. Please wait until I tell you the puzzle is unlocked.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         }
         );
@@ -1252,6 +1292,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(lockedPuzzles[7] == false) {
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1269,6 +1310,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         {
         username: 'Daedalus',
         text: "Puzzle 8 is locked. Please wait until I tell you the puzzle is unlocked.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         }
         );
@@ -1279,6 +1321,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(lockedPuzzles[8] == false) {
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1296,6 +1339,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         {
         username: 'Daedalus',
         text: "Puzzle 9 is locked. Please wait until I tell you the puzzle is unlocked.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         }
         );
@@ -1306,6 +1350,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     if(lockedPuzzles[9] == false) {
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1323,6 +1368,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         {
         username: 'Daedalus',
         text: "Puzzle 10 is locked. Please wait until I tell you the puzzle is unlocked.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         }
         );
@@ -1336,6 +1382,7 @@ controller.hears(["Key 1:"],["direct_message","direct_mention","mention","ambien
     if(message.text.toUpperCase() == "KEY 1: A GUARD DOG" || message.text.toUpperCase() == "KEY 1: GUARD DOG" || message.text.toUpperCase() == "KEY 1: DOG" || message.text.toUpperCase() == "KEY 1: A DOG"){
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1370,6 +1417,7 @@ controller.hears(["Key 1:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Incorrect. You cannot attempt to unlock this door again for one minute.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji
         }
         );
@@ -1380,6 +1428,7 @@ controller.hears(["Key 1:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Puzzle 1 is unlocked.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji
         }
         );
@@ -1394,6 +1443,7 @@ controller.hears(["Key 2:"],["direct_message","direct_mention","mention","ambien
     bot.reply(message, {
         text: "",
         icon_url: daedalusemoji,
+        channel: labyrinthchannelid,
         attachments: [
             {
                 username: 'Daedalus',
@@ -1442,6 +1492,7 @@ controller.hears(["Key 2:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Incorrect. You cannot attempt to unlock this door again for one minute.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji
         }
         );
@@ -1452,6 +1503,7 @@ controller.hears(["Key 2:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Puzzle 2 is unlocked.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji
         }
         );
@@ -1465,6 +1517,7 @@ controller.hears(["Key 3:"],["direct_message","direct_mention","mention","ambien
     bot.reply(message, {
         text: "",
         icon_url: daedalusemoji,
+        channel: labyrinthchannelid,
         attachments: [
             {
                 username: 'Daedalus',
@@ -1507,6 +1560,7 @@ controller.hears(["Key 3:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Incorrect. You cannot attempt to unlock this door again for one minute.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji
         }
         );
@@ -1517,6 +1571,7 @@ controller.hears(["Key 3:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Puzzle 3 is unlocked.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji
         }
         );
@@ -1529,6 +1584,7 @@ controller.hears(["Key 4:"],["direct_message","direct_mention","mention","ambien
     if(message.text.toUpperCase() == "KEY 4: 54 LEVELS" || message.text.toUpperCase() == "KEY 4: 54" || message.text.toUpperCase() == "KEY 4: FIFTY-FOUR LEVELS" || message.text.toUpperCase() == "KEY 4: FIFTY-FOUR" || message.text.toUpperCase() == "KEY 4: FIFTYFOUR LEVELS" || message.text.toUpperCase() == "KEY 4: FIFTYFOUR LEVELS"){
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1572,6 +1628,7 @@ controller.hears(["Key 4:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Incorrect. You cannot attempt to unlock this door again for one minute.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji
         }
         );
@@ -1582,6 +1639,7 @@ controller.hears(["Key 4:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Puzzle 4 is unlocked.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji
         }
         );
@@ -1595,6 +1653,7 @@ controller.hears(["Key 5:"],["direct_message","direct_mention","mention","ambien
     bot.reply(message, {
         text: "",
         icon_url: daedalusemoji,
+        channel: labyrinthchannelid,
         attachments: [
             {
                 username: 'Daedalus',
@@ -1637,6 +1696,7 @@ controller.hears(["Key 5:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Incorrect. You cannot attempt to unlock this door again for one minute.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji
         }
         );
@@ -1647,6 +1707,7 @@ controller.hears(["Key 5:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Puzzle 5 is unlocked.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji
         }
         );
@@ -1659,6 +1720,7 @@ controller.hears(["Key 6:"],["direct_message","direct_mention","mention","ambien
     if(message.text.toUpperCase() == "KEY 6: 82" || message.text.toUpperCase() == "KEY 6: 82 YEARS OLD" || message.text.toUpperCase() == "KEY 6: 82 Y/O" || message.text.toUpperCase() == "KEY 6: EIGHTY-TWO" || message.text.toUpperCase() == "KEY 6: EIGHTY-TWO YEARS OLD" || message.text.toUpperCase() == "KEY 6: EIGHTY-TWO Y/O" || message.text.toUpperCase() == "KEY 6: EIGHTYTWO" || message.text.toUpperCase() == "KEY 6: EIGHTYTWO YEARS OLD" || message.text.toUpperCase() == "KEY 6: EIGHTYTWO Y/O"){
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1708,6 +1770,7 @@ controller.hears(["Key 6:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Incorrect. You cannot attempt to unlock this door again for one minute.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji
         }
         );
@@ -1718,6 +1781,7 @@ controller.hears(["Key 6:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Puzzle 6 is unlocked.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji
         }
         );
@@ -1743,6 +1807,7 @@ controller.hears(["Key 7:"],["direct_message","direct_mention","mention","ambien
     }
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1756,6 +1821,7 @@ controller.hears(["Key 7:"],["direct_message","direct_mention","mention","ambien
     if(presevenroom == 3) {
       bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1794,6 +1860,7 @@ controller.hears(["Key 7:"],["direct_message","direct_mention","mention","ambien
     else if(presevenroom == 4) {
       bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1832,6 +1899,7 @@ controller.hears(["Key 7:"],["direct_message","direct_mention","mention","ambien
     else if(presevenroom == 8) {
       bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1870,6 +1938,7 @@ controller.hears(["Key 7:"],["direct_message","direct_mention","mention","ambien
     else if(presevenroom == 9) {
       bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1911,6 +1980,7 @@ controller.hears(["Key 7:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Incorrect. You cannot attempt to unlock this door again for one minute.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji
         }
         );
@@ -1921,6 +1991,7 @@ controller.hears(["Key 7:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Puzzle 7 is unlocked.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji
         }
         );
@@ -1933,6 +2004,7 @@ controller.hears(["Key 8:"],["direct_message","direct_mention","mention","ambien
     if(message.text.toUpperCase() == "KEY 8: PASSWORD" || message.text.toUpperCase() == "KEY 8: P A S S W O R D"){
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -1976,6 +2048,7 @@ controller.hears(["Key 8:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Incorrect. You cannot attempt to unlock this door again for one minute.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji
         }
         );
@@ -1986,6 +2059,7 @@ controller.hears(["Key 8:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Puzzle 8 is unlocked.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji
         }
         );
@@ -1998,6 +2072,7 @@ controller.hears(["Key 9:"],["direct_message","direct_mention","mention","ambien
     if(message.text.toUpperCase() == "KEY 9: 8" || message.text.toUpperCase() == "KEY 9: 8 TIMES" || message.text.toUpperCase() == "KEY 9: HE HAS TO CROSS 8 TIMES" || message.text.toUpperCase() == "KEY 9: HE HAS TO CROSS THE RIVER 8 TIMES" || message.text.toUpperCase() == "KEY 9: EIGHT" || message.text.toUpperCase() == "KEY 9: EIGHT TIMES" || message.text.toUpperCase() == "KEY 9: HE HAS TO CROSS EIGHT TIMES" || message.text.toUpperCase() == "KEY 9: HE HAS TO CROSS THE RIVER EIGHT TIMES"){
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -2041,6 +2116,7 @@ controller.hears(["Key 9:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Incorrect. You cannot attempt to unlock this door again for one minute.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji
         }
         );
@@ -2051,6 +2127,7 @@ controller.hears(["Key 9:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Puzzle 9 is unlocked.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji
         }
         );
@@ -2063,6 +2140,7 @@ controller.hears(["Key 10:"],["direct_message","direct_mention","mention","ambie
     if(message.text.toUpperCase() == "KEY 10: 6174219111"){
     bot.reply(message, {
         text: "",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji,
         attachments: [
             {
@@ -2107,6 +2185,7 @@ controller.hears(["Key 10:"],["direct_message","direct_mention","mention","ambie
         {
         username: 'Daedalus',
         text: "Incorrect. You cannot attempt to unlock this door again for one minute.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji
         }
         );
@@ -2117,6 +2196,7 @@ controller.hears(["Key 10:"],["direct_message","direct_mention","mention","ambie
         {
         username: 'Daedalus',
         text: "Puzzle 10 is unlocked.",
+        channel: labyrinthchannelid,
         icon_url: daedalusemoji
         }
         );
