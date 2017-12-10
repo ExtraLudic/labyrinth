@@ -568,7 +568,7 @@ controller.on('interactive_message_callback', function(bot, message) {
                         "value": "4",
                         "style": solvedPuzzles[3],
                         "type": "button"
-                    }
+                    },
                     {
                         "name": "Give Coin",
                         "text": "Give coin to peacock",
@@ -1750,7 +1750,7 @@ controller.hears(["Key 6:"],["direct_message","direct_mention","mention","ambien
                         "value": "4",
                         "style": solvedPuzzles[3],
                         "type": "button"
-                    }
+                    },
                     {
                         "name": "Give Coin",
                         "text": "Give coin to peacock",
