@@ -1168,7 +1168,7 @@ controller.on('interactive_message_callback', function(bot, message) {
             {
                 username: 'Daedalus',
                 title: "Room 1 - Daedalus",
-                text: 'What is the answer to Puzzle #1?'
+                text: 'What is the answer to Puzzle #1? Answer in the form of "Key 1: ANSWER"'
             }
         ]
     });
@@ -1196,7 +1196,7 @@ controller.on('interactive_message_callback', function(bot, message) {
             {
                 username: 'Daedalus',
                 title: "Room 2 - The Pantheon",
-                text: 'What is the answer to Puzzle #2?'
+                text: 'What is the answer to Puzzle #2? Answer in the form of "Key 2: ANSWER"'
             }
         ]
     });
@@ -1224,7 +1224,7 @@ controller.on('interactive_message_callback', function(bot, message) {
             {
                 username: 'Daedalus',
                 title: "Room 3 - Zeus",
-                text: 'What is the answer to Puzzle #3?'
+                text: 'What is the answer to Puzzle #3? Answer in the form of "Key 3: ANSWER"'
             }
         ]
     });
@@ -1252,7 +1252,7 @@ controller.on('interactive_message_callback', function(bot, message) {
             {
                 username: 'Daedalus',
                 title: "Room 4 - Hera",
-                text: 'What is the answer to Puzzle #4?'
+                text: 'What is the answer to Puzzle #4? Answer in the form of "Key 4: ANSWER"'
             }
         ]
     });
@@ -1281,7 +1281,7 @@ controller.on('interactive_message_callback', function(bot, message) {
             {
                 username: 'Daedalus',
                 title: "Room 5 - Poseidon",
-                text: 'What is the answer to Puzzle #5?'
+                text: 'What is the answer to Puzzle #5? Answer in the form of "Key 5: ANSWER"'
             }
         ]
     });
@@ -1310,7 +1310,7 @@ controller.on('interactive_message_callback', function(bot, message) {
             {
                 username: 'Daedalus',
                 title: "Room 6 - Demeter",
-                text: 'What is the answer to Puzzle #6?'
+                text: 'What is the answer to Puzzle #6? Answer in the form of "Key 6: ANSWER"'
             }
         ]
     });
@@ -1339,7 +1339,7 @@ controller.on('interactive_message_callback', function(bot, message) {
             {
                 username: 'Daedalus',
                 title: "Room 7 - Athena",
-                text: 'What is the answer to Puzzle #7?'
+                text: 'What is the answer to Puzzle #7? Answer in the form of "Key 7: ANSWER"'
             }
         ]
     });
@@ -1368,7 +1368,7 @@ controller.on('interactive_message_callback', function(bot, message) {
             {
                 username: 'Daedalus',
                 title: "Room 8 - Apollo & Artemis",
-                text: 'What is the answer to Puzzle #8?'
+                text: 'What is the answer to Puzzle #8? Answer in the form of "Key 8: ANSWER"'
             }
         ]
     });
@@ -1397,7 +1397,7 @@ controller.on('interactive_message_callback', function(bot, message) {
             {
                 username: 'Daedalus',
                 title: "Room 9 - Ares",
-                text: 'What is the answer to Puzzle #9?'
+                text: 'What is the answer to Puzzle #9? Answer in the form of "Key 9: ANSWER"'
             }
         ]
     });
@@ -1426,7 +1426,7 @@ controller.on('interactive_message_callback', function(bot, message) {
             {
                 username: 'Daedalus',
                 title: "Room 10 - Aphrodite",
-                text: 'What is the answer to Puzzle #10?'
+                text: 'What is the answer to Puzzle #10? Answer in the form of "Key 10: ANSWER"'
             }
         ]
     });
@@ -1478,6 +1478,7 @@ controller.hears(["Key 1:"],["direct_message","direct_mention","mention","ambien
             }
         ]
     });
+    puzzleQuestionAsked[0] = false;
     solvedPuzzles[0] = "default";
     currentRoom = 1;
     doors = [5, 8, 4];
@@ -1553,6 +1554,7 @@ controller.hears(["Key 2:"],["direct_message","direct_mention","mention","ambien
             }
         ]
     });
+    puzzleQuestionAsked[1] = false;
     solvedPuzzles[1] = "default";
     currentRoom = 2;
     doors = [1, 6, 3];
@@ -1621,6 +1623,7 @@ controller.hears(["Key 3:"],["direct_message","direct_mention","mention","ambien
             }
         ]
     });
+    puzzleQuestionAsked[2] = false;
     solvedPuzzles[2] = "default";
     currentRoom = 3;
     doors = [7, 9, 4];
@@ -1689,6 +1692,7 @@ controller.hears(["Key 4:"],["direct_message","direct_mention","mention","ambien
             }
         ]
     });
+    puzzleQuestionAsked[3] = false;
     solvedPuzzles[3] = "default";
     currentRoom = 4;
     doors = [7, 3, 8];
@@ -1757,6 +1761,7 @@ controller.hears(["Key 5:"],["direct_message","direct_mention","mention","ambien
             }
         ]
     });
+    puzzleQuestionAsked[4] = false;
     solvedPuzzles[4] = "default";
     currentRoom = 5;
     doors = [10, 9, 6];
@@ -1831,6 +1836,7 @@ controller.hears(["Key 6:"],["direct_message","direct_mention","mention","ambien
             }
         ]
     });
+    puzzleQuestionAsked[5] = false;
     solvedPuzzles[5] = "default";
     currentRoom = 6;
     doors = [8, 3, 4];
@@ -2044,6 +2050,7 @@ controller.hears(["Key 7:"],["direct_message","direct_mention","mention","ambien
         ]
     });
     }
+    puzzleQuestionAsked[6] = false;
     }
     else {
       bot.say(
@@ -2109,6 +2116,7 @@ controller.hears(["Key 8:"],["direct_message","direct_mention","mention","ambien
             }
         ]
     });
+    puzzleQuestionAsked[7] = false;
     solvedPuzzles[7] = "default";
     currentRoom = 8;
     doors = [7, 6, 9];
@@ -2177,6 +2185,7 @@ controller.hears(["Key 9:"],["direct_message","direct_mention","mention","ambien
             }
         ]
     });
+    puzzleQuestionAsked[8] = false;
     solvedPuzzles[8] = "default";
     currentRoom = 9;
     doors = [7, 3, 4];
@@ -2245,6 +2254,7 @@ controller.hears(["Key 10:"],["direct_message","direct_mention","mention","ambie
             }
         ]
     });
+    puzzleQuestionAsked[9] = false;
     haveRubyKey = true;
     solvedPuzzles[9] = "default";
     currentRoom = 10;
