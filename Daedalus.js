@@ -166,6 +166,13 @@ controller.on('interactive_message_callback', function(bot, message) {
     doors = [5, 8, 4];
     }
     else {
+      var leftdoor = 0;
+      if(doors.indexOf(1) == 0) {
+        leftdoor = doors[(doors.indexOf(1) + 2) % 3];
+      }
+      else {
+        leftdoor = doors[(doors.indexOf(1) - 1) % 3];
+      }
       bot.reply(message,
         {
         text: "",
@@ -187,8 +194,8 @@ controller.on('interactive_message_callback', function(bot, message) {
                     },
                     {
                         "name": "Check door to left",
-                        "text": "Try door " + doors[(doors.indexOf(1) - 1) % 3],
-                        "value": doors[(doors.indexOf(1) - 1) % 3].toString(),
+                        "text": "Try door " + leftdoor,
+                        "value": leftdoor.toString(),
                         "type": "button"
                     },
                     {
@@ -253,6 +260,13 @@ controller.on('interactive_message_callback', function(bot, message) {
     doors = [1, 6, 3];
     }
     else {
+      var leftdoor = 0;
+      if(doors.indexOf(2) == 0) {
+        leftdoor = doors[(doors.indexOf(2) + 2) % 3];
+      }
+      else {
+        leftdoor = doors[(doors.indexOf(2) - 1) % 3];
+      }
       bot.reply(message,
         {
         text: "",
@@ -274,8 +288,8 @@ controller.on('interactive_message_callback', function(bot, message) {
                     },
                     {
                         "name": "Check door to left",
-                        "text": "Try door " + doors[(doors.indexOf(2) - 1) % 3],
-                        "value": doors[(doors.indexOf(2) - 1) % 3].toString(),
+                        "text": "Try door " + leftdoor,
+                        "value": leftdoor.toString(),
                         "type": "button"
                     },
                     {
@@ -334,6 +348,13 @@ controller.on('interactive_message_callback', function(bot, message) {
     doors = [7, 9, 4];
    }
    else {
+    var leftdoor = 0;
+      if(doors.indexOf(3) == 0) {
+        leftdoor = doors[(doors.indexOf(3) + 2) % 3];
+      }
+      else {
+        leftdoor = doors[(doors.indexOf(3) - 1) % 3];
+      }
       bot.reply(message,
         {
         text: "",
@@ -355,8 +376,8 @@ controller.on('interactive_message_callback', function(bot, message) {
                     },
                     {
                         "name": "Check door to left",
-                        "text": "Try door " + doors[(doors.indexOf(3) - 1) % 3],
-                        "value": doors[(doors.indexOf(3) - 1) % 3].toString(),
+                        "text": "Try door " + leftdoor,
+                        "value": leftdoor.toString(),
                         "type": "button"
                     },
                     {
@@ -415,6 +436,13 @@ controller.on('interactive_message_callback', function(bot, message) {
     doors = [7, 3, 8];
     }
     else {
+      var leftdoor = 0;
+      if(doors.indexOf(4) == 0) {
+        leftdoor = doors[(doors.indexOf(4) + 2) % 3];
+      }
+      else {
+        leftdoor = doors[(doors.indexOf(4) - 1) % 3];
+      }
       bot.reply(message,
         {
         text: "",
@@ -436,8 +464,8 @@ controller.on('interactive_message_callback', function(bot, message) {
                     },
                     {
                         "name": "Check door to left",
-                        "text": "Try door " + doors[(doors.indexOf(4) - 1) % 3],
-                        "value": doors[(doors.indexOf(4) - 1) % 3].toString(),
+                        "text": "Try door " + leftdoor,
+                        "value": leftdoor.toString(),
                         "type": "button"
                     },
                     {
@@ -496,6 +524,13 @@ controller.on('interactive_message_callback', function(bot, message) {
     doors = [10, 9, 6];
     }
     else {
+      var leftdoor = 0;
+      if(doors.indexOf(5) == 0) {
+        leftdoor = doors[(doors.indexOf(5) + 2) % 3];
+      }
+      else {
+        leftdoor = doors[(doors.indexOf(5) - 1) % 3];
+      }
       bot.reply(message,
         {
         text: "",
@@ -517,8 +552,8 @@ controller.on('interactive_message_callback', function(bot, message) {
                     },
                     {
                         "name": "Check door to left",
-                        "text": "Try door " + doors[(doors.indexOf(5) - 1) % 3],
-                        "value": doors[(doors.indexOf(5) - 1) % 3].toString(),
+                        "text": "Try door " + leftdoor,
+                        "value": leftdoor.toString(),
                         "type": "button"
                     },
                     {
@@ -583,6 +618,13 @@ controller.on('interactive_message_callback', function(bot, message) {
     doors = [8, 3, 4];
     }
     else {
+      var leftdoor = 0;
+      if(doors.indexOf(6) == 0) {
+        leftdoor = doors[(doors.indexOf(6) + 2) % 3];
+      }
+      else {
+        leftdoor = doors[(doors.indexOf(6) - 1) % 3];
+      }
       bot.reply(message,
         {
         text: "",
@@ -604,8 +646,8 @@ controller.on('interactive_message_callback', function(bot, message) {
                     },
                     {
                         "name": "Check door to left",
-                        "text": "Try door " + doors[(doors.indexOf(6) - 1) % 3],
-                        "value": doors[(doors.indexOf(6) - 1) % 3].toString(),
+                        "text": "Try door " + leftdoor,
+                        "value": leftdoor.toString(),
                         "type": "button"
                     },
                     {
@@ -807,6 +849,13 @@ controller.on('interactive_message_callback', function(bot, message) {
     }
   } 
   else {
+    var leftdoor = 0;
+      if(doors.indexOf(7) == 0) {
+        leftdoor = doors[(doors.indexOf(7) + 2) % 3];
+      }
+      else {
+        leftdoor = doors[(doors.indexOf(7) - 1) % 3];
+      }
     bot.reply(message,
         {
         text: "",
@@ -828,8 +877,8 @@ controller.on('interactive_message_callback', function(bot, message) {
                     },
                     {
                         "name": "Check door to left",
-                        "text": "Try door " + doors[(doors.indexOf(7) - 1) % 3],
-                        "value": doors[(doors.indexOf(7) - 1) % 3].toString(),
+                        "text": "Try door " + leftdoor,
+                        "value": leftdoor.toString(),
                         "type": "button"
                     },
                     {
@@ -888,6 +937,13 @@ controller.on('interactive_message_callback', function(bot, message) {
     doors = [7, 6, 9];
     }
     else {
+      var leftdoor = 0;
+      if(doors.indexOf(8) == 8) {
+        leftdoor = doors[(doors.indexOf(8) + 2) % 3];
+      }
+      else {
+        leftdoor = doors[(doors.indexOf(8) - 1) % 3];
+      }
       bot.reply(message,
         {
         text: "",
@@ -909,8 +965,8 @@ controller.on('interactive_message_callback', function(bot, message) {
                     },
                     {
                         "name": "Check door to left",
-                        "text": "Try door " + doors[(doors.indexOf(8) - 1) % 3],
-                        "value": doors[(doors.indexOf(8) - 1) % 3].toString(),
+                        "text": "Try door " + leftdoor,
+                        "value": leftdoor.toString(),
                         "type": "button"
                     },
                     {
@@ -969,6 +1025,13 @@ controller.on('interactive_message_callback', function(bot, message) {
     doors = [7, 3, 4];
     }
     else {
+      var leftdoor = 0;
+      if(doors.indexOf(9) == 0) {
+        leftdoor = doors[(doors.indexOf(9) + 2) % 3];
+      }
+      else {
+        leftdoor = doors[(doors.indexOf(9) - 1) % 3];
+      }
       bot.reply(message,
         {
         text: "",
@@ -990,8 +1053,8 @@ controller.on('interactive_message_callback', function(bot, message) {
                     },
                     {
                         "name": "Check door to left",
-                        "text": "Try door " + doors[(doors.indexOf(9) - 1) % 3],
-                        "value": doors[(doors.indexOf(9) - 1) % 3].toString(),
+                        "text": "Try door " + leftdoor,
+                        "value": leftdoor.toString(),
                         "type": "button"
                     },
                     {
@@ -1050,6 +1113,13 @@ controller.on('interactive_message_callback', function(bot, message) {
     doors = [2, 9, 6];
     }
     else {
+      var leftdoor = 0;
+      if(doors.indexOf(10) == 0) {
+        leftdoor = doors[(doors.indexOf(10) + 2) % 3];
+      }
+      else {
+        leftdoor = doors[(doors.indexOf(10) - 1) % 3];
+      }
       bot.reply(message,
         {
         text: "",
@@ -1071,8 +1141,8 @@ controller.on('interactive_message_callback', function(bot, message) {
                     },
                     {
                         "name": "Check door to left",
-                        "text": "Try door " + doors[(doors.indexOf(10) - 1) % 3],
-                        "value": doors[(doors.indexOf(10) - 1) % 3].toString(),
+                        "text": "Try door " + leftdoor,
+                        "value": leftdoor.toString(),
                         "type": "button"
                     },
                     {
