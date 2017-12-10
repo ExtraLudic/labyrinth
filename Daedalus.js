@@ -45,7 +45,7 @@ var labyrinthchannelid = 'C7TBY98TS';
 var daedalusemoji = "https://avatars.slack-edge.com/2017-11-08/269162770516_e2c4553016a99b14da83_72.png";
 var bot = controller.spawn({
 
-  token: "xoxb-283934994183-4UiX0lBOQmNUMl4wxXLR184H"
+  token: "xoxb-283934994183-AC3Vc1TsqKJIrLL1AE8EKmyh"
 
 })
 
@@ -60,7 +60,6 @@ bot.startRTM(function(err,bot,payload) {
   bot.say(
         {
         username: 'Daedalus',
-        channel: bottestingid,
         icon_url: daedalusemoji,
         attachments:
         [
@@ -167,7 +166,7 @@ controller.on('interactive_message_callback', function(bot, message) {
       bot.reply(message,
         {
         text: "",
-        icon_url: daedalusemoji
+        icon_url: daedalusemoji,
         attachments: [
             {
               username: 'Daedalus',
@@ -252,7 +251,7 @@ controller.on('interactive_message_callback', function(bot, message) {
       bot.reply(message,
         {
         text: "",
-        icon_url: daedalusemoji
+        icon_url: daedalusemoji,
         attachments: [
             {
               username: 'Daedalus',
@@ -331,7 +330,7 @@ controller.on('interactive_message_callback', function(bot, message) {
       bot.reply(message,
         {
         text: "",
-        icon_url: daedalusemoji
+        icon_url: daedalusemoji,
         attachments: [
             {
               username: 'Daedalus',
@@ -410,7 +409,7 @@ controller.on('interactive_message_callback', function(bot, message) {
       bot.reply(message,
         {
         text: "",
-        icon_url: daedalusemoji
+        icon_url: daedalusemoji,
         attachments: [
             {
               username: 'Daedalus',
@@ -489,7 +488,7 @@ controller.on('interactive_message_callback', function(bot, message) {
       bot.reply(message,
         {
         text: "",
-        icon_url: daedalusemoji
+        icon_url: daedalusemoji,
         attachments: [
             {
               username: 'Daedalus',
@@ -574,7 +573,7 @@ controller.on('interactive_message_callback', function(bot, message) {
       bot.reply(message,
         {
         text: "",
-        icon_url: daedalusemoji
+        icon_url: daedalusemoji,
         attachments: [
             {
               username: 'Daedalus',
@@ -792,7 +791,7 @@ controller.on('interactive_message_callback', function(bot, message) {
     bot.reply(message,
         {
         text: "",
-        icon_url: daedalusemoji
+        icon_url: daedalusemoji,
         attachments: [
             {
               username: 'Daedalus',
@@ -871,7 +870,7 @@ controller.on('interactive_message_callback', function(bot, message) {
       bot.reply(message,
         {
         text: "",
-        icon_url: daedalusemoji
+        icon_url: daedalusemoji,
         attachments: [
             {
               username: 'Daedalus',
@@ -950,7 +949,7 @@ controller.on('interactive_message_callback', function(bot, message) {
       bot.reply(message,
         {
         text: "",
-        icon_url: daedalusemoji
+        icon_url: daedalusemoji,
         attachments: [
             {
               username: 'Daedalus',
@@ -1029,7 +1028,7 @@ controller.on('interactive_message_callback', function(bot, message) {
       bot.reply(message,
         {
         text: "",
-        icon_url: daedalusemoji
+        icon_url: daedalusemoji,
         attachments: [
             {
               username: 'Daedalus',
@@ -1084,7 +1083,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         {
         username: 'Daedalus',
         text: "Puzzle 1 is locked. Please wait until I tell you the puzzle is unlocked.",
-        icon_url: daedalusemoji
+        icon_url: daedalusemoji,
         }
         );
      }
@@ -1110,7 +1109,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         {
         username: 'Daedalus',
         text: "Puzzle 2 is locked. Please wait until I tell you the puzzle is unlocked.",
-        icon_url: daedalusemoji
+        icon_url: daedalusemoji,
         }
         );
      }
@@ -1136,7 +1135,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         {
         username: 'Daedalus',
         text: "Puzzle 3 is locked. Please wait until I tell you the puzzle is unlocked.",
-        icon_url: daedalusemoji
+        icon_url: daedalusemoji,
         }
         );
      }
@@ -1162,7 +1161,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         {
         username: 'Daedalus',
         text: "Puzzle 4 is locked. Please wait until I tell you the puzzle is unlocked.",
-        icon_url: daedalusemoji
+        icon_url: daedalusemoji,
         }
         );
      }
@@ -1189,7 +1188,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         {
         username: 'Daedalus',
         text: "Puzzle 5 is locked. Please wait until I tell you the puzzle is unlocked.",
-        icon_url: daedalusemoji
+        icon_url: daedalusemoji,
         }
         );
      }
@@ -1216,7 +1215,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         {
         username: 'Daedalus',
         text: "Puzzle 6 is locked. Please wait until I tell you the puzzle is unlocked.",
-        icon_url: daedalusemoji
+        icon_url: daedalusemoji,
         }
         );
      }
@@ -1243,7 +1242,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         {
         username: 'Daedalus',
         text: "Puzzle 7 is locked. Please wait until I tell you the puzzle is unlocked.",
-        icon_url: daedalusemoji
+        icon_url: daedalusemoji,
         }
         );
      }
@@ -1270,7 +1269,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         {
         username: 'Daedalus',
         text: "Puzzle 8 is locked. Please wait until I tell you the puzzle is unlocked.",
-        icon_url: daedalusemoji
+        icon_url: daedalusemoji,
         }
         );
      }
@@ -1297,7 +1296,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         {
         username: 'Daedalus',
         text: "Puzzle 9 is locked. Please wait until I tell you the puzzle is unlocked.",
-        icon_url: daedalusemoji
+        icon_url: daedalusemoji,
         }
         );
      }
@@ -1324,7 +1323,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         {
         username: 'Daedalus',
         text: "Puzzle 10 is locked. Please wait until I tell you the puzzle is unlocked.",
-        icon_url: daedalusemoji
+        icon_url: daedalusemoji,
         }
         );
      }
@@ -1371,7 +1370,6 @@ controller.hears(["Key 1:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Incorrect. You cannot attempt to unlock this door again for one minute.",
-        channel: bottestingid,
         icon_url: daedalusemoji
         }
         );
@@ -1382,7 +1380,6 @@ controller.hears(["Key 1:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Puzzle 1 is unlocked.",
-        channel: bottestingid,
         icon_url: daedalusemoji
         }
         );
@@ -1445,7 +1442,6 @@ controller.hears(["Key 2:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Incorrect. You cannot attempt to unlock this door again for one minute.",
-        channel: bottestingid,
         icon_url: daedalusemoji
         }
         );
@@ -1456,7 +1452,6 @@ controller.hears(["Key 2:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Puzzle 2 is unlocked.",
-        channel: bottestingid,
         icon_url: daedalusemoji
         }
         );
@@ -1512,7 +1507,6 @@ controller.hears(["Key 3:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Incorrect. You cannot attempt to unlock this door again for one minute.",
-        channel: bottestingid,
         icon_url: daedalusemoji
         }
         );
@@ -1523,7 +1517,6 @@ controller.hears(["Key 3:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Puzzle 3 is unlocked.",
-        channel: bottestingid,
         icon_url: daedalusemoji
         }
         );
@@ -1579,7 +1572,6 @@ controller.hears(["Key 4:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Incorrect. You cannot attempt to unlock this door again for one minute.",
-        channel: bottestingid,
         icon_url: daedalusemoji
         }
         );
@@ -1590,7 +1582,6 @@ controller.hears(["Key 4:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Puzzle 4 is unlocked.",
-        channel: bottestingid,
         icon_url: daedalusemoji
         }
         );
@@ -1646,7 +1637,6 @@ controller.hears(["Key 5:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Incorrect. You cannot attempt to unlock this door again for one minute.",
-        channel: bottestingid,
         icon_url: daedalusemoji
         }
         );
@@ -1657,7 +1647,6 @@ controller.hears(["Key 5:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Puzzle 5 is unlocked.",
-        channel: bottestingid,
         icon_url: daedalusemoji
         }
         );
@@ -1719,7 +1708,6 @@ controller.hears(["Key 6:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Incorrect. You cannot attempt to unlock this door again for one minute.",
-        channel: bottestingid,
         icon_url: daedalusemoji
         }
         );
@@ -1730,7 +1718,6 @@ controller.hears(["Key 6:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Puzzle 6 is unlocked.",
-        channel: bottestingid,
         icon_url: daedalusemoji
         }
         );
@@ -1924,7 +1911,6 @@ controller.hears(["Key 7:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Incorrect. You cannot attempt to unlock this door again for one minute.",
-        channel: bottestingid,
         icon_url: daedalusemoji
         }
         );
@@ -1935,7 +1921,6 @@ controller.hears(["Key 7:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Puzzle 7 is unlocked.",
-        channel: bottestingid,
         icon_url: daedalusemoji
         }
         );
@@ -1991,7 +1976,6 @@ controller.hears(["Key 8:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Incorrect. You cannot attempt to unlock this door again for one minute.",
-        channel: bottestingid,
         icon_url: daedalusemoji
         }
         );
@@ -2002,7 +1986,6 @@ controller.hears(["Key 8:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Puzzle 8 is unlocked.",
-        channel: bottestingid,
         icon_url: daedalusemoji
         }
         );
@@ -2058,7 +2041,6 @@ controller.hears(["Key 9:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Incorrect. You cannot attempt to unlock this door again for one minute.",
-        channel: bottestingid,
         icon_url: daedalusemoji
         }
         );
@@ -2069,7 +2051,6 @@ controller.hears(["Key 9:"],["direct_message","direct_mention","mention","ambien
         {
         username: 'Daedalus',
         text: "Puzzle 9 is unlocked.",
-        channel: bottestingid,
         icon_url: daedalusemoji
         }
         );
@@ -2126,7 +2107,6 @@ controller.hears(["Key 10:"],["direct_message","direct_mention","mention","ambie
         {
         username: 'Daedalus',
         text: "Incorrect. You cannot attempt to unlock this door again for one minute.",
-        channel: bottestingid,
         icon_url: daedalusemoji
         }
         );
@@ -2137,7 +2117,6 @@ controller.hears(["Key 10:"],["direct_message","direct_mention","mention","ambie
         {
         username: 'Daedalus',
         text: "Puzzle 10 is unlocked.",
-        channel: bottestingid,
         icon_url: daedalusemoji
         }
         );
