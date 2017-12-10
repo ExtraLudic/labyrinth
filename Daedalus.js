@@ -132,7 +132,7 @@ controller.on('interactive_message_callback', function(bot, message) {
       bot.closeRTM();
     }
   }
-  else if(message.actions[0].value.match("1")){ 
+  else if(message.actions[0].value.match("1") && !message.actions[0].value.match("10")){ 
     if(solvedPuzzles[0] == "default") {
     bot.reply(message, {
         text: "",
@@ -1444,6 +1444,85 @@ controller.on('interactive_message_callback', function(bot, message) {
         );
      }
     }
+  }
+  else if(message.actions[0].value.match("givecoin")){
+    haveCoin = false;
+    bot.reply(message, {
+        text: "",
+        channel: bottestingid,
+        icon_url: daedalusemoji,
+        attachments: [
+            {
+                username: 'Daedalus',
+                title: "Room 6 - Demeter",
+                text: 'The peacock devours the coin hungrily then speaks. “The eighth door is sealed with a code. It spells a word with zeros and ones. Binary.”',
+                callback_id: 'Room 6',
+                attachment_type: 'default',
+                actions: [
+                    {
+                        "name":"Door to Room 8",
+                        "text": "Enter Room 8",
+                        "value": "8",
+                        "style": solvedPuzzles[7],
+                        "type": "button"
+                    },
+                    {
+                        "name":"Door to Room 3",
+                        "text": "Enter Room 3",
+                        "value": "3",
+                        "style": solvedPuzzles[2],
+                        "type": "button"
+                    },
+                    {
+                        "name":"Door to Room 4",
+                        "text": "Enter Room 4",
+                        "value": "4",
+                        "style": solvedPuzzles[3],
+                        "type": "button"
+                    }
+                ]
+            }
+        ]
+    });
+  }
+  else if(message.actions[0].value.match("givekey")){
+    bot.reply(message, {
+        text: "",
+        channel: bottestingid,
+        icon_url: daedalusemoji,
+        attachments: [
+            {
+                username: 'Daedalus',
+                title: "Room 2 - The Pantheon",
+                text: '“Fool! The Architect told you not to give the key to anyone. How did anyone so stupid make it this far? You have clearly learned nothing. My advice is to find the seventh room.”',
+                callback_id: 'Room 2',
+                attachment_type: 'default',
+                actions: [
+                    {
+                        "name":"Door to Room 1",
+                        "text": "Enter Room 1",
+                        "value": "1",
+                        "style": solvedPuzzles[0],
+                        "type": "button"
+                    },
+                    {
+                        "name":"Door to Room 6",
+                        "text": "Enter Room 6",
+                        "value": "6",
+                        "style": solvedPuzzles[5],
+                        "type": "button"
+                    },
+                    {
+                        "name":"Door to Room 3",
+                        "text": "Enter Room 3",
+                        "value": "3",
+                        "style": solvedPuzzles[2],
+                        "type": "button"
+                    }
+                ]
+            }
+        ]
+    });
   }
 });
 
