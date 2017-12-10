@@ -12,8 +12,8 @@ var controller = Botkit.slackbot({
   debug: true,
   require_delivery: true
 }).configureSlackApp({
-    clientId: "265980639123.282171652369",
-    clientSecret: '35babee62ecaff4b61f46e5a21e32d49',
+    clientId: "284487422181.283793397088",
+    clientSecret: 'e0409faa585e9ac36722fd5be19125c1',
     scopes: ['commands', 'bot'],
 });;
 
@@ -45,7 +45,7 @@ var labyrinthchannelid = 'C7TBY98TS';
 var daedalusemoji = "https://avatars.slack-edge.com/2017-11-08/269162770516_e2c4553016a99b14da83_72.png";
 var bot = controller.spawn({
 
-  token: "xoxb-283934994183-JDh6aTIA18hc9bvGgpUEnJsa"
+  token: "xoxb-285523211751-U6yzb84gr97YPDnekyCI92lX"
 
 })
 
