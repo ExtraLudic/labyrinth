@@ -45,7 +45,7 @@ var labyrinthchannelid = 'C7TBY98TS';
 var daedalusemoji = "https://avatars.slack-edge.com/2017-11-08/269162770516_e2c4553016a99b14da83_72.png";
 var bot = controller.spawn({
 
-  token: "xoxb-283934994183-AC3Vc1TsqKJIrLL1AE8EKmyh"
+  token: "xoxb-283934994183-JDh6aTIA18hc9bvGgpUEnJsa"
 
 })
 
@@ -189,7 +189,7 @@ controller.on('interactive_message_callback', function(bot, message) {
                     {
                         "name": "Solve 1",
                         "text": "Try to Solve Puzzle 1",
-                        "value": "solve1",
+                        "value": "solveFirst",
                         "type": "button"
                     },
                     {
@@ -283,7 +283,7 @@ controller.on('interactive_message_callback', function(bot, message) {
                     {
                         "name": "Solve 2",
                         "text": "Try to Solve Puzzle 2",
-                        "value": "solve2",
+                        "value": "solveSecond",
                         "type": "button"
                     },
                     {
@@ -371,7 +371,7 @@ controller.on('interactive_message_callback', function(bot, message) {
                     {
                         "name": "Solve 3",
                         "text": "Try to Solve Puzzle 3",
-                        "value": "solve3",
+                        "value": "solveThird",
                         "type": "button"
                     },
                     {
@@ -459,7 +459,7 @@ controller.on('interactive_message_callback', function(bot, message) {
                     {
                         "name": "Solve 4",
                         "text": "Try to Solve Puzzle 4",
-                        "value": "solve4",
+                        "value": "solveFourth",
                         "type": "button"
                     },
                     {
@@ -547,7 +547,7 @@ controller.on('interactive_message_callback', function(bot, message) {
                     {
                         "name": "Solve 5",
                         "text": "Try to Solve Puzzle 5",
-                        "value": "solve5",
+                        "value": "solveFifth",
                         "type": "button"
                     },
                     {
@@ -641,7 +641,7 @@ controller.on('interactive_message_callback', function(bot, message) {
                     {
                         "name": "Solve 6",
                         "text": "Try to Solve Puzzle 6",
-                        "value": "solve6",
+                        "value": "solveSixth",
                         "type": "button"
                     },
                     {
@@ -872,7 +872,7 @@ controller.on('interactive_message_callback', function(bot, message) {
                     {
                         "name": "Solve 7",
                         "text": "Try to Solve Puzzle 7",
-                        "value": "solve7",
+                        "value": "solveSeventh",
                         "type": "button"
                     },
                     {
@@ -960,7 +960,7 @@ controller.on('interactive_message_callback', function(bot, message) {
                     {
                         "name": "Solve 8",
                         "text": "Try to Solve Puzzle 8",
-                        "value": "solve8",
+                        "value": "solveEighth",
                         "type": "button"
                     },
                     {
@@ -1048,7 +1048,7 @@ controller.on('interactive_message_callback', function(bot, message) {
                     {
                         "name": "Solve 9",
                         "text": "Try to Solve Puzzle 9",
-                        "value": "solve9",
+                        "value": "solveNinth",
                         "type": "button"
                     },
                     {
@@ -1136,7 +1136,7 @@ controller.on('interactive_message_callback', function(bot, message) {
                     {
                         "name": "Solve 10",
                         "text": "Try to Solve Puzzle 10",
-                        "value": "solve10",
+                        "value": "solveTenth",
                         "type": "button"
                     },
                     {
@@ -1158,7 +1158,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         );
     }
   }
-  else if(message.actions[0].value.match("solve1")){
+  else if(message.actions[0].value.match("solveFirst")){
     if(lockedPuzzles[0] == false){
     bot.reply(message, {
         text: "",
@@ -1186,7 +1186,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         );
      }
   }
-  else if(message.actions[0].value.match("solve2")){
+  else if(message.actions[0].value.match("solveSecond")){
     if(lockedPuzzles[1] == false){
     bot.reply(message, {
         text: "",
@@ -1214,7 +1214,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         );
      }
   }
-  else if(message.actions[0].value.match("solve3")){
+  else if(message.actions[0].value.match("solveThird")){
     if(lockedPuzzles[2] == false){
     bot.reply(message, {
         text: "",
@@ -1242,7 +1242,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         );
      }
   }
-  else if(message.actions[0].value.match("solve4")){
+  else if(message.actions[0].value.match("solveFourth")){
     if(lockedPuzzles[3] == false) {
     bot.reply(message, {
         text: "",
@@ -1271,7 +1271,7 @@ controller.on('interactive_message_callback', function(bot, message) {
      }
     }
   }
-  else if(message.actions[0].value.match("solve5")){
+  else if(message.actions[0].value.match("solveFifth")){
     if(lockedPuzzles[4] == false) {
     bot.reply(message, {
         text: "",
@@ -1300,7 +1300,7 @@ controller.on('interactive_message_callback', function(bot, message) {
      }
     }
   }
-  else if(message.actions[0].value.match("solve6")){
+  else if(message.actions[0].value.match("solveSixth")){
     if(lockedPuzzles[5] == false) {
     bot.reply(message, {
         text: "",
@@ -1329,7 +1329,7 @@ controller.on('interactive_message_callback', function(bot, message) {
      }
     }
   }
-  else if(message.actions[0].value.match("solve7")){
+  else if(message.actions[0].value.match("solveSeventh")){
     if(lockedPuzzles[6] == false) {
     bot.reply(message, {
         text: "",
@@ -1358,7 +1358,7 @@ controller.on('interactive_message_callback', function(bot, message) {
      }
     }
   }
-  else if(message.actions[0].value.match("solve8")){
+  else if(message.actions[0].value.match("solveEighth")){
     if(lockedPuzzles[7] == false) {
     bot.reply(message, {
         text: "",
@@ -1387,7 +1387,7 @@ controller.on('interactive_message_callback', function(bot, message) {
      }
     }
   }
-  else if(message.actions[0].value.match("solve9")){
+  else if(message.actions[0].value.match("solveNinth")){
     if(lockedPuzzles[8] == false) {
     bot.reply(message, {
         text: "",
@@ -1416,7 +1416,7 @@ controller.on('interactive_message_callback', function(bot, message) {
      }
     }
   }
-  else if(message.actions[0].value.match("solve10")){
+  else if(message.actions[0].value.match("solveTenth")){
     if(lockedPuzzles[9] == false) {
     bot.reply(message, {
         text: "",
