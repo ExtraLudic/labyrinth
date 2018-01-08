@@ -12,6 +12,7 @@ module.exports = function(controller) {
   // for choose/confirm 
   var choiceSelect = [];
   var choiceCallback;
+  var choiceValid;
 
     // create special handlers for certain actions in buttons
     // if the button action is 'say', act as if user said that thing
@@ -29,11 +30,11 @@ module.exports = function(controller) {
                 person = 'You';
             }
 
-            reply.attachments.push(
-                {
-                    text: person + ' said, ' + message.actions[0].value,
-                }
-            );
+            // reply.attachments.push(
+            //     {
+            //         text: person + ' said, ' + message.actions[0].value,
+            //     }
+            // );
 
             bot.replyInteractive(message, reply);
   
@@ -42,8 +43,9 @@ module.exports = function(controller) {
         if (message.actions[0].name.match(/^choose$/)) {
           
             var choice = message.actions[0].selected_options[0].value;
-          console.log(JSON.stringify(message));
+          console.log("user has chosen: ", JSON.stringify(message));
             choiceSelect = choice;
+            choiceValid = choice == "correct" ? true : false;
             choiceCallback = message.callback_id;
           console.log("user selected " + JSON.stringify(choiceSelect));
   
@@ -63,20 +65,22 @@ module.exports = function(controller) {
                 person = 'You';
             }
 
-            reply.attachments.push(
-                {
-                    text: person + ' confirmed, ' + choiceSelect,
-                }
-            );
+                      
+            if (choiceValid) {
+              console.log(choiceCallback, choiceSelect);
+              controller.studio.runTrigger(bot, choiceCallback, message.user, message.channel).catch(function(err) {
+                  bot.reply(message, 'I experienced an error with a request to Botkit Studio: ' + err);
+              });
+            } else {
+              console.log("wrong");
+              bot.reply(message, "wrong. please wait.");
+            }
           
             // controller.trigger('message_tagged', [bot, message, choiceSelect]);
           
             // web.chat.delete(message.ts, message.channel).then((res) => { console.log(res) });
             
-            console.log(choiceCallback, choiceSelect);
-            controller.studio.runTrigger(bot, choiceCallback, message.user, message.channel).catch(function(err) {
-                bot.reply(message, 'I experienced an error with a request to Botkit Studio: ' + err);
-            });
+            
 
             bot.replyInteractive(message, reply);
   
