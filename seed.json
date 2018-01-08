@@ -1,16 +1,16 @@
 {
-    "options": [
+    "puzzles": [
         {
             "text": "Unexpected sentience",
-            "value": "AI-2323"
+            "answer": "AI-2323"
         },
         {
             "text": "Bot biased toward other bots",
-            "value": "SUPPORT-42"
+            "answer": "SUPPORT-42"
         },
         {
             "text": "Bot broke my toaster",
-            "value": "IOT-75"
+            "answer": "IOT-75"
         }
     ]
 }

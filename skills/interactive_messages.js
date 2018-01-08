@@ -1,7 +1,16 @@
+var dataChannel;
+
+const { WebClient } = require('@slack/client');
+
+// An access token (from your Slack app or custom integration - xoxp, xoxb, or xoxa)
+const token = process.env.slackToken;
+
+const web = new WebClient(token);
+
 module.exports = function(controller) {
   
   // for choose/confirm 
-  var choiceSelect;
+  var choiceSelect = [];
   var choiceCallback;
 
     // create special handlers for certain actions in buttons
@@ -59,6 +68,15 @@ module.exports = function(controller) {
                     text: person + ' confirmed, ' + choiceSelect,
                 }
             );
+          
+            // controller.trigger('message_tagged', [bot, message, choiceSelect]);
+          
+            // web.chat.delete(message.ts, message.channel).then((res) => { console.log(res) });
+            
+            console.log(choiceCallback, choiceSelect);
+            controller.studio.runTrigger(bot, choiceCallback, message.user, message.channel).catch(function(err) {
+                bot.reply(message, 'I experienced an error with a request to Botkit Studio: ' + err);
+            });
 
             bot.replyInteractive(message, reply);
   
