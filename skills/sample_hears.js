@@ -10,6 +10,7 @@ respond immediately with a single line response.
 */
 
 var wordfilter = require('wordfilter');
+var _ = require("underscore");
 var dataChannel;
 
 const { WebClient } = require('@slack/client');
@@ -123,7 +124,7 @@ module.exports = function(controller) {
        ]
     });
     
-  });
+  }); // End hears "map"
   
   controller.hears( ['labyrinth'], 'direct_message,ambient', function( bot, message ) {
 
@@ -133,7 +134,7 @@ module.exports = function(controller) {
         bot.reply(message, 'I experienced an error with a request to Botkit Studio: ' + err);
     });
     
-  });
+  }); // End hears "labyrinth" 
   
   
   controller.hears("generate", 'direct_message', function(bot, message) {
@@ -145,25 +146,64 @@ module.exports = function(controller) {
       var puzzles = [];
       controller.studio.getScripts().then(function(list) {
         console.log(list);
-
+  
+        // Go through each script 
          for (var i = 0; i < list.length; i++ ) {
-           controller.studio.get(bot, list[i].name, message.user, message.channel).then(function(convo) {
-              console.log(convo);
-             puzzles.push({
-               door: convo.source_message.text
-             });
-           });
-           // var thisPuzzle = {
-           //   room: list[i].name
-           // };
-           // puzzles.push(thisPuzzle);
-         }
+            
+           // Check if script is tagged as part of the labyrinth
+           if ( _.contains(list[i].tags, 'labyrinth') ) {
+               
+             // Create a new instance of the tags list
+             var tags = list[i].tags;
+             // Remove labyrinth from the list
+             tags = _.without(tags, 'labyrinth');
+             
+              var thisPuzzle = {
+                room: list[i].name,
+                links: []
+              };
+             
+              console.log(tags);
+
+               // Go through each tag
+               for (var a = 0; a < tags.length; a++) {
+                 // if the tag contains "galaxy" or "Galaxy" 
+                 console.log(tags[a]);
+                 if (tags[a].includes("galaxy") || tags[a].includes("Galaxy")) {
+                   // set that tag as the puzzle galaxy
+                   console.log("this tag is a galaxy", tags[a]);
+                   thisPuzzle.galaxy = tags[a];
+                 } else { // If not...
+                   console.log("this tag is a room", tags[a]);
+                   // Create a room link based on the number in the tag
+                   var roomLink = tags[a].match(/\d+$/)[0];
+                   console.log(roomLink, "is a room link" ); 
+                   // Add this link to the links array on the puzzle
+                   thisPuzzle.links.push(roomLink);
+                 }
+               } // End tag loop
+              
+               // Add this puzzle to the puzzles array
+               puzzles.push(thisPuzzle);
+                          
+           } // End if script is room
+           
+         } // End Script Loop
         
+        // Set the team puzzles to the generated puzzles array
         team.puzzles = puzzles;
-        // console.log("the team puzzles: ", team.puzzles);
+        console.log("the team puzzles: ", JSON.stringify(team));
         
-        controller.storage.teams.save(team.id, function(err, team) {
-          console.log("updated: ", team);
+        // Save this team
+        controller.storage.teams.save(team, function(err, id) {
+          if (err) {
+            console.log("There was an error: ", err);
+          }
+          // Check the team to make sure it was updated
+          // Team should have a puzzles object now attached
+          // controller.storage.teams.get(id, function(err, team) {
+          //   console.log("updated: ", team);
+          // });
         });
 
       });

@@ -174,6 +174,7 @@ webserver.get('/:team_id/map', function(req, res){
   
   controller.storage.teams.get(teamId, function(err,team) {
 
+    // If no puzzles, create an empty array
     if (!team.puzzles) {
       team.puzzles = [];
     }
@@ -182,16 +183,13 @@ webserver.get('/:team_id/map', function(req, res){
       throw new Error(err);
     }
     
-    var data = {
-      puzzles: team.puzzles
-    };
-  
+    // Render map.hbs
     res.render('map', {
       domain: req.get('host'),
       protocol: req.protocol,
       glitch_domain: process.env.PROJECT_DOMAIN,
       layout: 'layouts/default', 
-      data: data
+      data: team
     });
 
   });
