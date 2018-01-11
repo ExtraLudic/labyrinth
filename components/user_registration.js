@@ -67,7 +67,7 @@ module.exports = function(controller) {
     });
 
 
-    controller.on('create_team', function(bot, team) {
+    controller.on('create_team', function(bot, team, auth) {
 
         debug('Team created:', team);
 
@@ -75,7 +75,7 @@ module.exports = function(controller) {
         controller.trigger('rtm:start', [bot.config]);
 
         // Trigger an event that will cause this team to receive onboarding messages
-        controller.trigger('onboard', [bot, team]);
+        controller.trigger('onboard', [bot, team, auth]);
 
     });
 

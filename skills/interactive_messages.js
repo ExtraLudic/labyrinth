@@ -8,32 +8,126 @@ const token = process.env.slackToken;
 
 const web = new WebClient(token);
 
+function findGalaxy(num) {
+  
+  var letter;
+  
+  num = num / 10; 
+  
+  if (num <= 1.0) {
+    letter = "a";
+  } else if (num <= 2.0) {
+    letter = "b";
+  } else if (num <= 3.0) {
+    letter = "c";
+  } else if (num <= 4.0) {
+    letter = "d";
+  } else if (num <= 5.0) {
+    letter = "e";
+  } else if (num <= 6.0) {
+    letter = "f";
+  } else if (num <= 7.0) {
+    letter = "g";
+  } else if (num <= 8.0) {
+    letter = "h";
+  } else if (num <= 9.0) {
+    letter = "i";
+  } else if (num <= 10.0) {
+    letter = "j";
+  }
+  
+  return "galaxy_" + letter;
+};
+
+// Find the puzzle based on team and puzzle room name
+function findPuzzle(controller, teamId, puzzle) {
+  console.log(puzzle);
+  var galaxy = findGalaxy(puzzle.split("_")[1]);
+  var found;
+  controller.storage.teams.get(teamId, function(err, team) {
+    // console.log(team.puzzles)
+    // console.log(galaxy);
+    // console.log(_.findWhere(team.puzzles, { room: galaxy + "_" + puzzle }));
+    found = _.findWhere(team.puzzles, { room: galaxy + "_" + puzzle });
+    console.log(found);
+  });
+  return found;
+
+};
+
 module.exports = function(controller) {
   
   // for choose/confirm 
+  // Temporary storage
   var choiceSelect = [];
-
+  
     // create special handlers for certain actions in buttons
     // if the button action is 'say', act as if user said that thing
     controller.middleware.receive.use(function(bot, message, next) {
       var theBot = bot;
       if (message.type == 'interactive_message_callback') {
-        if (message.actions[0].name.match(/^say$/)) {
+        
+        // User "says" something via button 
+        if (message.actions[0].name.match(/^door$/)) {
           
-            var reply = message.original_message;
-          
-            // Delete the original message the bot sent to the player          
-            web.chat.delete(message.original_message.ts, message.channel).then((res) => {
+          var reply = message.original_message;
 
-               // console.log(res + " was deleted");
-
-            }).catch((err) => { console.log(err) }); 
+          // Delete the original message the bot sent to the player          
+          web.chat.delete(message.original_message.ts, message.channel).then().catch((err) => { console.log(err) }); 
           
+          // Find the puzzle the user is about to open
+          var puzzle = findPuzzle(controller, message.team.id, message.text);
+        
+          // Check if the puzzle is unlocked in the database or contains "_open" in the button's value
+          if (!puzzle.locked || message.text[0].includes("_open")) {
+            var name = findGalaxy(message.text[0].split("_")[1] / 10) + "_" + message.text; 
+
+            console.log(name);
+
+            // This door has been unlocked, so let's tell them
+            bot.reply(message, "This door is unlocked. Sending you to the room.", (err, response) => {
+
+              // We should wait...
+              setTimeout(function() {
+
+                // And run the script for the room that is unlocked
+                controller.studio.run(bot, name, message.user, message.channel).then(function(convo) {
+
+                }).catch((err) => { console.log("Got error while running " + name[0] + " :", err) });
+
+                // And delete the bot message
+                web.chat.delete(response.ts, response.channel).then((res) => {
+
+                   // console.log(res + " was deleted");
+
+                }).catch((err) => { console.log(err) }); 
+
+              }, 1000);
+              
+            });
+
+          } else {
+            // This door leads to the puzzle thread as set up in BotKit Studio
             // The bot "replies" with what the user said
             bot.replyInteractive(message, reply);
+          }
           
-           
-         }
+        }
+        
+        
+        // User "says" something via button 
+        if (message.actions[0].name.match(/^say$/)) {
+          
+          var reply = message.original_message;
+
+          // Delete the original message the bot sent to the player          
+          web.chat.delete(message.original_message.ts, message.channel).then().catch((err) => { console.log(err) }); 
+          
+          // This door leads to the puzzle thread as set up in BotKit Studio
+          // The bot "replies" with what the user said
+          bot.replyInteractive(message, reply);
+          
+        }
         
         // Choose a menu option
         if (message.actions[0].name.match(/^choose$/)) {
@@ -79,8 +173,8 @@ module.exports = function(controller) {
               
             } else { // User has choice stored
               
-              var choiceToUpdate = _.findWhere(choiceSelect, { user: message.user });
               console.log("we are updating this choice");
+              // Update stored choice with new choice, valid bool, and callback_id
               choiceSelect = _.map(choiceSelect, function(item) {
                 if (item.user == message.user) {
                   item.choice = choice;
@@ -91,81 +185,76 @@ module.exports = function(controller) {
                 else return item;
               });
             }
-            
           
-            // console.log("user selected " + JSON.stringify(choiceSelect));          
+            console.log("user selected " + JSON.stringify(choiceSelect));          
           
             bot.replyInteractive(message, reply);
-
-  
+          
          }
         
         // Confirm menu choice
         if (message.actions[0].name.match(/^confirm$/)) {
           
             var reply = message.original_message;
-          var theMessage = message;
-          console.log(message);
-          //   console.log("user confirmed " + JSON.stringify(_.findWhere(choiceSelect, { user: message.user })));
+            // data object for puzzle attempt event
+            var data = {};
+          
+            // console.log("user confirmed " + JSON.stringify(_.findWhere(choiceSelect, { user: message.user })));
           
             // Locate the saved choice based on the user key
             var confirmedChoice = _.findWhere(choiceSelect, { user: message.user });
             var script;
+            
+            // Set the puzzle, answer, and if the answer is correct
+            // This data will be sent to the puzzle_attempt event for saving to storage
+            data.puzzle = confirmedChoice.callback;
+            data.answer = confirmedChoice;
+            data.correct = confirmedChoice.valid;
+
             controller.studio.getScripts().then((list) => {
               // console.log(list, " we are listing the list" );
               // script = _.findWhere(list, { triggers: confirmedChoice.callback });
               for (var i = 0; i < list.length; i++) {
                 var triggers = list[i].triggers;
+                // Locate the script based on its triggers
+                // If script is listening for the callback_id of the confirmed option, that's our script
                 _.each(triggers, function(a) {
-                  // console.log(a, " a trigger");
                   if (a.pattern == confirmedChoice.callback) {
                     script = list[i];
                   }
-                  
                 });
-                // console.log(triggers);
               }
-              // console.log(script);
+
               // If the confirmed choice is valid...
               if (confirmedChoice.valid) {
-                // console.log(confirmedChoice.callback, choiceSelect);
+                
+                // Use the script name to do some stuff before it runs
+               controller.trigger("before_hook", [bot, message, script]);
                 // Run the trigger for the menu callback_id
                 // This runs a trigger for botkit studio based on the MENU attachment callback_id
                 // Triggers a script that is listening for this callback_id
-                controller.studio.before(script.name, function(convo, next) {
-                    // Find team to check puzzles data                   
-                    controller.storage.teams.get(theMessage.team.id, function(err, team) {
-                        // console.log("the team puzzles are: ", team.puzzles);
-                        // Go through conversation attachments 
-                        for (var i = 0; i < convo.messages[0].attachments[0].actions.length; i++) {
-                          // Find matching puzzle
-                          // Room button values should match room names (ie: room_1)
-                           var puzzle = _.findWhere(team.puzzles, { 
-                             room: convo.messages[0].attachments[0].actions[i].value
-                           });
-                          // If puzzle is locked, set style to "danger" (red) or else use "primary" (green)
-                           if (puzzle.locked) {
-                             convo.messages[0].attachments[0].actions[i].style = "danger";
-                           } else {
-                             convo.messages[0].attachments[0].actions[i].style = "primary";
-                           }
-                        }
-
-                    });
-                  
-                    next();
-
-                });
-                
-                controller.studio.runTrigger(theBot, confirmedChoice.callback, message.user, message.channel).catch(function(err) {
+                controller.studio.runTrigger(theBot, confirmedChoice.callback, message.user, message.channel)
+                  .catch((err) => {
                     bot.reply(message, 'I experienced an error with a request to Botkit Studio: ' + err);
                 });
+                
               } else { // If the choice is NOT valid
                 // Tell the user they were wrong
-                bot.reply(message, "wrong. please wait.");
-
-                // TO DO: Timer that locks the user out and then sends them back here
+                // console.log("wrong", message);
+                bot.reply(message, "wrong. sending you back to the beginning.", (err, response) => {
+                  // Wait some length of time (1000 = 1 sec)
+                   setTimeout(function() {
+                     // Send them back to the beginning
+                    controller.studio.run(bot, 'galaxy_a_room_1', message.user, message.channel);
+                     // Delete the bot's previous message
+                    web.chat.delete(response.ts, response.channel).then().catch((err) => { console.log(err) }); 
+                  }, 1000); 
+                });
+                                
               }
+              
+              // Trigger an attempt of opening the door
+              controller.trigger("puzzle_attempt", [bot, message, data]);
 
               // Delete the bot's message
               web.chat.delete(message.original_message.ts, message.channel).then((res) => {
