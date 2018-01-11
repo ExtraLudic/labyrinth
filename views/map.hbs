@@ -56,6 +56,8 @@ function init(data) {
           new go.Binding("stroke", "color")),
         $(go.Shape, { toArrow: "Standard" })
       );
+  
+  
 
     // Override the clickSelectingTool's standardMouseSelect
     // If less than 2 nodes are selected, always add to the selection
@@ -66,7 +68,7 @@ function init(data) {
       var count = diagram.selection.count;
       var curobj = diagram.findPartAt(e.documentPoint, false);
       if (curobj !== null) {
-        if (count < 2) {  // add the part to the selection
+        if (count < 1) {  // add the part to the selection
           if (!curobj.isSelected) {
             var part = curobj;
             if (part !== null) part.isSelected = true;
@@ -80,29 +82,28 @@ function init(data) {
       } else if (e.left && !(e.control || e.meta) && !e.shift) {
         // left click on background with no modifier: clear selection
         diagram.clearSelection();
-      }
+      } 
     }
 
     generateGraph();
 
     // select two nodes that connect from the first one to the second one
-    var num = myDiagram.model.nodeDataArray.length;
-    var node1 = null;
-    var node2 = null;
-    for (var i = 0; i < num; i++) {
-      node1 = myDiagram.findNodeForKey(i);
-      var distances = findDistances(node1);
-      for (var j = 0; j < num; j++) {
-        node2 = myDiagram.findNodeForKey(j);
-        var dist = distances.getValue(node2);
-        if (dist > 1 && dist < Infinity) {
-          node1.isSelected = true;
-          node2.isSelected = true;
-          break;
-        }
-      }
-      if (myDiagram.selection.count > 0) break;
-    }
+  // console.log("nodeData: ", myDiagram.model.nodeDataArray);
+  //   var node1 = null;
+  //   var node2 = null;
+  //   _.each(myDiagram.model.nodeDataArray, function(node1, i) {
+  //     var distances = findDistances(node1);
+  //     for (var j = 0; j < num; j++) {
+  //       node2 = myDiagram.findNodeForKey(j);
+  //       var dist = distances.getValue(node2);
+  //       if (dist > 1 && dist < Infinity) {
+  //         node1.isSelected = true;
+  //         node2.isSelected = true;
+  //         break;
+  //       }
+  //     }
+  //     if (myDiagram.selection.count > 0) break;
+  //   });
   }
 
   function generateGraph() {
@@ -114,19 +115,24 @@ function init(data) {
     });
     
     console.log(names, " the rooms");
-
-    var nodeDataArray = [];
-    for (var i = 0; i < names.length; i++) {
-      nodeDataArray.push({ key: i, text: names[i].room, color: go.Brush.randomColor(128, 240) });
-    }
-
+    
     var linkDataArray = [];
-    var num = nodeDataArray.length;
-    for (var i = 0; i < num * 2; i++) {
-      var a = Math.floor(Math.random() * num);
-      var b = Math.floor(Math.random() * num / 4) + 1;
-      linkDataArray.push({ from: a, to: (a + b) % num, color: go.Brush.randomColor(0, 127) });
+    var nodeDataArray = [];
+    
+    for (var i = 0; i < names.length; i++) {
+      nodeDataArray.push({ key: names[i].room.split("_")[3], text: names[i].room, color: go.Brush.randomColor(128, 240) });
+      names[i].id = names[i].room.split("_")[3];
     }
+    
+    // For each node, find the room and add the associated links
+    _.each(nodeDataArray, function(node, i) {
+      var room = _.findWhere(names, { id: node.key });
+      _.each(room.links, function(link, j) {
+        linkDataArray.push({ from: room.id, to: parseInt(link), color: go.Brush.randomColor(0, 127) });
+      });
+    });
+    
+    console.log("linkDataArray: ", linkDataArray);
 
     myDiagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
   }
@@ -367,6 +373,19 @@ function init(data) {
       f.findLinksTo(t).each(function(l) { l.isHighlighted = true; });
     }
   } 
+  
+  myDiagram.commandHandler.doKeyDown = function() {
+      var e = myDiagram.lastInput;
+      var cmd = myDiagram.commandHandler;
+        console.log("key: ", e.key);
+
+      if (e.key === e.Delete || e.key === "Backspace" ) {  // could also check for e.control or e.shift
+        return;
+      } else {
+        // call base method with no arguments
+        go.CommandHandler.prototype.doKeyDown.call(cmd);
+      }
+    };
 
   
   });

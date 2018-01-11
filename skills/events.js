@@ -87,11 +87,6 @@ module.exports = function(controller) {
 
     });
   
-  // Choose to enter
-  controller.on('labyrinth_start', function(bot, message) {
-    
-  });
-  
   // Choose a door
   controller.on('door_enter', function(bot, message) {
     // Store that a player approached the door
@@ -116,7 +111,7 @@ module.exports = function(controller) {
         }
         
         // Find this particular puzzle from the team's generated puzzle list
-        var puzzle = _.findWhere(team.puzzles, { name: data.puzzle });
+        var puzzle = _.findWhere(team.puzzles, { room: data.puzzle });
 
         // Add a try to the puzzle
         puzzle.tries++;
@@ -153,33 +148,64 @@ module.exports = function(controller) {
     // This is called when a player enters a room
     // Will check doors and set their style and value
     controller.on("before_hook", function(bot, message, script) {
-        
-        // Find the galaxy based on script's tag
-        var galaxy = function() {
-          _.each(script.tags, function(tag, i) {
-            if (tag.includes("galaxy")) {
-                return tag;
-            }
-          });
-        };
+      
+      console.log("script:" , script);
+      
+      
+      var galaxy;
+      
+      _.each(script.tags, function(tag, i) {
+        if (tag.includes("galaxy")) {
+            galaxy = tag;
+        }
+      });
+      
+      console.log("galaxy: ", galaxy);
+      
+      console.log(message);
         
         // Before the room script runs...
         controller.studio.before(script.name, function(convo, next) {
+          console.log(message);
+          
+          // Based on the format of "message", set the teamId
+          var teamId;
+          if (message.team_id) {
+              console.log("using the team_id");
+              teamId = message.team_id;
+          } else if (message.team.id) {
+              console.log("using team object");
+              teamId = message.team.id;
+          } else {
+              console.log("just using the team");
+              teamId = message.team;
+          }
+          
           // Find team to check puzzles data                   
-          controller.storage.teams.get(message.team.id, function(err, team) {
+          controller.storage.teams.get(teamId, function(err, team) {
+                        
+              if (message.actions) {
+                 console.log(message.actions[0].value);
 
-              // Set the correctly unlocked puzzle to be unlocked in the team data
-              var unlocked = _.findWhere(team.puzzles, { 
-                 room: galaxy + "_" + message.actions[0].value
-              });
+                // Set the correctly unlocked puzzle to be unlocked in the team data
+                var unlocked = _.findWhere(team.puzzles, { 
+                   room: galaxy + "_" + message.actions[0].value
+                });
+                
+                
+                if (unlocked) {
+                  
+                  console.log(unlocked, " line 230");
 
-              console.log(unlocked, " line 230");
+                  unlocked.locked = false;
+                  // save the team
+                  controller.storage.teams.save(team, function(err, id) {});
 
-              unlocked.locked = false;
-              // save the team
-              controller.storage.teams.save(team, function(err, id) {});
-
-              // console.log("the team puzzles are: ", team.puzzles);
+                }
+                
+              }
+              
+            // console.log("the team puzzles are: ", team.puzzles);
               // Go through conversation attachments 
               for (var i = 0; i < convo.messages[0].attachments[0].actions.length; i++) {
                  var action = convo.messages[0].attachments[0].actions[i];
@@ -189,6 +215,7 @@ module.exports = function(controller) {
                    room: galaxy + "_" + action.value
                  });
 
+                
                  // If puzzle is locked, set button style to "danger" or else use "primary" 
                  if (puzzle.locked) {
                    action.style = "danger"; // red

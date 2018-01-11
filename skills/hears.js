@@ -28,13 +28,13 @@ module.exports = function(controller) {
         convos: 0,
     }
 
-//     controller.on('heard_trigger', function() {
-//         stats.triggers++;
-//     });
+    controller.on('heard_trigger', function() {
+        stats.triggers++;
+    });
 
-//     controller.on('conversationStarted', function() {
-//         stats.convos++;
-//     });
+    controller.on('conversationStarted', function() {
+        stats.convos++;
+    });
 
 
     controller.hears(['^uptime','^debug'], 'direct_message,direct_mention', function(bot, message) {
@@ -77,24 +77,61 @@ module.exports = function(controller) {
     });
   });
   
-  controller.hears('start','direct_message,ambient',function(bot,message) {
-    var currentChannel;
-    var user = message.user;
+  controller.hears('start', 'direct_message,ambient', function(bot,message) {
     
-    // Run the script listening to for "enter" (the first room)
-    controller.studio.runTrigger(bot, "enter", message.user, message.channel)
-      .catch((err) => { bot.reply(message, 'I experienced an error with a request to Botkit Studio: ' + err); });
+    console.log("starting the game!!");
+    
+    controller.studio.getScripts().then((list) => {
+      // console.log(list, " we are listing the list" );
+      var script;
+      for (var i = 0; i < list.length; i++) {
+        var triggers = list[i].triggers;
+        // Locate the script based on its triggers
+        // If script is listening for the message text, that's our script
+        _.each(triggers, function(a) {
+          console.log(triggers);
+          if (a.pattern == "enter") {
+            script = list[i];
+          }
+        });
+      }
+      
+      // console.log(script);
+      
+      // Trigger the before hook event for this script
+      controller.trigger("before_hook", [bot, message, script]);
 
-    // Generate the team's fresh puzzle data  
-    controller.trigger('generate', [bot, message]);
+      // Run the script listening to for "enter" (the first room)
+      controller.studio.runTrigger(bot, "enter", message.user, message.channel)
+        .catch((err) => { bot.reply(message, 'I experienced an error with a request to Botkit Studio: ' + err); });
+
+      // If the team doesn't already, get them the puzzle data
+      controller.storage.teams.get(message.team, function(err, team) {
+        if (!team.puzzles) // Generate the team's fresh puzzle data  
+          controller.trigger('generate', [bot, message]);
+      });
+      
+    });
 
   });
   
   controller.hears('map','direct_message,direct_mention,ambient',function(bot,message) {
 
     // console.log("message: " + JSON.stringify(message));
-    var team = message.team ? message.team : message.team_id;
-    var mapLink = "/" + team + "/map";
+    // Based on the format of "message", set the teamId
+    var teamId;
+    if (message.team_id) {
+        console.log("using the team_id");
+        teamId = message.team_id;
+    } else if (message.team.id) {
+        console.log("using team object");
+        teamId = message.team.id;
+    } else {
+        console.log("just using the team");
+        teamId = message.team;
+    }
+
+    var mapLink = "/" + teamId + "/map";
     console.log(mapLink, "is the map link for this team" );
     
     bot.reply(message, {
@@ -112,6 +149,10 @@ module.exports = function(controller) {
   // Test for entry
   controller.hears("labyrinth", 'direct_message,direct_mention', function(bot, message) {
       controller.studio.run(bot, 'welcome', message.user, message.channel);
+  });
+  
+  controller.hears("generate", 'direct_message,direct_mention', function(bot, message) {
+      controller.trigger('generate', [bot, message]);
   });
 
 

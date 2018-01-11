@@ -42,13 +42,12 @@ function findGalaxy(num) {
 // Find the puzzle based on team and puzzle room name
 function findPuzzle(controller, teamId, puzzle) {
   console.log(puzzle);
-  var galaxy = findGalaxy(puzzle.split("_")[1]);
   var found;
   controller.storage.teams.get(teamId, function(err, team) {
     // console.log(team.puzzles)
     // console.log(galaxy);
     // console.log(_.findWhere(team.puzzles, { room: galaxy + "_" + puzzle }));
-    found = _.findWhere(team.puzzles, { room: galaxy + "_" + puzzle });
+    found = _.findWhere(team.puzzles, { room: puzzle });
     console.log(found);
   });
   return found;
@@ -68,66 +67,107 @@ module.exports = function(controller) {
       if (message.type == 'interactive_message_callback') {
         
         // User "says" something via button 
-        if (message.actions[0].name.match(/^door$/)) {
-          
-          var reply = message.original_message;
-
-          // Delete the original message the bot sent to the player          
-          web.chat.delete(message.original_message.ts, message.channel).then().catch((err) => { console.log(err) }); 
-          
-          // Find the puzzle the user is about to open
-          var puzzle = findPuzzle(controller, message.team.id, message.text);
-        
-          // Check if the puzzle is unlocked in the database or contains "_open" in the button's value
-          if (!puzzle.locked || message.text[0].includes("_open")) {
-            var name = findGalaxy(message.text[0].split("_")[1] / 10) + "_" + message.text; 
-
-            console.log(name);
-
-            // This door has been unlocked, so let's tell them
-            bot.reply(message, "This door is unlocked. Sending you to the room.", (err, response) => {
-
-              // We should wait...
-              setTimeout(function() {
-
-                // And run the script for the room that is unlocked
-                controller.studio.run(bot, name, message.user, message.channel).then(function(convo) {
-
-                }).catch((err) => { console.log("Got error while running " + name[0] + " :", err) });
-
-                // And delete the bot message
-                web.chat.delete(response.ts, response.channel).then((res) => {
-
-                   // console.log(res + " was deleted");
-
-                }).catch((err) => { console.log(err) }); 
-
-              }, 1000);
-              
-            });
-
-          } else {
-            // This door leads to the puzzle thread as set up in BotKit Studio
-            // The bot "replies" with what the user said
-            bot.replyInteractive(message, reply);
-          }
-          
-        }
-        
-        
-        // User "says" something via button 
         if (message.actions[0].name.match(/^say$/)) {
           
           var reply = message.original_message;
-
-          // Delete the original message the bot sent to the player          
-          web.chat.delete(message.original_message.ts, message.channel).then().catch((err) => { console.log(err) }); 
+          var puzzleName;
+          var locked;
           
-          // This door leads to the puzzle thread as set up in BotKit Studio
-          // The bot "replies" with what the user said
-          bot.replyInteractive(message, reply);
+          // Delete the original message the bot sent to the player          
+          web.chat.delete(message.original_message.ts, message.channel).then().catch((err) => { console.log(err) });
+          
+          console.log(message, " THIS MESSAGE WAS SAID");
+          // Set puzzleName and locked based on button values
+          if (message.text.includes("_open")) {
+            puzzleName = message.text.split("_open")[0];
+            puzzleName = findGalaxy(puzzleName.split("_")[1] / 10) + "_" + puzzleName;
+            locked = false;
+          } else {
+            locked = true;
+            puzzleName = findGalaxy(message.text.split("_")[1] / 10) + "_" + message.text;
+          }
+          
+          console.log("puzzle locked: " + locked);
+          console.log("puzzle name: " + puzzleName);
+
+          // Find the puzzle the user is about to open
+          var puzzle = findPuzzle(controller, message.team.id, puzzleName);
+          
+          if (!puzzle) {
+            console.log("user said " + message.text);
+            // This door leads to the puzzle thread as set up in BotKit Studio
+            // The bot "replies" with what the user said
+            bot.replyInteractive(message, reply);
+          } else {
+            
+              // Check if the puzzle is unlocked in the database or contains "_open" in the button's value
+              if (!puzzle.locked || !locked) {
+
+                // This door has been unlocked, so let's tell them
+                bot.reply(message, "This door is unlocked. Sending you to the room.", (err, response) => {
+
+                  // We should wait...
+                  setTimeout(function() {
+                    
+                    controller.studio.getScripts().then((list) => {
+                      // console.log(list, " we are listing the list" );
+                      // script = _.findWhere(list, { triggers: confirmedChoice.callback });
+                      for (var i = 0; i < list.length; i++) {
+                        var triggers = list[i].triggers;
+                        // Locate the script based on its triggers
+                        // If script is listening for the callback_id of the confirmed option, that's our script
+                        _.each(triggers, function(a) {
+                          if (a.pattern == puzzleName) {
+                            script = list[i];
+                          }
+                        });
+                      }
+                      
+                      // Use the script name to do some stuff before it runs
+                       controller.trigger("before_hook", [bot, message, script]);
+
+                      // And run the script for the room that is unlocked
+                      controller.studio.run(bot, script.name, message.user, message.channel).then(function(convo) {
+
+                      }).catch((err) => { console.log("Got error while running " + name[0] + " :", err) });
+
+                      // And delete the bot message
+                      web.chat.delete(response.ts, response.channel).then((res) => {
+
+                         // console.log(res + " was deleted");
+
+                      }).catch((err) => { console.log(err) }); 
+
+                    });
+                  }, 1000);
+
+                });
+
+              } else {
+                // This door leads to the puzzle thread as set up in BotKit Studio
+                // The bot "replies" with what the user said
+                bot.replyInteractive(message, reply);
+              }
+            
+          }
+        
           
         }
+        
+        
+//         // User "says" something via button 
+//         if (message.actions[0].name.match(/^say$/)) {
+          
+//           var reply = message.original_message;
+
+//           // Delete the original message the bot sent to the player          
+//           web.chat.delete(message.original_message.ts, message.channel).then().catch((err) => { console.log(err) }); 
+          
+//           // This door leads to the puzzle thread as set up in BotKit Studio
+//           // The bot "replies" with what the user said
+//           bot.replyInteractive(message, reply);
+          
+//         }
         
         // Choose a menu option
         if (message.actions[0].name.match(/^choose$/)) {
@@ -207,7 +247,7 @@ module.exports = function(controller) {
             
             // Set the puzzle, answer, and if the answer is correct
             // This data will be sent to the puzzle_attempt event for saving to storage
-            data.puzzle = confirmedChoice.callback;
+            data.puzzle = findGalaxy(confirmedChoice.callback.split("_")[1] / 10) + "_" + confirmedChoice.callback;
             data.answer = confirmedChoice;
             data.correct = confirmedChoice.valid;
 
@@ -224,6 +264,17 @@ module.exports = function(controller) {
                   }
                 });
               }
+              
+              
+               // Trigger an attempt of opening the door
+              controller.trigger("puzzle_attempt", [bot, message, data]);
+
+              // Delete the bot's message
+              web.chat.delete(message.original_message.ts, message.channel).then((res) => {
+
+                 // console.log(res + " was deleted");
+
+              }).catch((err) => { console.log(err) });
 
               // If the confirmed choice is valid...
               if (confirmedChoice.valid) {
@@ -253,17 +304,9 @@ module.exports = function(controller) {
                                 
               }
               
-              // Trigger an attempt of opening the door
-              controller.trigger("puzzle_attempt", [bot, message, data]);
 
-              // Delete the bot's message
-              web.chat.delete(message.original_message.ts, message.channel).then((res) => {
-
-                 // console.log(res + " was deleted");
-
-              }).catch((err) => { console.log(err) }); 
-
-              bot.replyInteractive(message, reply);
+              // bot.replyInteractive(message, reply);
+              
             });
             
             

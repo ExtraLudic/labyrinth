@@ -11,6 +11,7 @@ module.exports = function(controller) {
 
       var web = new WebClient(token);
       
+      
       bot.api.im.open({user: bot.config.createdBy}, function(err, direct_message) {
           if (err) {
               debug('Error sending onboarding message:', err);
