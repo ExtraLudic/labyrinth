@@ -7,7 +7,7 @@ module.exports = function(controller) {
     // Capture the rtm:start event and actually start the RTM...
     controller.on('rtm:start', function(config) {
         var bot = controller.spawn(config);
-        manager.start(bot);
+        manager.start(bot, config);
     });
 
     //
@@ -17,10 +17,11 @@ module.exports = function(controller) {
 
     // The manager object exposes some useful tools for managing the RTM
     var manager = {
-        start: function(bot) {
+        start: function(bot, config) {
 
             if (managed_bots[bot.config.token]) {
                 debug('Start RTM: already online');
+               
             } else {
                 bot.startRTM(function(err, bot) {
                     if (err) {
@@ -31,6 +32,8 @@ module.exports = function(controller) {
                     }
                 });
             }
+          
+            
         },
         stop: function(bot) {
             if (managed_bots[bot.config.token]) {

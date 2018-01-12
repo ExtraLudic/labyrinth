@@ -66,7 +66,7 @@ var debug = require('debug')('botkit:main');
 var bot_options = {
     clientId: process.env.clientId,
     clientSecret: process.env.clientSecret,
-    // debug: true,
+    debug: true,
     scopes: ['bot'],
     studio_token: process.env.studio_token,
     studio_command_uri: process.env.studio_command_uri
@@ -141,6 +141,7 @@ if (!process.env.clientId || !process.env.clientSecret) {
   // You can tie into the execution of the script using the functions
   // controller.studio.before, controller.studio.after and controller.studio.validate
   if (process.env.studio_token) {
+
       controller.on('direct_message,direct_mention,mention', function(bot, message) {
           controller.studio.runTrigger(bot, message.text, message.user, message.channel, message).then(function(convo) {
               if (!convo) {
@@ -167,6 +168,43 @@ if (!process.env.clientId || !process.env.clientSecret) {
 }
 
 
+webserver.get('/:team_id/map', function(req, res){
+  
+  var teamId = req.params.team_id;
+  
+  controller.storage.teams.get(teamId, function(err,team) {
+
+    // If no puzzles, create an empty array
+    if (!team.puzzles) {
+      team.puzzles = [];
+    }
+
+    if (err) {
+      throw new Error(err);
+    }
+    
+    // Render map.hbs
+    res.render('map', {
+      domain: req.get('host'),
+      protocol: req.protocol,
+      glitch_domain: process.env.PROJECT_DOMAIN,
+      layout: 'layouts/default', 
+      data: team
+    });
+
+  });
+  
+});
+
+webserver.get('/map/update', function(req, res){
+    res.render('map', {
+      domain: req.get('host'),
+      protocol: req.protocol,
+      glitch_domain: process.env.PROJECT_DOMAIN,
+      layout: 'layouts/default'
+    });
+});
+
 
 
 
@@ -179,3 +217,5 @@ function usage_tip() {
     console.log('Get a Botkit Studio token here: https://studio.botkit.ai/')
     console.log('~~~~~~~~~~');
 }
+
+
