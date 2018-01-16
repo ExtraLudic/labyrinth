@@ -151,10 +151,18 @@ module.exports = function(controller) {
       controller.studio.run(bot, 'welcome', message.user, message.channel);
   });
   
-  controller.hears("generate", 'direct_message,direct_mention', function(bot, message) {
-      controller.trigger('generate', [bot, message]);
+  // Listen for 
+  controller.hears("^generate (.*)", 'direct_message,direct_mention', function(bot, message) {
+    
+    // if the message is "generate player" then generate player data
+    if (message.match[0] == "generate player") {
+      controller.trigger('generate', [bot, message, true]);
+    } else {
+      // Otherwise, generate development data for each puzzle
+      controller.trigger('generate', [bot, message, false]);
+    }
+      
   });
-
 
     /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */

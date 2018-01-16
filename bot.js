@@ -85,7 +85,6 @@ if (process.env.MONGO_URI) {
 var controller = Botkit.slackbot(bot_options);
 
 controller.startTicking();
-
 // Set up an Express-powered webserver to expose oauth and webhook endpoints
 var webserver = require(__dirname + '/components/express_webserver.js')(controller);
 
@@ -96,7 +95,7 @@ if (!process.env.clientId || !process.env.clientSecret) {
 
   webserver.get('/', function(req, res){
     res.render('installation', {
-      studio_enabled: controller.config.studio_token ? true : false,
+      studio_enabled: true,
       domain: req.get('host'),
       protocol: req.protocol,
       glitch_domain:  process.env.PROJECT_DOMAIN,
@@ -141,7 +140,7 @@ if (!process.env.clientId || !process.env.clientSecret) {
   // You can tie into the execution of the script using the functions
   // controller.studio.before, controller.studio.after and controller.studio.validate
   if (process.env.studio_token) {
-
+    
       controller.on('direct_message,direct_mention,mention', function(bot, message) {
           controller.studio.runTrigger(bot, message.text, message.user, message.channel, message).then(function(convo) {
               if (!convo) {

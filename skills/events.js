@@ -112,6 +112,8 @@ module.exports = function(controller) {
         
         // Find this particular puzzle from the team's generated puzzle list
         var puzzle = _.findWhere(team.puzzles, { room: data.puzzle });
+        
+        if (data.correct) puzzle.locked = false;
 
         // Add a try to the puzzle
         puzzle.tries++;
