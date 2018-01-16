@@ -110,7 +110,7 @@ module.exports = function(controller) {
                   setTimeout(function() {
                     
                     controller.studio.getScripts().then((list) => {
-                      // console.log(list, " we are listing the list" );
+                      console.log(list, " we are listing the list" );
                       // script = _.findWhere(list, { triggers: confirmedChoice.callback });
                       for (var i = 0; i < list.length; i++) {
                         var triggers = list[i].triggers;
@@ -278,15 +278,24 @@ module.exports = function(controller) {
 
               // If the confirmed choice is valid...
               if (confirmedChoice.valid) {
+                console.log("correct!");
                 
                 // Use the script name to do some stuff before it runs
                controller.trigger("before_hook", [bot, message, script]);
                 // Run the trigger for the menu callback_id
                 // This runs a trigger for botkit studio based on the MENU attachment callback_id
                 // Triggers a script that is listening for this callback_id
-                controller.studio.runTrigger(theBot, confirmedChoice.callback, message.user, message.channel)
-                  .catch((err) => {
-                    bot.reply(message, 'I experienced an error with a request to Botkit Studio: ' + err);
+                bot.reply(message, "Nice! You unlocked that door.", (err, response) => {
+                  // Wait some length of time (1000 = 1 sec)
+                   setTimeout(function() {
+                     // Send them to the script
+                    controller.studio.runTrigger(theBot, confirmedChoice.callback, message.user, message.channel)
+                        .catch((err) => {
+                          bot.reply(message, 'I experienced an error with a request to Botkit Studio: ' + err);
+                    });
+                                         // Delete the bot's previous message
+                    web.chat.delete(response.ts, response.channel).then().catch((err) => { console.log(err) }); 
+                  }, 1000); 
                 });
                 
               } else { // If the choice is NOT valid
