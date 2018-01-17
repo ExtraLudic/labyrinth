@@ -24,7 +24,8 @@ function init(data) {
         { 
           locationSpot: go.Spot.Center,  // Node.location is the center of the Shape
           locationObjectName: "SHAPE",
-          selectionAdorned: false
+          selectionAdorned: false, 
+          click: function(e, node) { showConnections(node); }
         },
         $(go.Panel, "Auto",
           $(go.Shape, "Ellipse",
@@ -59,35 +60,6 @@ function init(data) {
            new go.Binding("stroke", "color"), 
            new go.Binding("fill", "fill"))
       );
-  
-  
-
-    // Override the clickSelectingTool's standardMouseSelect
-    // If less than 2 nodes are selected, always add to the selection
-    myDiagram.toolManager.clickSelectingTool.standardMouseSelect = function() {
-      var diagram = this.diagram;
-      if (diagram === null || !diagram.allowSelect) return;
-      var e = diagram.lastInput;
-      var count = diagram.selection.count;
-      var curobj = diagram.findPartAt(e.documentPoint, false);
-      if (curobj !== null) {
-        if (count < 1) {  // add the part to the selection
-          if (!curobj.isSelected) {
-            var part = curobj;
-            if (part !== null) part.isSelected = true;
-          }
-        } else {
-          if (!curobj.isSelected) {
-            var part = curobj;
-            if (part !== null) diagram.select(part);
-            highlightLinks(part);
-          }
-        }
-      } else if (e.left && !(e.control || e.meta) && !e.shift) {
-        // left click on background with no modifier: clear selection
-        diagram.clearSelection();
-      } 
-    }
 
     generateGraph();
   
@@ -116,7 +88,7 @@ function init(data) {
         layer: names[i].room.split("_")[3] % 10 == 0 ? 0 : 1
       });
       
-      if (_.findWhere(nodeDataArray, { key: names[i].galaxy.split("_")[0] + " " + names[i].galaxy.split("_")[1] }) == undefined) {
+      if (_.findWhere(nodeDataArray, { key: names[i].galaxy.split("_")[0] + "_" + names[i].galaxy.split("_")[1] }) == undefined) {
         nodeDataArray.push({
           key: names[i].galaxy.split("_")[0] + "_" + names[i].galaxy.split("_")[1], 
           text: names[i].galaxy.split("_")[0] + "_" + names[i].galaxy.split("_")[1], 
@@ -181,17 +153,18 @@ function init(data) {
     return set;
   }
 
-
-  // Highlight links outgoing from a node
-  function highlightLinks(node) {
-    myDiagram.clearHighlighteds();
-    var outNodes = node.findNodesOutOf();
-    _.each(outNodes, function(linkedNode) {
-      node.findLinksTo(linkedNode).each(
-        function(l) { l.isHighlighted = true; }
-      );
-    });
-  } 
+    // highlight all Links and Nodes coming out of a given Node
+  function showConnections(node) {
+    var diagram = node.diagram;
+    diagram.startTransaction("highlight");
+    // remove any previous highlighting
+    diagram.clearHighlighteds();
+    // for each Link coming out of the Node, set Link.isHighlighted
+    node.findLinksOutOf().each(function(l) { l.isHighlighted = true; });
+    // for each Node destination for the Node, set Node.isHighlighted
+    node.findNodesOutOf().each(function(n) { n.isHighlighted = true; });
+    diagram.commitTransaction("highlight");
+  }
   
   myDiagram.commandHandler.doKeyDown = function() {
       var e = myDiagram.lastInput;

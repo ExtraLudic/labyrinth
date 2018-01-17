@@ -13,6 +13,7 @@ var wordfilter = require('wordfilter');
 var _ = require("underscore");
 var dataChannel;
 
+
 const { WebClient } = require('@slack/client');
 
 // An access token (from your Slack app or custom integration - xoxp, xoxb, or xoxa)
@@ -139,7 +140,7 @@ module.exports = function(controller) {
       'attachments': [
           {
             "title": "Team Map",
-            "title_link": "https://languid-car.glitch.me" + mapLink,
+            "title_link": process.env.domain + mapLink,
           }
        ]
     });

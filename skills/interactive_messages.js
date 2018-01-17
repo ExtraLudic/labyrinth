@@ -15,28 +15,28 @@ function findGalaxy(num) {
   num = num / 10; 
   
   if (num <= 1.0) {
-    letter = "a";
+    letter = "A";
   } else if (num <= 2.0) {
-    letter = "b";
+    letter = "B";
   } else if (num <= 3.0) {
-    letter = "c";
+    letter = "C";
   } else if (num <= 4.0) {
-    letter = "d";
+    letter = "D";
   } else if (num <= 5.0) {
-    letter = "e";
+    letter = "E";
   } else if (num <= 6.0) {
-    letter = "f";
+    letter = "F";
   } else if (num <= 7.0) {
-    letter = "g";
+    letter = "G";
   } else if (num <= 8.0) {
-    letter = "h";
+    letter = "H";
   } else if (num <= 9.0) {
-    letter = "i";
+    letter = "I";
   } else if (num <= 10.0) {
-    letter = "j";
+    letter = "J";
   }
   
-  return "galaxy_" + letter;
+  return "Galaxy_" + letter;
 };
 
 // Find the puzzle based on team and puzzle room name
@@ -53,6 +53,12 @@ function findPuzzle(controller, teamId, puzzle) {
   return found;
 
 };
+
+function upperCase(string) 
+{
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 
 module.exports = function(controller) {
   
@@ -74,17 +80,19 @@ module.exports = function(controller) {
           var locked;
           
           // Delete the original message the bot sent to the player          
-          web.chat.delete(message.original_message.ts, message.channel).then().catch((err) => { console.log(err) });
+          web.chat.delete(message.original_message.ts, message.channel)
+            .then(res => console.log(res))
+            .catch((err) => { console.log(err) });
           
           console.log(message, " THIS MESSAGE WAS SAID");
           // Set puzzleName and locked based on button values
           if (message.text.includes("_open")) {
-            puzzleName = message.text.split("_open")[0];
+            puzzleName = "Room" + _ + message.text.split("_open")[0].split("_")[1];
             puzzleName = findGalaxy(puzzleName.split("_")[1] / 10) + "_" + puzzleName;
             locked = false;
           } else {
             locked = true;
-            puzzleName = findGalaxy(message.text.split("_")[1] / 10) + "_" + message.text;
+            puzzleName = findGalaxy(message.text.split("_")[1] / 10) + "_" + upperCase(message.text);
           }
           
           console.log("puzzle locked: " + locked);
@@ -154,21 +162,6 @@ module.exports = function(controller) {
           
         }
         
-        
-//         // User "says" something via button 
-//         if (message.actions[0].name.match(/^say$/)) {
-          
-//           var reply = message.original_message;
-
-//           // Delete the original message the bot sent to the player          
-//           web.chat.delete(message.original_message.ts, message.channel).then().catch((err) => { console.log(err) }); 
-          
-//           // This door leads to the puzzle thread as set up in BotKit Studio
-//           // The bot "replies" with what the user said
-//           bot.replyInteractive(message, reply);
-          
-//         }
-        
         // Choose a menu option
         if (message.actions[0].name.match(/^choose$/)) {
           
@@ -181,7 +174,7 @@ module.exports = function(controller) {
             var choice;
           
             // for each attachment option
-            for (var i = 0; i <= reply.attachments[0].actions.length; i ++) {
+            for (var i = 0; i < reply.attachments[0].actions[0].options.length; i ++) {
               // check if the attachment option value equals the selected value
               // NO TWO VALUES CAN BE THE SAME
               if (reply.attachments[0].actions[0].options[i].value == value) {
@@ -247,7 +240,7 @@ module.exports = function(controller) {
             
             // Set the puzzle, answer, and if the answer is correct
             // This data will be sent to the puzzle_attempt event for saving to storage
-            data.puzzle = findGalaxy(confirmedChoice.callback.split("_")[1] / 10) + "_" + confirmedChoice.callback;
+            data.puzzle = findGalaxy(confirmedChoice.callback.split("_")[1] / 10) + "_" + upperCase(confirmedChoice.callback);
             data.answer = confirmedChoice;
             data.correct = confirmedChoice.valid;
 
@@ -293,7 +286,7 @@ module.exports = function(controller) {
                         .catch((err) => {
                           bot.reply(message, 'I experienced an error with a request to Botkit Studio: ' + err);
                     });
-                                         // Delete the bot's previous message
+                    // Delete the bot's previous message
                     web.chat.delete(response.ts, response.channel).then().catch((err) => { console.log(err) }); 
                   }, 1000); 
                 });
