@@ -15,28 +15,28 @@ function findGalaxy(num) {
   num = num / 10; 
   
   if (num <= 1.0) {
-    letter = "a";
+    letter = "A";
   } else if (num <= 2.0) {
-    letter = "b";
+    letter = "B";
   } else if (num <= 3.0) {
-    letter = "c";
+    letter = "C";
   } else if (num <= 4.0) {
-    letter = "d";
+    letter = "D";
   } else if (num <= 5.0) {
-    letter = "e";
+    letter = "E";
   } else if (num <= 6.0) {
-    letter = "f";
+    letter = "F";
   } else if (num <= 7.0) {
-    letter = "g";
+    letter = "G";
   } else if (num <= 8.0) {
-    letter = "h";
+    letter = "H";
   } else if (num <= 9.0) {
-    letter = "i";
+    letter = "I";
   } else if (num <= 10.0) {
-    letter = "j";
+    letter = "J";
   }
   
-  return "galaxy_" + letter;
+  return "Galaxy_" + letter;
 };
 
 // Find the puzzle based on team and puzzle room name
@@ -53,6 +53,12 @@ function findPuzzle(controller, teamId, puzzle) {
   return found;
 
 };
+
+function upperCase(string) 
+{
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 
 module.exports = function(controller) {
   
@@ -74,17 +80,19 @@ module.exports = function(controller) {
           var locked;
           
           // Delete the original message the bot sent to the player          
-          web.chat.delete(message.original_message.ts, message.channel).then().catch((err) => { console.log(err) });
+          web.chat.delete(message.original_message.ts, message.channel)
+            .then(res => console.log(res))
+            .catch((err) => { console.log(err) });
           
           console.log(message, " THIS MESSAGE WAS SAID");
           // Set puzzleName and locked based on button values
           if (message.text.includes("_open")) {
-            puzzleName = message.text.split("_open")[0];
+            puzzleName = "Room_" + message.text.split("_open")[0].split("_")[1];
             puzzleName = findGalaxy(puzzleName.split("_")[1] / 10) + "_" + puzzleName;
             locked = false;
           } else {
             locked = true;
-            puzzleName = findGalaxy(message.text.split("_")[1] / 10) + "_" + message.text;
+            puzzleName = findGalaxy(message.text.split("_")[1] / 10) + "_Room_" + message.text.split("_")[1];
           }
           
           console.log("puzzle locked: " + locked);
@@ -110,17 +118,14 @@ module.exports = function(controller) {
                   setTimeout(function() {
                     
                     controller.studio.getScripts().then((list) => {
-                      console.log(list, " we are listing the list" );
+                      // console.log(list, " we are listing the list" );
                       // script = _.findWhere(list, { triggers: confirmedChoice.callback });
                       for (var i = 0; i < list.length; i++) {
-                        var triggers = list[i].triggers;
                         // Locate the script based on its triggers
                         // If script is listening for the callback_id of the confirmed option, that's our script
-                        _.each(triggers, function(a) {
-                          if (a.pattern == puzzleName) {
-                            script = list[i];
-                          }
-                        });
+                        if (list[i].name == puzzleName) {
+                          script = list[i];
+                        }
                       }
                       
                       // Use the script name to do some stuff before it runs
@@ -154,21 +159,6 @@ module.exports = function(controller) {
           
         }
         
-        
-//         // User "says" something via button 
-//         if (message.actions[0].name.match(/^say$/)) {
-          
-//           var reply = message.original_message;
-
-//           // Delete the original message the bot sent to the player          
-//           web.chat.delete(message.original_message.ts, message.channel).then().catch((err) => { console.log(err) }); 
-          
-//           // This door leads to the puzzle thread as set up in BotKit Studio
-//           // The bot "replies" with what the user said
-//           bot.replyInteractive(message, reply);
-          
-//         }
-        
         // Choose a menu option
         if (message.actions[0].name.match(/^choose$/)) {
           
@@ -181,7 +171,7 @@ module.exports = function(controller) {
             var choice;
           
             // for each attachment option
-            for (var i = 0; i <= reply.attachments[0].actions.length; i ++) {
+            for (var i = 0; i < reply.attachments[0].actions[0].options.length; i ++) {
               // check if the attachment option value equals the selected value
               // NO TWO VALUES CAN BE THE SAME
               if (reply.attachments[0].actions[0].options[i].value == value) {
@@ -247,7 +237,7 @@ module.exports = function(controller) {
             
             // Set the puzzle, answer, and if the answer is correct
             // This data will be sent to the puzzle_attempt event for saving to storage
-            data.puzzle = findGalaxy(confirmedChoice.callback.split("_")[1] / 10) + "_" + confirmedChoice.callback;
+            data.puzzle = findGalaxy(confirmedChoice.callback.split("_")[1] / 10) + "_Room_" + confirmedChoice.callback.split("_")[1];
             data.answer = confirmedChoice;
             data.correct = confirmedChoice.valid;
 
@@ -255,14 +245,10 @@ module.exports = function(controller) {
               // console.log(list, " we are listing the list" );
               // script = _.findWhere(list, { triggers: confirmedChoice.callback });
               for (var i = 0; i < list.length; i++) {
-                var triggers = list[i].triggers;
-                // Locate the script based on its triggers
-                // If script is listening for the callback_id of the confirmed option, that's our script
-                _.each(triggers, function(a) {
-                  if (a.pattern == confirmedChoice.callback) {
-                    script = list[i];
-                  }
-                });
+                // Locate the script based on its name
+                if (list[i].name == data.puzzle) {
+                  script = list[i];
+                }
               }
               
               
@@ -278,7 +264,7 @@ module.exports = function(controller) {
 
               // If the confirmed choice is valid...
               if (confirmedChoice.valid) {
-                console.log("correct!");
+                console.log("correct!", data.puzzle);
                 
                 // Use the script name to do some stuff before it runs
                controller.trigger("before_hook", [bot, message, script]);
@@ -288,12 +274,12 @@ module.exports = function(controller) {
                 bot.reply(message, "Nice! You unlocked that door.", (err, response) => {
                   // Wait some length of time (1000 = 1 sec)
                    setTimeout(function() {
-                     // Send them to the script
-                    controller.studio.runTrigger(theBot, confirmedChoice.callback, message.user, message.channel)
+                    // Send them to the script
+                    controller.studio.run(theBot, data.puzzle, message.user, message.channel)
                         .catch((err) => {
                           bot.reply(message, 'I experienced an error with a request to Botkit Studio: ' + err);
                     });
-                                         // Delete the bot's previous message
+                    // Delete the bot's previous message
                     web.chat.delete(response.ts, response.channel).then().catch((err) => { console.log(err) }); 
                   }, 1000); 
                 });
@@ -305,7 +291,7 @@ module.exports = function(controller) {
                   // Wait some length of time (1000 = 1 sec)
                    setTimeout(function() {
                      // Send them back to the beginning
-                    controller.studio.run(bot, 'galaxy_a_room_1', message.user, message.channel);
+                    controller.studio.runTrigger(bot, 'enter', message.user, message.channel);
                      // Delete the bot's previous message
                     web.chat.delete(response.ts, response.channel).then().catch((err) => { console.log(err) }); 
                   }, 1000); 

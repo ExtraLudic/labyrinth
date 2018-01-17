@@ -13,6 +13,7 @@ var wordfilter = require('wordfilter');
 var _ = require("underscore");
 var dataChannel;
 
+
 const { WebClient } = require('@slack/client');
 
 // An access token (from your Slack app or custom integration - xoxp, xoxb, or xoxa)
@@ -96,7 +97,7 @@ module.exports = function(controller) {
         });
       }
       
-      // console.log(script);
+      console.log(script, " start script");
       
       // Trigger the before hook event for this script
       controller.trigger("before_hook", [bot, message, script]);
@@ -139,7 +140,7 @@ module.exports = function(controller) {
       'attachments': [
           {
             "title": "Team Map",
-            "title_link": "https://languid-car.glitch.me" + mapLink,
+            "title_link": process.env.domain + mapLink,
           }
        ]
     });
@@ -154,6 +155,7 @@ module.exports = function(controller) {
   // Listen for 
   controller.hears("^generate (.*)", 'direct_message,direct_mention', function(bot, message) {
     
+    console.log("generating")
     // if the message is "generate player" then generate player data
     if (message.match[0] == "generate player") {
       controller.trigger('generate', [bot, message, true]);

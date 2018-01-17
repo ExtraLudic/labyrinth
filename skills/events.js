@@ -107,7 +107,7 @@ module.exports = function(controller) {
         
         if (!team.puzzles) {
           // Just in case
-          controller.trigger("generate", [bot, message]);
+          controller.trigger("generate", [bot, message, true]);
         }
         
         // Find this particular puzzle from the team's generated puzzle list
@@ -153,14 +153,7 @@ module.exports = function(controller) {
       
       console.log("script:" , script);
       
-      
-      var galaxy;
-      
-      _.each(script.tags, function(tag, i) {
-        if (tag.includes("galaxy")) {
-            galaxy = tag;
-        }
-      });
+     var galaxy = script.name.split("_")[0] + "_" + script.name.split("_")[1];
       
       console.log("galaxy: ", galaxy);
       
@@ -211,10 +204,14 @@ module.exports = function(controller) {
               // Go through conversation attachments 
               for (var i = 0; i < convo.messages[0].attachments[0].actions.length; i++) {
                  var action = convo.messages[0].attachments[0].actions[i];
+                
+                console.log(_.findWhere(team.puzzles, { 
+                   room: galaxy + "_" + action.value.charAt(0).toUpperCase() + action.value.slice(1)
+                 }));
                  // Find matching puzzle
                  // Room button values should match room names (ie: room_1)
                  var puzzle = _.findWhere(team.puzzles, { 
-                   room: galaxy + "_" + action.value
+                   room: galaxy + "_" + action.value.charAt(0).toUpperCase() + action.value.slice(1)
                  });
 
                 
