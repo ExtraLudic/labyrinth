@@ -97,7 +97,7 @@ module.exports = function(controller) {
         });
       }
       
-      // console.log(script);
+      console.log(script, " start script");
       
       // Trigger the before hook event for this script
       controller.trigger("before_hook", [bot, message, script]);
@@ -155,6 +155,7 @@ module.exports = function(controller) {
   // Listen for 
   controller.hears("^generate (.*)", 'direct_message,direct_mention', function(bot, message) {
     
+    console.log("generating")
     // if the message is "generate player" then generate player data
     if (message.match[0] == "generate player") {
       controller.trigger('generate', [bot, message, true]);
