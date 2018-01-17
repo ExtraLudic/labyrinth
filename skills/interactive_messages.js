@@ -291,7 +291,7 @@ module.exports = function(controller) {
                   // Wait some length of time (1000 = 1 sec)
                    setTimeout(function() {
                      // Send them back to the beginning
-                    controller.studio.run(bot, 'galaxy_a_room_1', message.user, message.channel);
+                    controller.studio.runTrigger(bot, 'enter', message.user, message.channel);
                      // Delete the bot's previous message
                     web.chat.delete(response.ts, response.channel).then().catch((err) => { console.log(err) }); 
                   }, 1000); 
