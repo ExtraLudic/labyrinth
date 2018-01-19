@@ -110,7 +110,8 @@ function init(data) {
         text: names[i].room, 
         color: names[i].dev ? "lightgrey" : names[i].locked ? "red" : "green",
         group: names[i].galaxy.split("_")[0] + "_" + names[i].galaxy.split("_")[1], 
-        layer: names[i].room.split("_")[3] % 10 == 0 ? 0 : 1
+        layer: names[i].room.split("_")[3] % 10 == 0 ? 0 : 1, 
+        locked: names[i].locked
       });
       
       if (_.findWhere(nodeDataArray, { key: names[i].galaxy.split("_")[0] + "_" + names[i].galaxy.split("_")[1] }) == undefined) {
@@ -181,14 +182,17 @@ function init(data) {
     // highlight all Links and Nodes coming out of a given Node
   function showConnections(node) {
     var diagram = node.diagram;
-    diagram.startTransaction("highlight");
-    // remove any previous highlighting
-    diagram.clearHighlighteds();
-    // for each Link coming out of the Node, set Link.isHighlighted
-    node.findLinksOutOf().each(function(l) { l.isHighlighted = true; });
-    // for each Node destination for the Node, set Node.isHighlighted
-    node.findNodesOutOf().each(function(n) { n.isHighlighted = true; });
-    diagram.commitTransaction("highlight");
+    
+    if (!node.Rd.locked || node.Rd.dev) {
+      diagram.startTransaction("highlight");
+      // remove any previous highlighting
+      diagram.clearHighlighteds();
+      // for each Link coming out of the Node, set Link.isHighlighted
+      node.findLinksOutOf().each(function(l) { l.isHighlighted = true; });
+      // for each Node destination for the Node, set Node.isHighlighted
+      node.findNodesOutOf().each(function(n) { n.isHighlighted = true; });
+      diagram.commitTransaction("highlight");
+    }
   }
   
   myDiagram.commandHandler.doKeyDown = function() {
