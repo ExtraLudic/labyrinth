@@ -46,8 +46,6 @@ module.exports = function(controller) {
             });
           });
           
-          // Here we can do something with the new array
-
         });
                         
       }).catch((err) => { console.log(err, " is the err") }); // End get scripts

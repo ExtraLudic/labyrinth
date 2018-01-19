@@ -180,7 +180,7 @@ module.exports = function(controller) {
           controller.storage.teams.get(teamId, function(err, team) {
                         
               if (message.actions) {
-                 console.log(message.actions[0].value);
+                 console.log(message.actions[0]);
 
                 // Set the correctly unlocked puzzle to be unlocked in the team data
                 var unlocked = _.findWhere(team.puzzles, { 

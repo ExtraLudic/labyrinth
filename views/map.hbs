@@ -11,11 +11,12 @@ function init(data) {
     myDiagram =
       $(go.Diagram, "map", // must be the ID or reference to div
         {
-          initialAutoScale: go.Diagram.UniformToFill,
+          initialAutoScale: go.Diagram.Uniform,
           padding: 10,
           contentAlignment: go.Spot.Center,
-          layout: $(go.CircularLayout),
-          maxSelectionCount: 2
+          maxSelectionCount: 2, 
+          layout: $(go.GridLayout,
+                        { comparer: go.GridLayout.smartComparer })
         });
 
     // define the Node template
@@ -25,21 +26,45 @@ function init(data) {
           locationSpot: go.Spot.Center,  // Node.location is the center of the Shape
           locationObjectName: "SHAPE",
           selectionAdorned: false, 
-          click: function(e, node) { showConnections(node); }
+          selectable: false,
+          click: function(e, node) { 
+            showConnections(node);
+          }
         },
         $(go.Panel, "Auto",
           $(go.Shape, "Ellipse",
             { name: "SHAPE",
               fill: "lightgray",  // default value, but also data-bound
-              stroke: "transparent",  // modified by highlighting
+              stroke: "black",  // modified by highlighting
               strokeWidth: 2,
               desiredSize: new go.Size(30, 30),
               portId: "" },  // so links will go to the shape, not the whole node
             new go.Binding("fill", "color"),
-            new go.Binding("stroke", "isSelected", function(s, obj) { return s ? "black" : null }).ofObject())
+            new go.Binding("stroke", "isSelected", function(s, obj) { return s ? "yellow" : "black" }).ofObject())
          ),
         $(go.TextBlock,
           new go.Binding("text")));
+  
+    // Group template
+    myDiagram.groupTemplate =
+      $(go.Group, "Vertical",
+        {
+            layout: $(go.CircularLayout)
+        },
+        $(go.Panel, "Auto",
+          $(go.Shape, "RoundedRectangle",  // surrounds the Placeholder
+            { parameter1: 14,
+              fill: "transparent", 
+              stroke: "transparent" 
+            }),
+          $(go.Placeholder,    // represents the area of all member parts,
+            { padding: 5})  // with some extra padding around them
+        ),
+        $(go.TextBlock,         // group title
+          { alignment: go.Spot.Right, font: "Bold 12pt Sans-Serif" },
+          new go.Binding("text", "key"))
+      );
+
 
     // define the Link template
     myDiagram.linkTemplate =
@@ -104,9 +129,9 @@ function init(data) {
         _.each(room.links, function(link, j) {
           linkDataArray.push({ 
             from: room.room, 
-            to: room.galaxy + "_Room_" + parseInt(link), 
-            color: room.dev ? "black" : room.locked ? "transparent" : "black",
-            fill: room.dev ? "black" : room.locked ? "transparent" : "black"
+            to: findGalaxy(parseInt(link)) + "_Room_" + parseInt(link), 
+            color: room.dev ? "lightgrey" : room.locked ? "transparent" : "black",
+            fill: room.dev ? "lightgrey" : room.locked ? "transparent" : "black"
           });
         });
       }
@@ -181,6 +206,39 @@ function init(data) {
 
   
   });
+  
+  function findGalaxy(num) {
+  
+    var letter;
+
+    num = num / 10; 
+
+    if (num <= 1.0) {
+      letter = "A";
+    } else if (num <= 2.0) {
+      letter = "B";
+    } else if (num <= 3.0) {
+      letter = "C";
+    } else if (num <= 4.0) {
+      letter = "D";
+    } else if (num <= 5.0) {
+      letter = "E";
+    } else if (num <= 6.0) {
+      letter = "F";
+    } else if (num <= 7.0) {
+      letter = "G";
+    } else if (num <= 8.0) {
+      letter = "H";
+    } else if (num <= 9.0) {
+      letter = "I";
+    } else if (num <= 10.0) {
+      letter = "J";
+    }
+
+    return "Galaxy_" + letter;
+  };
+  
+  
 </script>
 
 
@@ -189,10 +247,18 @@ function init(data) {
 
     <h1>Here is your team map.</h1>
 
-    {{{jsonPrint data}}}
-
     <div id="myPaths"></div>
+  
+  {{{jsonPrint data}}}
 
     <div id="map" style="border: solid 1px black; background: white; width: 100%; height: 700px"></div>
+    
+    <button id="zoomin">
+      +
+    </button>
 
+    <button id="zoomout">
+      -
+    </button>
+  
 </div>

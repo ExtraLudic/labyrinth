@@ -55,7 +55,7 @@ module.exports = function(controller) {
                             debug('Error: could not save team record:', err);
                         } else {
                             if (new_team) {
-                                controller.trigger('create_team', [testbot, team]);
+                                controller.trigger('create_team', [testbot, team, payload]);
                             } else {
                                 controller.trigger('update_team', [testbot, team]);
                             }
@@ -67,15 +67,15 @@ module.exports = function(controller) {
     });
 
 
-    controller.on('create_team', function(bot, team, auth) {
+    controller.on('create_team', function(bot, team, payload) {
 
         debug('Team created:', team);
 
         // Trigger an event that will establish an RTM connection for this bot
-        controller.trigger('rtm:start', [bot.config]);
+        controller.trigger('rtm:start', [bot.config, team, payload]);
 
         // Trigger an event that will cause this team to receive onboarding messages
-        controller.trigger('onboard', [bot, team, auth]);
+        controller.trigger('onboard', [bot, team, payload]);
 
     });
 
