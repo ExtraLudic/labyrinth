@@ -204,8 +204,9 @@ webserver.get('/map/update', function(req, res){
     });
 });
 
+var scope = "bot,channels:history,channels:read,channels:write,users:read,chat:write:user,chat:write:bot,team:read,im:write,admin,incoming-webhook"
 
-
+console.log(controller.getAuthorizeURL(scope, "id"));
 
 function usage_tip() {
     console.log('~~~~~~~~~~');

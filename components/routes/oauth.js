@@ -4,6 +4,7 @@ module.exports = function(webserver, controller) {
 
     var handler = {
         login: function(req, res) {
+          
             res.redirect(controller.getAuthorizeURL());
         },
         oauth: function(req, res) {
