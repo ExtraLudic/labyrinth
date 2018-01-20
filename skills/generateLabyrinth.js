@@ -57,9 +57,11 @@ module.exports = function(controller) {
       // Create the puzzle object
        var thisPuzzle = {
           room: name,
+          galaxy: name.split("_")[0] + "_" + name.split("_")[1],
           links: [], 
           locked: true, 
-          tries: 0
+          tries: 0, 
+          roomId: name.match(/\d+/)[0]
         };
       
       if (!playerData) thisPuzzle.dev = true;

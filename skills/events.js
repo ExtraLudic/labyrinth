@@ -9,6 +9,17 @@ const token = process.env.slackToken;
 
 const web = new WebClient(token);
 
+function findGalaxy(data, num) {
+
+  var thesePuzzles = _.pluck(data, "roomId");
+  var thisPuzzle = thesePuzzles.indexOf(num.toString());
+  console.log(thisPuzzle, data[thisPuzzle]);
+  if (thisPuzzle >= 0) 
+    return data[thisPuzzle].galaxy;
+  else return 0;
+
+};
+
 module.exports = function(controller) {
   
     // message sent in the labyrinth channel
@@ -153,9 +164,9 @@ module.exports = function(controller) {
       
       console.log("script:" , script);
       
-     var galaxy = script.name.split("_")[0] + "_" + script.name.split("_")[1];
+     // var galaxy = script.name.split("_")[0] + "_" + script.name.split("_")[1];
       
-      console.log("galaxy: ", galaxy);
+      // console.log("galaxy: ", galaxy);
       
       console.log(message);
         
@@ -178,29 +189,7 @@ module.exports = function(controller) {
           
           // Find team to check puzzles data                   
           controller.storage.teams.get(teamId, function(err, team) {
-                        
-              if (message.actions) {
-                 console.log(message.actions[0], " are the message actions, before_hook");
-
-                // Set the correctly unlocked puzzle to be unlocked in the team data
-                var unlocked = _.findWhere(team.puzzles, { 
-                   room: galaxy + "_Room_" + parseInt(message.actions[0].value)
-                });
-                
-                
-                if (unlocked) {
-                  
-                  console.log(unlocked, " line 230");
-
-                  unlocked.locked = false;
-                  // save the team
-                  controller.storage.teams.save(team, function(err, id) {});
-
-                  
-                }
-                
-              }
-              
+                                      
             // console.log("the team puzzles are: ", team.puzzles);
               // Go through conversation attachments 
               for (var i = 0; i < convo.messages[0].attachments[0].actions.length; i++) {
@@ -208,12 +197,12 @@ module.exports = function(controller) {
                   console.log(action, "puzzle button actions");
                 console.log(action.value.match(/\d+/)[0]);
                  console.log(_.findWhere(team.puzzles, { 
-                   room: galaxy + "_Room_" + action.value.match(/\d+/)[0]
+                   room: findGalaxy(team.puzzles, action.value.match(/\d+/)[0]) + "_Room_" + action.value.match(/\d+/)[0]
                  }), "is the found puzzle");
                  // Find matching puzzle
                  // Room button values should match room names (ie: room_1)
                  var puzzle = _.findWhere(team.puzzles, { 
-                   room: galaxy +  "_Room_" + action.value.match(/\d+/)[0]
+                   room: findGalaxy(team.puzzles, action.value.match(/\d+/)[0]) +  "_Room_" + action.value.match(/\d+/)[0]
                  });
 
                 
