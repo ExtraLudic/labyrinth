@@ -83,7 +83,7 @@ module.exports = function(controller) {
                    // console.log(thread[0].attachments[0].actions);
                    // Find button value (room_xxx) 
                    // Extract link number from value
-                   var num = action.value.match(/\d+$/)[0];
+                   var num = action.value.match(/\d+/)[0];
                    // Add that number to the links array for this puzzle
                    thisPuzzle.links.push(num);
 
