@@ -85,14 +85,15 @@ module.exports = function(controller) {
             .catch((err) => { console.log(err) });
           
           console.log(message, " THIS MESSAGE WAS SAID");
+          var num = message.text.match(/\d+/)[0];
           // Set puzzleName and locked based on button values
           if (message.text.includes("_open")) {
-            puzzleName = "Room_" + message.text.split("_open")[0].split("_")[1];
-            puzzleName = findGalaxy(puzzleName.split("_")[1] / 10) + "_" + puzzleName;
+            puzzleName = "Room_" + num;
+            puzzleName = findGalaxy(num / 10) + "_" + puzzleName;
             locked = false;
           } else {
             locked = true;
-            puzzleName = findGalaxy(message.text.split("_")[1] / 10) + "_Room_" + message.text.split("_")[1];
+            puzzleName = findGalaxy(num / 10) + "_Room_" + num;
           }
           
           console.log("puzzle locked: " + locked);
@@ -237,7 +238,7 @@ module.exports = function(controller) {
             
             // Set the puzzle, answer, and if the answer is correct
             // This data will be sent to the puzzle_attempt event for saving to storage
-            data.puzzle = findGalaxy(confirmedChoice.callback.split("_")[1] / 10) + "_Room_" + confirmedChoice.callback.split("_")[1];
+            data.puzzle = findGalaxy(confirmedChoice.callback.match(/\d+/)[0] / 10) + "_Room_" + confirmedChoice.callback.match(/\d+/)[0];
             data.answer = confirmedChoice;
             data.correct = confirmedChoice.valid;
 

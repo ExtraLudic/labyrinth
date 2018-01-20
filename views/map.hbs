@@ -75,15 +75,16 @@ function init(data) {
           layerName: "Background"  // don't cross in front of any nodes
         },
         $(go.Shape,  // this shape only shows when it isHighlighted
-          { isPanelMain: true, stroke: null, strokeWidth: 5 },
+          { toArrow: "Triangle", isPanelMain: true, stroke: null, strokeWidth: 3 },
+          new go.Binding("fill", "isHighlighted", function(h) { return h ? "black" : null; }).ofObject(),
           new go.Binding("stroke", "isHighlighted", function(h) { return h ? "black" : null; }).ofObject()),
         $(go.Shape,
           // mark each Shape to get the link geometry with isPanelMain: true
           { isPanelMain: true, stroke: "black", strokeWidth: 1 },
           new go.Binding("stroke", "color")),
-        $(go.Shape, { toArrow: "Triangle"}, 
-           new go.Binding("stroke", "color"), 
-           new go.Binding("fill", "fill"))
+        $(go.Shape, { toArrow: "Triangle" }, 
+           new go.Binding("stroke", "isHighlighted", function(h) { return h ? "black" : null; }).ofObject(), 
+           new go.Binding("fill", "isHighlighted", function(h) { return h ? "black" : null; }).ofObject())
       );
 
     generateGraph();
@@ -109,7 +110,7 @@ function init(data) {
         key: names[i].room, 
         text: names[i].room.split("_")[3], 
         color: names[i].dev ? "lightgrey" : names[i].locked ? "red" : "green",
-        group: names[i].galaxy.split("_")[0] + "_" + names[i].galaxy.split("_")[1], 
+        group: names[i].galaxy, 
         layer: names[i].center ? 0 : names[i].blackhole ? 2 : 1, 
         locked: names[i].locked, 
         dev: names[i].dev
@@ -132,8 +133,8 @@ function init(data) {
           linkDataArray.push({ 
             from: room.room, 
             to: findGalaxy(nodeDataArray, parseInt(link)) + "_Room_" + parseInt(link), 
-            color: room.dev ? "lightgrey" : room.locked ? "transparent" : "black",
-            fill: room.dev ? "lightgrey" : room.locked ? "transparent" : "black"
+            color: room.dev ? "lightgrey" : room.locked ? "transparent" : "lightgrey",
+            fill: room.dev ? "lightgrey" : room.locked ? "transparent" : "lightgrey"
           });
         });
       }
@@ -190,8 +191,7 @@ function init(data) {
       diagram.clearHighlighteds();
       // for each Link coming out of the Node, set Link.isHighlighted
       node.findLinksOutOf().each(function(l) { l.isHighlighted = true; });
-      // for each Node destination for the Node, set Node.isHighlighted
-      node.findNodesOutOf().each(function(n) { n.isHighlighted = true; });
+      
       diagram.commitTransaction("highlight");
     }
   }

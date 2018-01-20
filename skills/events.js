@@ -161,7 +161,7 @@ module.exports = function(controller) {
         
         // Before the room script runs...
         controller.studio.before(script.name, function(convo, next) {
-          console.log(message);
+          // console.log(message);
           
           // Based on the format of "message", set the teamId
           var teamId;
@@ -180,11 +180,11 @@ module.exports = function(controller) {
           controller.storage.teams.get(teamId, function(err, team) {
                         
               if (message.actions) {
-                 console.log(message.actions[0]);
+                 console.log(message.actions[0], " are the message actions, before_hook");
 
                 // Set the correctly unlocked puzzle to be unlocked in the team data
                 var unlocked = _.findWhere(team.puzzles, { 
-                   room: galaxy + "_" + message.actions[0].value
+                   room: galaxy + "_Room_" + parseInt(message.actions[0].value)
                 });
                 
                 
@@ -196,6 +196,7 @@ module.exports = function(controller) {
                   // save the team
                   controller.storage.teams.save(team, function(err, id) {});
 
+                  
                 }
                 
               }
@@ -204,14 +205,15 @@ module.exports = function(controller) {
               // Go through conversation attachments 
               for (var i = 0; i < convo.messages[0].attachments[0].actions.length; i++) {
                  var action = convo.messages[0].attachments[0].actions[i];
-                
-                console.log(_.findWhere(team.puzzles, { 
-                   room: galaxy + "_" + action.value.charAt(0).toUpperCase() + action.value.slice(1)
-                 }));
+                  console.log(action, "puzzle button actions");
+                console.log(action.value.match(/\d+/)[0]);
+                 console.log(_.findWhere(team.puzzles, { 
+                   room: galaxy + "_Room_" + action.value.match(/\d+/)[0]
+                 }), "is the found puzzle");
                  // Find matching puzzle
                  // Room button values should match room names (ie: room_1)
                  var puzzle = _.findWhere(team.puzzles, { 
-                   room: galaxy + "_" + action.value.charAt(0).toUpperCase() + action.value.slice(1)
+                   room: galaxy +  "_Room_" + action.value.match(/\d+/)[0]
                  });
 
                 
@@ -220,7 +222,8 @@ module.exports = function(controller) {
                    action.style = "danger"; // red
                  } else {
                    action.style = "primary"; // green
-                   action.value = action.value + "_open";
+                   if (!action.value.includes("_open"))
+                     action.value = action.value + "_open";
                  }
               }
 
