@@ -107,11 +107,12 @@ function init(data) {
     for (var i = 0; i < names.length; i++) {
       nodeDataArray.push({ 
         key: names[i].room, 
-        text: names[i].room, 
+        text: names[i].room.split("_")[3], 
         color: names[i].dev ? "lightgrey" : names[i].locked ? "red" : "green",
         group: names[i].galaxy.split("_")[0] + "_" + names[i].galaxy.split("_")[1], 
-        layer: names[i].room.split("_")[3] % 10 == 0 ? 0 : 1, 
-        locked: names[i].locked
+        layer: names[i].center ? 0 : names[i].blackhole ? 2 : 1, 
+        locked: names[i].locked, 
+        dev: names[i].dev
       });
       
       if (_.findWhere(nodeDataArray, { key: names[i].galaxy.split("_")[0] + "_" + names[i].galaxy.split("_")[1] }) == undefined) {
@@ -130,7 +131,7 @@ function init(data) {
         _.each(room.links, function(link, j) {
           linkDataArray.push({ 
             from: room.room, 
-            to: findGalaxy(parseInt(link)) + "_Room_" + parseInt(link), 
+            to: findGalaxy(nodeDataArray, parseInt(link)) + "_Room_" + parseInt(link), 
             color: room.dev ? "lightgrey" : room.locked ? "transparent" : "black",
             fill: room.dev ? "lightgrey" : room.locked ? "transparent" : "black"
           });
@@ -207,39 +208,16 @@ function init(data) {
         go.CommandHandler.prototype.doKeyDown.call(cmd);
       }
     };
-
-  
   });
   
-  function findGalaxy(num) {
-  
-    var letter;
-
-    num = num / 10; 
-
-    if (num <= 1.0) {
-      letter = "A";
-    } else if (num <= 2.0) {
-      letter = "B";
-    } else if (num <= 3.0) {
-      letter = "C";
-    } else if (num <= 4.0) {
-      letter = "D";
-    } else if (num <= 5.0) {
-      letter = "E";
-    } else if (num <= 6.0) {
-      letter = "F";
-    } else if (num <= 7.0) {
-      letter = "G";
-    } else if (num <= 8.0) {
-      letter = "H";
-    } else if (num <= 9.0) {
-      letter = "I";
-    } else if (num <= 10.0) {
-      letter = "J";
-    }
-
-    return "Galaxy_" + letter;
+  function findGalaxy(data, num) {
+    
+    var thesePuzzles = _.pluck(data, "text");
+    var thisPuzzle = thesePuzzles.indexOf(num.toString());
+    if (thisPuzzle >= 0) 
+      return data[thisPuzzle].group;
+    else return 0;
+    
   };
   
   
