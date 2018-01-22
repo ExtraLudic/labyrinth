@@ -8,38 +8,22 @@ const token = process.env.slackToken;
 
 const web = new WebClient(token);
 
-function findGalaxy(num) {
+// find galaxy
+function findGalaxy(controller, teamId, num) {
+  var galaxy;
   
-  var letter;
+  controller.storage.teams.get(teamId, function(err, team) {
+    var thesePuzzles = _.pluck(team.puzzles, "roomId");
+    var thisPuzzle = thesePuzzles.indexOf(num.toString());
+    console.log(thisPuzzle, team.puzzles[thisPuzzle]);
+    if (thisPuzzle >= 0) 
+      galaxy = team.puzzles[thisPuzzle].galaxy;
+  });
   
-  num = num / 10; 
-  
-  if (num <= 1.0) {
-    letter = "A";
-  } else if (num <= 2.0) {
-    letter = "B";
-  } else if (num <= 3.0) {
-    letter = "C";
-  } else if (num <= 4.0) {
-    letter = "D";
-  } else if (num <= 5.0) {
-    letter = "E";
-  } else if (num <= 6.0) {
-    letter = "F";
-  } else if (num <= 7.0) {
-    letter = "G";
-  } else if (num <= 8.0) {
-    letter = "H";
-  } else if (num <= 9.0) {
-    letter = "I";
-  } else if (num <= 10.0) {
-    letter = "J";
-  }
-  
-  return "Galaxy_" + letter;
+  return galaxy;
 };
 
-// Find the puzzle based on team and puzzle room name
+// find the puzzle based on team and puzzle room name
 function findPuzzle(controller, teamId, puzzle) {
   console.log(puzzle);
   var found;
@@ -89,11 +73,11 @@ module.exports = function(controller) {
           // Set puzzleName and locked based on button values
           if (message.text.includes("_open")) {
             puzzleName = "Room_" + num;
-            puzzleName = findGalaxy(num / 10) + "_" + puzzleName;
+            puzzleName = findGalaxy(controller, message.team.id, num) + "_" + puzzleName;
             locked = false;
           } else {
             locked = true;
-            puzzleName = findGalaxy(num / 10) + "_Room_" + num;
+            puzzleName = findGalaxy(controller, message.team.id, num) + "_Room_" + num;
           }
           
           console.log("puzzle locked: " + locked);
@@ -235,10 +219,10 @@ module.exports = function(controller) {
             // Locate the saved choice based on the user key
             var confirmedChoice = _.findWhere(choiceSelect, { user: message.user });
             var script;
-            
+          
             // Set the puzzle, answer, and if the answer is correct
             // This data will be sent to the puzzle_attempt event for saving to storage
-            data.puzzle = findGalaxy(confirmedChoice.callback.match(/\d+/)[0] / 10) + "_Room_" + confirmedChoice.callback.match(/\d+/)[0];
+            data.puzzle = findGalaxy(controller, message.team.id, confirmedChoice.callback.match(/\d+/)[0]) + "_Room_" + confirmedChoice.callback.match(/\d+/)[0];
             data.answer = confirmedChoice;
             data.correct = confirmedChoice.valid;
 
@@ -251,8 +235,8 @@ module.exports = function(controller) {
                   script = list[i];
                 }
               }
-              
-              
+
+
                // Trigger an attempt of opening the door
               controller.trigger("puzzle_attempt", [bot, message, data]);
 
@@ -266,7 +250,7 @@ module.exports = function(controller) {
               // If the confirmed choice is valid...
               if (confirmedChoice.valid) {
                 console.log("correct!", data.puzzle);
-                
+
                 // Use the script name to do some stuff before it runs
                controller.trigger("before_hook", [bot, message, script]);
                 // Run the trigger for the menu callback_id
@@ -284,7 +268,7 @@ module.exports = function(controller) {
                     web.chat.delete(response.ts, response.channel).then().catch((err) => { console.log(err) }); 
                   }, 1000); 
                 });
-                
+
               } else { // If the choice is NOT valid
                 // Tell the user they were wrong
                 // console.log("wrong", message);
@@ -297,14 +281,12 @@ module.exports = function(controller) {
                     web.chat.delete(response.ts, response.channel).then().catch((err) => { console.log(err) }); 
                   }, 1000); 
                 });
-                                
-              }
-              
 
-              // bot.replyInteractive(message, reply);
-              
+              }
+
+
             });
-            
+              
             
   
          }
