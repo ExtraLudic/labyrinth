@@ -136,13 +136,20 @@ module.exports = function(controller) {
   controller.hears("^generate(.*)", 'direct_message,direct_mention', function(bot, message) {
     
     console.log(message);
+    var options = {
+      bot: bot, 
+      message: message, 
+      forced: true
+    };
     
     // if the message is "generate player" then generate player data
     if (message.match[0] == "generate player") {
-      controller.trigger('generate', [bot, message, true]);
+      options.player = true;
+      controller.trigger('generate', [options]);
     } else if (message.match[0] == "generate dev") {
+      options.player = false;
       // Otherwise, generate development data for each puzzle
-      controller.trigger('generate', [bot, message, false]);
+      controller.trigger('generate', [options]);
     } else {
       bot.reply(message, {
         'text': "Hmm.. please specify if you want to generate dev or player data!"

@@ -82,13 +82,27 @@ module.exports = function(controller) {
                     // console.log(joined, "is the joined data");
                     // console.log(mapChannel, "is the map channel");
                     setTimeout(function() {
-                      var options = {
+                      
+                      var generateOptions = {
+                        bot: bot, 
+                        team: team,
+                        player: true, 
+                        user: bot.config.createdBy,
+                        channel: direct_message.channel.id
+                      };
+                      
+                      // Generate all that team data
+                      controller.trigger('generate', [generateOptions]);
+                      
+                      var mapOptions = {
                         bot: bot, 
                         team: team, 
                         channel: mapChannel
                       };
+                      
                       // Have the bot send the map message from the map channel
-                      controller.trigger('map_event', [options]);
+                      controller.trigger('map_event', [mapOptions]);
+                      
                     }, 1000);
                     
                   });

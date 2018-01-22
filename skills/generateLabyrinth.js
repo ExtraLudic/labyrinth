@@ -2,6 +2,10 @@ const _ = require("underscore");
 
 // Script for generation event 
 // Pulls scripts with a certain tag for team puzzle data 
+    
+var team, 
+    user, 
+    channel;
 
 module.exports = function(controller) {
   
@@ -9,13 +13,22 @@ module.exports = function(controller) {
   var pullTag = "labyrinth";
   var promises = [];
       
-  controller.on("generate", function(bot, message, playerData) {
+  controller.on("generate", function(options) {
+    
+    console.log(options, options.message);
+    
+    if (options.user) user = options.user;
+    if (options.channel) channel = options.channel;
+    if (options.team) team = options.team.id;
+    
+    if (!channel) channel = options.message.channel;
+    if (!user) user = options.message.user;
+    if (!team) team = options.message.team;
     
     // console.log(bot);
-    controller.storage.teams.get(message.team, function(err, team) {
-      // console.log(team);
-      controller.studio.getScripts().then(function(list) {
-        
+    controller.storage.teams.get(team, function(err, teamData) {
+      console.log(teamData, "is the gotten team" );
+      controller.studio.getScripts().then(function(list) {        
         // console.log(list, "is the list of scripts");
          // Go through each script 
         // make new array with all names
@@ -24,7 +37,7 @@ module.exports = function(controller) {
         });
         
         var names = _.pluck(puzzles, "name");
-        console.log(puzzles, names);
+        // console.log(puzzles, names);
         
         var mapPromises = names.map(pd);
 
@@ -33,19 +46,21 @@ module.exports = function(controller) {
         return results.then(puzzleArray => {
           
           console.log(puzzleArray, "this is from all those promises");
-          team.puzzles = puzzleArray;
+          teamData.puzzles = puzzleArray;
           // Set the team puzzles to the generated puzzles array
-          controller.storage.teams.save(team, function(err, id) {
+          controller.storage.teams.save(teamData, function(err, id) {
             if (err) {
               console.log("There was an error: ", err);
             }
             // Check the team to make sure it was updated
             // Team should have a puzzles object now attached
-            controller.storage.teams.get(id, function(err, team) {
-              console.log("updated: ", team.puzzles);
-              bot.reply(message, {
-                'text': "Nice, you have updated your team's puzzles with completely fresh data!"
-              });
+            controller.storage.teams.get(id, function(err, teamUpdated) {
+              // console.log("updated: ", team.puzzles);
+              if (options.forced) {
+                options.bot.reply(options.message, {
+                  'text': "Nice, you have updated your team's puzzles with completely fresh data!"
+                });
+              }
             });
           });
           
@@ -67,9 +82,11 @@ module.exports = function(controller) {
           roomId: name.match(/\d+/)[0]
         };
       
-      if (!playerData) thisPuzzle.dev = true;
+      console.log(options, "are the options inside this promise");
+      console.log(user, channel);
+      if (!options.player) thisPuzzle.dev = true;
           
-       return controller.studio.get(bot, name, message.user, message.channel).then((script) => {
+       return controller.studio.get(options.bot, name, options.bot.config.createdBy, channel).then((script) => {
 
            // Find the links based on thread attachments
            // First get the default thread
