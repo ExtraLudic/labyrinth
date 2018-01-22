@@ -156,6 +156,62 @@ module.exports = function(controller) {
 
     });
   
+  // Map event for sending team the map link
+  controller.on("map_event", function(options) {
+    
+    // bot, message, channel, team
+    
+    console.log("map event message: " + JSON.stringify(options.message));
+    // Based on the format of "message", set the teamId
+    
+    var teamId;
+    if (options.team) {
+        teamId = options.team.id
+    } else if (options.message.team_id) {
+        console.log("using the team_id");
+        teamId = options.message.team_id;
+    } else if (options.message.team.id) {
+        console.log("using team object");
+        teamId = options.message.team.id;
+    } else {
+        console.log("just using the team");
+        teamId = options.message.team;
+    }
+
+    var mapLink = "/" + teamId + "/map";
+    console.log(mapLink, "is the map link for this team" );
+    
+    if (options.channel) {
+      console.log(options.channel, "is the map channel to post in");
+      // Send this message to the specified channel
+      options.bot.say({
+        'channel': options.channel.id,
+        'text': 'Follow this link for the team map',
+        'attachments': [
+            {
+              "title": "Team Map",
+              "title_link": process.env.domain + mapLink,
+            }
+         ]
+      });
+      
+    } else if (options.message) {
+    
+      // Reply to the user
+      options.bot.reply(options.message, {
+        'text': 'Follow this link for the team map',
+        'attachments': [
+            {
+              "title": "Team Map",
+              "title_link": process.env.domain + mapLink,
+            }
+         ]
+      });
+      
+    }
+    
+  });
+  
   
     // Labyrinth room script before hook
     // This is called when a player enters a room

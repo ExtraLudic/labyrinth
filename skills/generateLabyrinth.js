@@ -43,6 +43,9 @@ module.exports = function(controller) {
             // Team should have a puzzles object now attached
             controller.storage.teams.get(id, function(err, team) {
               console.log("updated: ", team.puzzles);
+              bot.reply(message, {
+                'text': "Nice, you have updated your team's puzzles with completely fresh data!"
+              });
             });
           });
           

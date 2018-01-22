@@ -118,32 +118,12 @@ module.exports = function(controller) {
   
   controller.hears('map','direct_message,direct_mention,ambient',function(bot,message) {
 
-    // console.log("message: " + JSON.stringify(message));
-    // Based on the format of "message", set the teamId
-    var teamId;
-    if (message.team_id) {
-        console.log("using the team_id");
-        teamId = message.team_id;
-    } else if (message.team.id) {
-        console.log("using team object");
-        teamId = message.team.id;
-    } else {
-        console.log("just using the team");
-        teamId = message.team;
-    }
-
-    var mapLink = "/" + teamId + "/map";
-    console.log(mapLink, "is the map link for this team" );
-    
-    bot.reply(message, {
-      'text': 'Follow this link for the team map',
-      'attachments': [
-          {
-            "title": "Team Map",
-            "title_link": process.env.domain + mapLink,
-          }
-       ]
-    });
+    var options = {
+      bot: bot, 
+      message: message
+    };
+    // Trigger the map event
+    controller.trigger('map_event', [options]);
     
   }); // End hears "map"
   
@@ -153,15 +133,20 @@ module.exports = function(controller) {
   });
   
   // Listen for 
-  controller.hears("^generate (.*)", 'direct_message,direct_mention', function(bot, message) {
+  controller.hears("^generate(.*)", 'direct_message,direct_mention', function(bot, message) {
     
-    console.log("generating")
+    console.log(message);
+    
     // if the message is "generate player" then generate player data
     if (message.match[0] == "generate player") {
       controller.trigger('generate', [bot, message, true]);
-    } else {
+    } else if (message.match[0] == "generate dev") {
       // Otherwise, generate development data for each puzzle
       controller.trigger('generate', [bot, message, false]);
+    } else {
+      bot.reply(message, {
+        'text': "Hmm.. please specify if you want to generate dev or player data!"
+      });
     }
       
   });
