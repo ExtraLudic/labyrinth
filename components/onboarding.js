@@ -4,7 +4,7 @@ var _ = require("underscore");
 
 const { WebClient } = require('@slack/client');
 
-var channels = ["gamelog", "labyrinth", "map"], 
+var channels = ["gamelog", "theLabyrinth", "map"], 
     mapChannel,
     globalChannels = [], 
     globalMembers = [],
@@ -13,7 +13,7 @@ var channels = ["gamelog", "labyrinth", "map"],
 
 function isUser(member) {
   // console.log(member.name, "is the member being checked");
-  if ((member.is_bot && member.name != "botkit") || member.name == "slackbot" || member.id == creator)
+  if ((member.is_bot && member.name != process.env.botName) || member.name == "slackbot" || member.id == creator)
     return false;
   else
     return true;
