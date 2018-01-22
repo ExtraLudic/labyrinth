@@ -82,6 +82,9 @@ module.exports = function(controller) {
           roomId: name.match(/\d+/)[0]
         };
       
+      if (thisPuzzle.roomId == 1)
+        thisPuzzle.locked = false;
+      
       console.log(options, "are the options inside this promise");
       console.log(user, channel);
       if (!options.player) thisPuzzle.dev = true;
