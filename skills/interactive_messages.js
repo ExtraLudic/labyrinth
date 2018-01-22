@@ -63,10 +63,12 @@ module.exports = function(controller) {
           var puzzleName;
           var locked;
           
+          console.log(message.channel.toString());
+          
           // Delete the original message the bot sent to the player          
-          web.chat.delete(message.original_message.ts, message.channel)
-            .then(res => console.log(res))
-            .catch((err) => { console.log(err) });
+          bot.api.chat.delete({ts: message.original_message.ts, channel: message.channel}, function(err, message) {
+            console.log("deleted: ", message);
+          });
           
           console.log(message, " THIS MESSAGE WAS SAID");
           var num = message.text.match(/\d+/)[0];
@@ -121,12 +123,10 @@ module.exports = function(controller) {
 
                       }).catch((err) => { console.log("Got error while running " + name[0] + " :", err) });
 
-                      // And delete the bot message
-                      web.chat.delete(response.ts, response.channel).then((res) => {
-
-                         // console.log(res + " was deleted");
-
-                      }).catch((err) => { console.log(err) }); 
+                      // Delete the original message the bot sent to the player          
+                      bot.api.chat.delete({ts: message.original_message.ts, channel: message.channel}, function(err, message) {
+                        console.log("deleted: ", message);
+                      });
 
                     });
                   }, 1000);
@@ -240,12 +240,10 @@ module.exports = function(controller) {
                // Trigger an attempt of opening the door
               controller.trigger("puzzle_attempt", [bot, message, data]);
 
-              // Delete the bot's message
-              web.chat.delete(message.original_message.ts, message.channel).then((res) => {
-
-                 // console.log(res + " was deleted");
-
-              }).catch((err) => { console.log(err) });
+              // Delete the original message the bot sent to the player          
+              bot.api.chat.delete({ts: message.original_message.ts, channel: message.channel}, function(err, message) {
+                console.log("deleted: ", message);
+              });
 
               // If the confirmed choice is valid...
               if (confirmedChoice.valid) {
@@ -265,7 +263,10 @@ module.exports = function(controller) {
                           bot.reply(message, 'I experienced an error with a request to Botkit Studio: ' + err);
                     });
                     // Delete the bot's previous message
-                    web.chat.delete(response.ts, response.channel).then().catch((err) => { console.log(err) }); 
+                    bot.api.chat.delete({ts: message.original_message.ts, channel: message.channel}, function(err, message) {
+                      console.log("deleted: ", message);
+                    });
+
                   }, 1000); 
                 });
 
@@ -278,8 +279,11 @@ module.exports = function(controller) {
                      // Send them back to the beginning
                     controller.studio.runTrigger(bot, 'enter', message.user, message.channel);
                      // Delete the bot's previous message
-                    web.chat.delete(response.ts, response.channel).then().catch((err) => { console.log(err) }); 
-                  }, 1000); 
+                    bot.api.chat.delete({ts: message.original_message.ts, channel: message.channel}, function(err, message) {
+                      console.log("deleted: ", message);
+                    });
+                                      
+                   }, 1000); 
                 });
 
               }
