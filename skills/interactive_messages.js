@@ -124,7 +124,7 @@ module.exports = function(controller) {
                       }).catch((err) => { console.log("Got error while running " + name[0] + " :", err) });
 
                       // Delete the original message the bot sent to the player          
-                      bot.api.chat.delete({ts: message.original_message.ts, channel: message.channel}, function(err, message) {
+                      bot.api.chat.delete({ts: response.ts, channel: response.channel}, function(err, message) {
                         console.log("deleted: ", message);
                       });
 
@@ -240,7 +240,7 @@ module.exports = function(controller) {
                // Trigger an attempt of opening the door
               controller.trigger("puzzle_attempt", [bot, message, data]);
 
-              // Delete the original message the bot sent to the player          
+              // Delete the bot's message
               bot.api.chat.delete({ts: message.original_message.ts, channel: message.channel}, function(err, message) {
                 console.log("deleted: ", message);
               });
@@ -263,11 +263,10 @@ module.exports = function(controller) {
                           bot.reply(message, 'I experienced an error with a request to Botkit Studio: ' + err);
                     });
                     // Delete the bot's previous message
-                    bot.api.chat.delete({ts: message.original_message.ts, channel: message.channel}, function(err, message) {
+                    bot.api.chat.delete({ts: response.ts, channel: response.channel}, function(err, message) {
                       console.log("deleted: ", message);
-                    });
-
-                  }, 1000); 
+                    }); 
+                   }, 1000); 
                 });
 
               } else { // If the choice is NOT valid
@@ -279,10 +278,9 @@ module.exports = function(controller) {
                      // Send them back to the beginning
                     controller.studio.runTrigger(bot, 'enter', message.user, message.channel);
                      // Delete the bot's previous message
-                    bot.api.chat.delete({ts: message.original_message.ts, channel: message.channel}, function(err, message) {
-                      console.log("deleted: ", message);
-                    });
-                                      
+                      bot.api.chat.delete({ts: response.ts, channel: response.channel}, function(err, message) {
+                        console.log("deleted: ", message);
+                      });
                    }, 1000); 
                 });
 
