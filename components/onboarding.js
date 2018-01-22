@@ -34,7 +34,7 @@ module.exports = function(controller) {
               debug('Error sending onboarding message:', err);
           } else {
               // Run the welcome script
-              controller.studio.run(bot, 'welcome', bot.config.createdBy, direct_message.channel.id, direct_message).catch(function(err) {
+              controller.studio.runTrigger(bot, 'welcome', bot.config.createdBy, direct_message.channel.id, direct_message).catch(function(err) {
                   debug('Error: encountered an error loading onboarding script from Botkit Studio:', err);
               });
             

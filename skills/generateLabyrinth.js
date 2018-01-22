@@ -85,8 +85,6 @@ module.exports = function(controller) {
       if (thisPuzzle.roomId == 1)
         thisPuzzle.locked = false;
       
-      console.log(options, "are the options inside this promise");
-      console.log(user, channel);
       if (!options.player) thisPuzzle.dev = true;
           
        return controller.studio.get(options.bot, name, options.bot.config.createdBy, channel).then((script) => {
@@ -123,11 +121,6 @@ module.exports = function(controller) {
         }).catch((err) => { console.log("Error in generation getting scripts; ", err); });
 
       }
-    
-//     var findLinks = Promise.resolve(name => {
-      
-        
-//       });
     
   }); // End on event
   
