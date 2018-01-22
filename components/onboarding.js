@@ -5,9 +5,19 @@ var _ = require("underscore");
 const { WebClient } = require('@slack/client');
 
 var channels = ["gamelog", "labyrinth", "map"], 
+    mapChannel,
     globalChannels = [], 
     globalMembers = [],
+    creator,
     memberCount;
+
+function isUser(member) {
+  // console.log(member.name, "is the member being checked");
+  if ((member.is_bot && member.name != "botkit") || member.name == "slackbot" || member.id == creator)
+    return false;
+  else
+    return true;
+}
 
 module.exports = function(controller) {
   
@@ -17,7 +27,9 @@ module.exports = function(controller) {
 
       var web = new WebClient(token);
             
-      bot.api.im.open({user: bot.config.createdBy}, function(err, direct_message) {  
+      bot.api.im.open({user: bot.config.createdBy}, function(err, direct_message) { 
+          creator = bot.config.createdBy;
+        console.log(creator, "created this group and added the bot");
           if (err) {
               debug('Error sending onboarding message:', err);
           } else {
@@ -34,32 +46,65 @@ module.exports = function(controller) {
                 globalMembers = res.members;
                 memberCount = globalMembers.length;
                 
-                console.log(globalMembers, " are the members");
+                // console.log(globalMembers, " are the members");
                 
                 var channelData = channels.map(channelCreate);
                                 
                 var channelResults = Promise.all(channelData);
                 
                 return channelResults.then(created => {
-                  console.log(created, "is the created data");
+                  // console.log(created, "is the created data");
+                  // Find the map channel
+                  mapChannel = _.findWhere(created, { name: 'map' });
+                  console.log(mapChannel, "is the map channel");
+                  // Set the global channels
                   globalChannels = created;
+                  // Create empty array for channel/member pairs
                   var channelMembers = [];
+                  // Go through each channel
                   _.each(globalChannels, function(channel) {
+                    // Go through each member
                     _.each(globalMembers, function(member) {
+                      // Create unique array for each channel and member pair
                       var array = [channel, member];
-                      console.log(array, "is an array")
+                      // Add this pair to the channel/member array
                       channelMembers.push(array);
                     });
                   });
                   
-                  console.log(channelMembers, "is all the channels and members groups");
+                  // console.log(channelMembers, "is all the channels and members groups");
                   
                   var memberData = channelMembers.map(channelJoin);
                   
                   var memberResults = Promise.all(memberData);
                   
                   return memberResults.then(joined => {
-                    console.log(joined, "is the joined data");
+                    // console.log(joined, "is the joined data");
+                    // console.log(mapChannel, "is the map channel");
+                    setTimeout(function() {
+                      
+                      var generateOptions = {
+                        bot: bot, 
+                        team: team,
+                        player: true, 
+                        user: bot.config.createdBy,
+                        channel: direct_message.channel.id
+                      };
+                      
+                      // Generate all that team data
+                      controller.trigger('generate', [generateOptions]);
+                      
+                      var mapOptions = {
+                        bot: bot, 
+                        team: team, 
+                        channel: mapChannel
+                      };
+                      
+                      // Have the bot send the map message from the map channel
+                      controller.trigger('map_event', [mapOptions]);
+                      
+                    }, 1000);
+                    
                   });
                   
                 });
@@ -79,7 +124,7 @@ module.exports = function(controller) {
           // Join the channels
 
           return web.channels.create(name).then((res) => {
-            console.log("created labyrinth channel: " + JSON.stringify(res.channel));            
+            // console.log("created labyrinth channel: " + JSON.stringify(res.channel));            
             return res.channel;
 
           }).catch((err) => { console.log(err) }); // End channels.join call 
@@ -92,8 +137,8 @@ module.exports = function(controller) {
         
         // Set a timeout for 1 sec each so that we don't exceed our Slack Api limits
         // setTimeout(function() {
-          var member = JSON.stringify(params[1]["id"]);
-          var channel = JSON.stringify(params[0]["id"]);
+          var member = params[1]["id"].toString();
+          var channel = params[0]["id"].toString();
           console.log(member, "is the member that will join " + channel);
 
           // check if user is bot before adding
@@ -102,14 +147,20 @@ module.exports = function(controller) {
             // var member = member["id"];
             
             web.channels.info(channel).then(channelData => {
-              console.log(channelData);
+              // console.log(channelData);
               if (channelData) {
-                // Invite each user to the labyrinth chat channel
-                return web.channels.invite(channel, member)
-                  .then(res => {
-                    return res;
-                  }).catch((err) => { console.log(err) });
-
+                // console.log(params[1], isUser(params[1]));
+                
+                if (isUser(params[1])) {
+                  
+                  // Invite each user to the labyrinth chat channel
+                  return web.channels.invite(channel, member)
+                    .then(res => {
+                      // console.log(res, "is the channel res");
+                      return res;
+                    }).catch((err) => { console.log(err) });
+                  
+                }
               }
             }).catch(err => console.log(err));
 
@@ -122,5 +173,7 @@ module.exports = function(controller) {
       
       
     });
+  
+  
 
 }
