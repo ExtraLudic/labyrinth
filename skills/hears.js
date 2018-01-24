@@ -12,6 +12,7 @@ respond immediately with a single line response.
 var wordfilter = require('wordfilter');
 var _ = require("underscore");
 var dataChannel;
+var fs = require('fs');
 
 
 const { WebClient } = require('@slack/client');
@@ -70,6 +71,14 @@ module.exports = function(controller) {
       console.log("storage: " + JSON.stringify(storage));
 
       theBot.reply(message, JSON.stringify(storage));
+      
+      // Export the chosen data into a json file
+      fs.writeFile('./data/db/storage.json', JSON.stringify(storage), 'utf8', (err) => {
+          if (err) throw err;
+
+          console.log("The file was succesfully saved!");
+      });
+
 
       if (err) {
         throw new Error(err);
@@ -90,14 +99,14 @@ module.exports = function(controller) {
         // Locate the script based on its triggers
         // If script is listening for the message text, that's our script
         _.each(triggers, function(a) {
-          console.log(triggers);
+          // console.log(triggers);
           if (a.pattern == "enter") {
             script = list[i];
           }
         });
       }
       
-      console.log(script, " start script");
+      // console.log(script, " start script");
       
       // Trigger the before hook event for this script
       controller.trigger("before_hook", [bot, message, script]);
@@ -135,7 +144,7 @@ module.exports = function(controller) {
   // Listen for 
   controller.hears("^generate(.*)", 'direct_message,direct_mention', function(bot, message) {
     
-    console.log(message);
+    // console.log(message);
     var options = {
       bot: bot, 
       message: message, 
@@ -155,6 +164,13 @@ module.exports = function(controller) {
         'text': "Hmm.. please specify if you want to generate dev or player data!"
       });
     }
+      
+  });
+  
+  // Listen for 
+  controller.hears("^export", 'direct_message,direct_mention', function(bot, message) {
+    
+    // controller.storage
       
   });
 

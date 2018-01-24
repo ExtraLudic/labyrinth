@@ -1,6 +1,6 @@
 const _ = require("underscore");
 
-// Script for generation event 
+// Script for gene            controller.storage.teams.get(teamSaved.iration event 
 // Pulls scripts with a certain tag for team puzzle data 
     
 var team, 
@@ -14,9 +14,7 @@ module.exports = function(controller) {
   var promises = [];
       
   controller.on("generate", function(options) {
-    
-    console.log(options, options.message);
-    
+        
     if (options.user) user = options.user;
     if (options.channel) channel = options.channel;
     if (options.team) team = options.team.id;
@@ -25,9 +23,11 @@ module.exports = function(controller) {
     if (!user) user = options.message.user;
     if (!team) team = options.message.team;
     
+    console.log(options.message, options.team);
+    
     // console.log(bot);
     controller.storage.teams.get(team, function(err, teamData) {
-      console.log(teamData, "is the gotten team" );
+      // console.log(teamData, "is the gotten team" );
       controller.studio.getScripts().then(function(list) {        
         // console.log(list, "is the list of scripts");
          // Go through each script 
@@ -45,17 +45,20 @@ module.exports = function(controller) {
 
         return results.then(puzzleArray => {
           
-          console.log(puzzleArray, "this is from all those promises");
+          // console.log(puzzleArray, "this is from all those promises");
           teamData.puzzles = puzzleArray;
           // Set the team puzzles to the generated puzzles array
-          controller.storage.teams.save(teamData, function(err, id) {
+          controller.storage.teams.save(teamData, function(err, teamSaved) {
             if (err) {
               console.log("There was an error: ", err);
             }
+            
+            console.log(teamSaved, "is the team data we saved");
             // Check the team to make sure it was updated
+         
             // Team should have a puzzles object now attached
-            controller.storage.teams.get(id, function(err, teamUpdated) {
-              // console.log("updated: ", team.puzzles);
+            controller.storage.teams.get(teamSaved, function(err, teamUpdated) {
+              console.log("updated: ", teamUpdated.puzzles);
               if (options.forced) {
                 options.bot.reply(options.message, {
                   'text': "Nice, you have updated your team's puzzles with completely fresh data!"
@@ -82,6 +85,8 @@ module.exports = function(controller) {
           roomId: name.match(/\d+/)[0]
         };
       
+      
+      
       if (thisPuzzle.roomId == 1)
         thisPuzzle.locked = false;
       
@@ -103,7 +108,7 @@ module.exports = function(controller) {
                  // console.log(action);
                  // If that button exists
                  if (action) {
-                   // console.log(thread[0].attachments[0].actions);
+                   // console.log(action);
                    // Find button value (room_xxx) 
                    // Extract link number from value
                    var num = action.value.match(/\d+/)[0];
@@ -118,9 +123,9 @@ module.exports = function(controller) {
 
             return thisPuzzle;
          
-        }).catch((err) => { console.log("Error in generation getting scripts; ", err); });
+        }).catch((err) => { console.log("Error in") });
 
-      }
+      };
     
   }); // End on event
   
