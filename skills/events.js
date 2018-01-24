@@ -119,7 +119,12 @@ module.exports = function(controller) {
         
         if (!team.puzzles) {
           // Just in case
-          controller.trigger("generate", [bot, message, true]);
+          var options = {
+            bot: bot, 
+            message: message, 
+            forced: false
+          };
+          controller.trigger("generate", [options]);
         }
         
         // Find this particular puzzle from the team's generated puzzle list
@@ -221,8 +226,6 @@ module.exports = function(controller) {
       // This door leads to the puzzle thread as set up in BotKit Studio
       // The bot "replies" with what the user said
       console.log(script.name, "before hook script");
-
-      controller.trigger("validation_event", [script]);
       
       // console.log("script:" , script);
       
