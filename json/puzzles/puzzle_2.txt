@@ -1,0 +1,1 @@
+You have two containers and a water tap. One container holds exactly three gallons and the other holds exactly 5 gallons. What is the minimum amount of water that you would need to draw from the tap to get exactly 4 gallons of water in the five gallon container and to be sure that you had exactly 4 gallons?
