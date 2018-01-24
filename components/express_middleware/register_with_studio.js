@@ -27,7 +27,7 @@ module.exports = function(webserver, controller) {
                         debug('Error registering instance with Botkit Studio', err);
                     } else {
 
-                        var json =null;
+                        var json = null;
                         try {
                             json = JSON.parse(body);
                         } catch(err) {

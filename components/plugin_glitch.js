@@ -4,7 +4,7 @@ module.exports = function(controller) {
   function keepalive() {
 
     request({
-      url: 'http://' + process.env.PROJECT_DOMAIN + '.glitch.me',
+      url: 'http://' + process.env.domain + '.glitch.me',
     }, function(err) {
 
       setTimeout(function() {
@@ -16,10 +16,10 @@ module.exports = function(controller) {
   }
 
   // if this is running on Glitch
-  if (process.env.PROJECT_DOMAIN) {
+  if (process.env.domain) {
 
     // Register with studio using the provided domain name
-    controller.registerDeployWithStudio(process.env.PROJECT_DOMAIN + '.glitch.me');
+    controller.registerDeployWithStudio(process.env.domain + '.glitch.me');
 
     // make a web call to self every 55 seconds
     // in order to avoid the process being put to sleep.

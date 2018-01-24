@@ -1,6 +1,7 @@
 var dataChannel;
 var _ = require("underscore");
 
+
 const { WebClient } = require('@slack/client');
 
 // An access token (from your Slack app or custom integration - xoxp, xoxb, or xoxa)
@@ -15,7 +16,7 @@ function findGalaxy(controller, teamId, num) {
   controller.storage.teams.get(teamId, function(err, team) {
     var thesePuzzles = _.pluck(team.puzzles, "roomId");
     var thisPuzzle = thesePuzzles.indexOf(num.toString());
-    console.log(thisPuzzle, team.puzzles[thisPuzzle]);
+    // console.log(thisPuzzle, team.puzzles[thisPuzzle]);
     if (thisPuzzle >= 0) 
       galaxy = team.puzzles[thisPuzzle].galaxy;
   });
@@ -24,15 +25,15 @@ function findGalaxy(controller, teamId, num) {
 };
 
 // find the puzzle based on team and puzzle room name
-function findPuzzle(controller, teamId, puzzle) {
-  console.log(puzzle);
+function findPuzzle(controller, teamId, num) {
+  // console.log(puzzle);
   var found;
   controller.storage.teams.get(teamId, function(err, team) {
-    // console.log(team.puzzles)
+    console.log(team.puzzles)
     // console.log(galaxy);
-    // console.log(_.findWhere(team.puzzles, { room: galaxy + "_" + puzzle }));
-    found = _.findWhere(team.puzzles, { room: puzzle });
-    console.log(found);
+    console.log(_.findWhere(team.puzzles, { roomId: num }));
+    found = _.findWhere(team.puzzles, { roomId: num });
+    // console.log(found);
   });
   return found;
 
@@ -62,41 +63,50 @@ module.exports = function(controller) {
           var reply = message.original_message;
           var puzzleName;
           var locked;
-          
-          console.log(message.channel.toString());
-          
+                    
           // Delete the original message the bot sent to the player          
           bot.api.chat.delete({ts: message.original_message.ts, channel: message.channel}, function(err, message) {
-            console.log("deleted: ", message);
+            // console.log("deleted door choice: ", message);
           });
           
-          console.log(message, " THIS MESSAGE WAS SAID");
-          var num = message.text.match(/\d+/)[0];
-          // Set puzzleName and locked based on button values
-          if (message.text.includes("_open")) {
-            puzzleName = "Room_" + num;
-            puzzleName = findGalaxy(controller, message.team.id, num) + "_" + puzzleName;
-            locked = false;
-          } else {
-            locked = true;
-            puzzleName = findGalaxy(controller, message.team.id, num) + "_Room_" + num;
+                    
+          if (message.text.match(/\d+/)) {
+            
+            var num = message.text.match(/\d+/)[0];
+            // Set puzzleName and locked based on button values
+            if (message.text.includes("_open")) {
+              puzzleName = "Room_" + num;
+              puzzleName = findGalaxy(controller, message.team.id, num) + "_" + puzzleName;
+              locked = false;
+            } else {
+              locked = true;
+              puzzleName = findGalaxy(controller, message.team.id, num) + "_Room_" + num;
+            }
+
+            console.log("puzzle locked: " + locked);
+            console.log("puzzle name: " + puzzleName);
+
+            // Find the puzzle the user is about to open
+            var puzzle = findPuzzle(controller, message.team.id, puzzleName);
+
           }
           
-          console.log("puzzle locked: " + locked);
-          console.log("puzzle name: " + puzzleName);
-
-          // Find the puzzle the user is about to open
-          var puzzle = findPuzzle(controller, message.team.id, puzzleName);
-          
           if (!puzzle) {
-            console.log("user said " + message.text);
+            // console.log("user said " + message.text);
             // This door leads to the puzzle thread as set up in BotKit Studio
             // The bot "replies" with what the user said
             bot.replyInteractive(message, reply);
           } else {
             
+            
+                
+            
+              // console.log(message, " THIS MESSAGE WAS SAID -- match: " + message.text.match(/\d+/));
+
               // Check if the puzzle is unlocked in the database or contains "_open" in the button's value
               if (!puzzle.locked || !locked) {
+                
+                console.log(puzzleName, " puzzle is not locked");
 
                 // This door has been unlocked, so let's tell them
                 bot.reply(message, "This door is unlocked. Sending you to the room.", (err, response) => {
@@ -116,27 +126,28 @@ module.exports = function(controller) {
                       }
                       
                       // Use the script name to do some stuff before it runs
-                       controller.trigger("before_hook", [bot, message, script]);
-
-                      // And run the script for the room that is unlocked
-                      controller.studio.run(bot, script.name, message.user, message.channel).then(function(convo) {
-
-                      }).catch((err) => { console.log("Got error while running " + name[0] + " :", err) });
+                      controller.trigger("before_hook", [bot, message, script]);
 
                       // Delete the original message the bot sent to the player          
                       bot.api.chat.delete({ts: response.ts, channel: response.channel}, function(err, message) {
-                        console.log("deleted: ", message);
+                        // console.log("deleted: ", message);
                       });
 
                     });
+                    
                   }, 1000);
 
                 });
 
               } else {
-                // This door leads to the puzzle thread as set up in BotKit Studio
-                // The bot "replies" with what the user said
-                bot.replyInteractive(message, reply);
+                
+                var scriptObj = {
+                  name: puzzleName
+                };
+                
+                // Use the script name to do some stuff before it runs
+                controller.trigger("before_hook", [bot, message, scriptObj]);
+
               }
             
           }
@@ -174,7 +185,7 @@ module.exports = function(controller) {
           
             // If this user does not already have a choice stored
             if (!_.findWhere(choiceSelect, { user: message.user })) {
-              console.log("we are adding this choice");
+              // console.log("we are adding this choice");
                 // Create object to hold this selection
                 // Selection is "valid" or the solution/key if the value is "correct"
                 // Any other value will be incorrect 
@@ -188,7 +199,7 @@ module.exports = function(controller) {
               
             } else { // User has choice stored
               
-              console.log("we are updating this choice");
+              // console.log("we are updating this choice");
               // Update stored choice with new choice, valid bool, and callback_id
               choiceSelect = _.map(choiceSelect, function(item) {
                 if (item.user == message.user) {
@@ -201,9 +212,9 @@ module.exports = function(controller) {
               });
             }
           
-            console.log("user selected " + JSON.stringify(choiceSelect));          
+            // console.log("user selected " + JSON.stringify(choiceSelect));          
           
-            bot.replyInteractive(message, reply);
+            // bot.replyInteractive(message, reply);
           
          }
         
@@ -247,7 +258,7 @@ module.exports = function(controller) {
 
               // If the confirmed choice is valid...
               if (confirmedChoice.valid) {
-                console.log("correct!", data.puzzle);
+                // console.log("correct!", data.puzzle);
 
                 // Use the script name to do some stuff before it runs
                controller.trigger("before_hook", [bot, message, script]);
@@ -279,7 +290,7 @@ module.exports = function(controller) {
                     controller.studio.runTrigger(bot, 'enter', message.user, message.channel);
                      // Delete the bot's previous message
                       bot.api.chat.delete({ts: response.ts, channel: response.channel}, function(err, message) {
-                        console.log("deleted: ", message);
+                        // console.log("deleted: ", message);
                       });
                    }, 1000); 
                 });

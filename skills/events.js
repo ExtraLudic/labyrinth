@@ -12,8 +12,9 @@ const web = new WebClient(token);
 function findGalaxy(data, num) {
 
   var thesePuzzles = _.pluck(data, "roomId");
+  // console.log(thesePuzzles);
   var thisPuzzle = thesePuzzles.indexOf(num.toString());
-  console.log(thisPuzzle, data[thisPuzzle]);
+  // console.log(thisPuzzle, data[thisPuzzle]);
   if (thisPuzzle >= 0) 
     return data[thisPuzzle].galaxy;
   else return 0;
@@ -38,16 +39,16 @@ module.exports = function(controller) {
         var theBot = bot;
       
         if (message.event.text.includes("#")) {
-          console.log(message.event.text.match(/#[a-z0-9_]+/g));
+          // console.log(message.event.text.match(/#[a-z0-9_]+/g));
           controller.trigger('message_tagged', [bot, message, message.event.text.match(/#[a-z0-9_]+/g)]);
         } else {
           
           // delete the message without a tag
-          web.chat.delete(message.ts, message.channel).then((res) => {
+//           web.chat.delete(message.ts, message.channel).then((res) => {
             
-             console.log(res + " was deleted bc it was not tagged");
+//              console.log(res + " was deleted bc it was not tagged");
 
-          }).catch((err) => { console.log(err) });
+//           }).catch((err) => { console.log(err) });
           
           // trigger the tagging script in botkit studio
           controller.studio.runTrigger(bot, 'tagging', message.user, message.channel).catch(function(err) {
@@ -65,7 +66,7 @@ module.exports = function(controller) {
     // Tagged a message
     controller.on('message_tagged', function(bot, message, tag) {
       
-      console.log(tag, message);
+      // console.log(tag, message);
       
       // console.log(bot, "this bot is listening to taggs");
       // console.log(message, "this message is being tagged");
@@ -84,10 +85,10 @@ module.exports = function(controller) {
                     
           puzzle.discussion.push(thisMessage);
           
-          console.log(team.puzzles);
+          // console.log(team.puzzles);
           
           console.storage.teams.save(team, function(err, id) {
-            console.log("team updated with tagged message");
+            // console.log("team updated with tagged message");
           });
 
           if (err) {
@@ -107,7 +108,7 @@ module.exports = function(controller) {
   // Attempt a door
   controller.on('puzzle_attempt', function(bot, message, data) {
       
-      console.log(data);
+      // console.log(data);
       // Get the team id from the message
       var teamId = message.team.id ? message.team.id : message.team_id;
       
@@ -144,7 +145,7 @@ module.exports = function(controller) {
         // Save this team
         controller.storage.teams.save(team, function(err, id) {
           controller.storage.teams.get(id, function(err, team) {
-            console.log("this team is updated: ", team);
+            // console.log("this team is updated: ", team);
           });
         });
 
@@ -161,9 +162,8 @@ module.exports = function(controller) {
     
     // bot, message, channel, team
     
-    console.log("map event message: " + JSON.stringify(options.message));
+    // console.log("map event message: " + JSON.stringify(options.message));
     // Based on the format of "message", set the teamId
-    
     var teamId;
     if (options.team) {
         teamId = options.team.id
@@ -179,10 +179,10 @@ module.exports = function(controller) {
     }
 
     var mapLink = "/" + teamId + "/map";
-    console.log(mapLink, "is the map link for this team" );
+    // console.log(mapLink, "is the map link for this team" );
     
     if (options.channel) {
-      console.log(options.channel, "is the map channel to post in");
+      // console.log(options.channel, "is the map channel to post in");
       // Send this message to the specified channel
       options.bot.say({
         'channel': options.channel.id,
@@ -218,17 +218,23 @@ module.exports = function(controller) {
     // Will check doors and set their style and value
     controller.on("before_hook", function(bot, message, script) {
       
-      console.log("script:" , script);
+      // This door leads to the puzzle thread as set up in BotKit Studio
+      // The bot "replies" with what the user said
+      console.log(script.name, "before hook script");
+
+      controller.trigger("validation_event", [script]);
+      
+      // console.log("script:" , script);
       
      // var galaxy = script.name.split("_")[0] + "_" + script.name.split("_")[1];
       
       // console.log("galaxy: ", galaxy);
       
-      console.log(message);
+      // console.log(message);
         
         // Before the room script runs...
         controller.studio.before(script.name, function(convo, next) {
-          // console.log(message);
+          console.log(message);
           
           // Based on the format of "message", set the teamId
           var teamId;
@@ -250,11 +256,12 @@ module.exports = function(controller) {
               // Go through conversation attachments 
               for (var i = 0; i < convo.messages[0].attachments[0].actions.length; i++) {
                  var action = convo.messages[0].attachments[0].actions[i];
-                  console.log(action, "puzzle button actions");
-                console.log(action.value.match(/\d+/)[0]);
-                 console.log(_.findWhere(team.puzzles, { 
-                   room: findGalaxy(team.puzzles, action.value.match(/\d+/)[0]) + "_Room_" + action.value.match(/\d+/)[0]
-                 }), "is the found puzzle");
+                //   console.log(action, "puzzle button actions");
+                // console.log(action.value.match(/\d+/)[0]);
+                //  console.log(_.findWhere(team.puzzles, { 
+                //    room: findGalaxy(team.puzzles, action.value.match(/\d+/)[0]) + "_Room_" + action.value.match(/\d+/)[0]
+                //  }), "is the found puzzle");
+                
                  // Find matching puzzle
                  // Room button values should match room names (ie: room_1)
                  var puzzle = _.findWhere(team.puzzles, { 
