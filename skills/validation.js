@@ -30,11 +30,32 @@ function findPuzzle(controller, teamId, puzzle) {
 };
 
 module.exports = function(controller) {
-  controller.on("validation_event", function(script) {
+  
+  // First find all of the script names
+  controller.studio.getScripts().then(list => {
+    var puzzles = _.reject(list, function(puzzle) {
+      return !_.contains(puzzle.tags, "labyrinth");
+    });
+
+    var names = _.pluck(puzzles, "name");
+    console.log(puzzles, names);
     
-    console.log(script, "validation");
+
+    var mapPromises = names.map(validate);
+    
+    var results = Promise.all(mapPromises);
+
+    results.then(puzzleArray => {
+      console.log(puzzleArray);
+    });
+  });
+  
+
+  var validate = function(name) {
+    
+    console.log(name, "validation");
         
-    controller.studio.validate(script.name, 'user_response', function(convo, next) {
+    controller.studio.validate(name, 'user_response', function(convo, next) {
       // console.log(convo);
         var bot = convo.context.bot;
         var user = convo.context.user;
@@ -42,10 +63,8 @@ module.exports = function(controller) {
         var response = convo.extractResponse('user_response');
         var team = convo.transcript[1].team.id;
       
-      console.log(response, "is the response");
-      
-      
-      
+        console.log(response, "is the response");
+            
         if (response.match(/\d+/)) {
       
           var thread = findGalaxy(controller, team, response.match(/\d+/)).replace("_", " ")
@@ -62,24 +81,24 @@ module.exports = function(controller) {
 
           if (puzzle.locked) {
 
-            // console.log(thread);
+            console.log(thread);
 
             convo.gotoThread(thread);
 
             next();
 
           } else {
-            convo.status = "completed";
-            controller.studio.run(bot, puzzle, user, channel);
+            // convo.status = "completed";
+            controller.studio.run(bot, puzzle.room, user, channel);
+            next();
           }
 
         } else {
           
           next();
         }
-      
+            
     });
-    
-  });
-  
+  };
+      
 }

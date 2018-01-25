@@ -16,12 +16,17 @@ function findGalaxy(controller, teamId, num) {
   controller.storage.teams.get(teamId, function(err, team) {
     var thesePuzzles = _.pluck(team.puzzles, "roomId");
     var thisPuzzle = thesePuzzles.indexOf(num.toString());
-    // console.log(thisPuzzle, team.puzzles[thisPuzzle]);
+    console.log(thisPuzzle, team.puzzles[thisPuzzle]);
+    
     if (thisPuzzle >= 0) 
       galaxy = team.puzzles[thisPuzzle].galaxy;
+
+
   });
-  
-  return galaxy;
+       
+    console.log(galaxy, "is the galaxy");
+    return galaxy;
+
 };
 
 // find the puzzle based on team and puzzle room name
@@ -29,11 +34,11 @@ function findPuzzle(controller, teamId, num) {
   // console.log(puzzle);
   var found;
   controller.storage.teams.get(teamId, function(err, team) {
-    console.log(team.puzzles)
+    // console.log(team.puzzles)
     // console.log(galaxy);
-    console.log(_.findWhere(team.puzzles, { roomId: num }));
-    found = _.findWhere(team.puzzles, { roomId: num });
-    // console.log(found);
+    // console.log(_.findWhere(team.puzzles, { roomId: num }));
+    found = _.findWhere(team.puzzles, { room: num });
+    console.log(found);
   });
   return found;
 
@@ -73,16 +78,18 @@ module.exports = function(controller) {
           if (message.text.match(/\d+/)) {
             
             var num = message.text.match(/\d+/)[0];
+            var galaxy = findGalaxy(controller, message.team.id, num); 
+            
             // Set puzzleName and locked based on button values
             if (message.text.includes("_open")) {
               puzzleName = "Room_" + num;
-              puzzleName = findGalaxy(controller, message.team.id, num) + "_" + puzzleName;
+              puzzleName = galaxy + "_" + puzzleName;
               locked = false;
             } else {
               locked = true;
-              puzzleName = findGalaxy(controller, message.team.id, num) + "_Room_" + num;
+              puzzleName = galaxy + "_Room_" + num;
             }
-
+            
             console.log("puzzle locked: " + locked);
             console.log("puzzle name: " + puzzleName);
 
@@ -106,7 +113,7 @@ module.exports = function(controller) {
               // Check if the puzzle is unlocked in the database or contains "_open" in the button's value
               if (!puzzle.locked || !locked) {
                 
-                console.log(puzzleName, " puzzle is not locked");
+                // console.log(puzzleName, " puzzle is not locked");
 
                 // This door has been unlocked, so let's tell them
                 bot.reply(message, "This door is unlocked. Sending you to the room.", (err, response) => {
@@ -124,6 +131,8 @@ module.exports = function(controller) {
                           script = list[i];
                         }
                       }
+                      
+                      
                       
                       // Use the script name to do some stuff before it runs
                       controller.trigger("before_hook", [bot, message, script]);
@@ -144,6 +153,9 @@ module.exports = function(controller) {
                 var scriptObj = {
                   name: puzzleName
                 };
+                
+                controller.trigger("validation_event", [scriptObj]);
+
                 
                 // Use the script name to do some stuff before it runs
                 controller.trigger("before_hook", [bot, message, scriptObj]);
