@@ -62,12 +62,12 @@ module.exports = function(controller) {
         var channel = convo.context.channel;
         var response = convo.extractResponse('user_response');
         var team = convo.transcript[1].team.id ? convo.transcript[1].team.id : convo.transcript[1].team;
-      
-      var galaxy = findGalaxy(controller, team, response.match(/\d+/));
-      
+            
         console.log(response, "is the response");
             
-        if (response.match(/\d+/) && galaxy) {
+        if (response.match(/\d+/)) {
+          
+          var galaxy = findGalaxy(controller, team, response.match(/\d+/));
       
           var thread = galaxy.replace("_", " ")
                       + ": Room " 
