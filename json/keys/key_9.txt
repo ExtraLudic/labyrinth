@@ -1,1 +1,0 @@
-A, B, C, D, A and B, A and C, A and D, B and C, B and D, D and A, D and B, D and C, C and A, C and B, C and E, A B and C, C D and E, C D and A, C D and A, B A and C, B A and D, A B C and D

@@ -1,1 +1,0 @@
-There are 300 humans playing this game right now, but 12 of them are secretly Cylons, human-looking artificial intelligences. What is the probability that there is at least one Cylon on a 5-player team?

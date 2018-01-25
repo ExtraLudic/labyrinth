@@ -1,1 +1,0 @@
-An AI plays a perfect game of Pac-Man on one life every six hours. A perfect game of Pac-Man covers 255 maps, with ordinary pellets being worth 10 points, and power pellets being worth 50 points. Assuming the AI eats every ghost at every opportunity on every map, and avoids all fruits, how many points will the AI have collected after 24 hours?

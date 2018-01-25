@@ -1,1 +1,0 @@
-If you rolled five 30-sided dice and totaled the faces, then repeated this process one billion times, what number is likely to come up the most?
