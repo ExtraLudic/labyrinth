@@ -99,10 +99,10 @@ module.exports = function(controller) {
           }
           
           if (!puzzle) {
-            // console.log("user said " + message.text);
+            console.log("user said " + message.text);
             // This door leads to the puzzle thread as set up in BotKit Studio
             // The bot "replies" with what the user said
-            bot.replyInteractive(message, reply);
+            controller.studio.runTrigger(bot, message.text, message.user, message.channel);
           } else {
             
             

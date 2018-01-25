@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
+  <id>tag:github.com,2008:/ExtraLudic/labyrinth/commits/master</id>
+  <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commits/master"/>
+  <link type="application/atom+xml" rel="self" href="https://github.com/ExtraLudic/labyrinth/commits/master.atom"/>
+  <title>Recent Commits to labyrinth:master</title>
+  <updated>2018-01-25T14:11:26Z</updated>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/638d3f53ba65d6c510110a8a147ce501ae4c1b0a</id>
+    <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commit/638d3f53ba65d6c510110a8a147ce501ae4c1b0a"/>
+    <title>
+        Merge branch &#39;master&#39; of https://github.com/ExtraLudic/labyrinth
+    </title>
+    <updated>2018-01-25T14:11:26Z</updated>
+    <media:thumbnail height="30" width="30" url="https://avatars2.githubusercontent.com/u/11821504?s=30&amp;v=4"/>
+    <author>
+      <name>esalling23</name>
+      <uri>https://github.com/esalling23</uri>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;Merge branch &amp;#39;master&amp;#39; of https://github.com/ExtraLudic/labyrinth&lt;/pre&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/4e9bdd36022a0c5a0e64f6544ccc7c887b13224d</id>
+    <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commit/4e9bdd36022a0c5a0e64f6544ccc7c887b13224d"/>
+    <title>
+        Merge branch &#39;glitch&#39;
+    </title>
+    <updated>2018-01-25T14:11:12Z</updated>
+    <media:thumbnail height="30" width="30" url="https://avatars2.githubusercontent.com/u/11821504?s=30&amp;v=4"/>
+    <author>
+      <name>esalling23</name>
+      <uri>https://github.com/esalling23</uri>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;Merge branch &amp;#39;glitch&amp;#39;&lt;/pre&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/e140101faec589261c1d27468d12fd11ab9081d9</id>
+    <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commit/e140101faec589261c1d27468d12fd11ab9081d9"/>
+    <title>
+        Merge pull request #54 from ExtraLudic/glitch
+    </title>
+    <updated>2018-01-25T14:09:18Z</updated>
+    <media:thumbnail height="30" width="30" url="https://avatars0.githubusercontent.com/u/35108931?s=30&amp;v=4"/>
+    <author>
+      <name>extraludicinc</name>
+      <uri>https://github.com/extraludicinc</uri>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;Merge pull request #54 from ExtraLudic/glitch
+
+fix for validation scripts, remove mongo connection for now&lt;/pre&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/05ecc0b82d60562be739bd60ba2777f0edb51340</id>
+    <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commit/05ecc0b82d60562be739bd60ba2777f0edb51340"/>
+    <title>
+        fix for validation scripts, remove mongo connection for now
+    </title>
+    <updated>2018-01-24T21:08:07Z</updated>
+    <media:thumbnail height="30" width="30" url="https://1.gravatar.com/avatar/334c4a4c42fdb79d7ebc3e73b517e6f8?d=https%3A%2F%2Fassets-cdn.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png&amp;r=g&amp;s=30"/>
+    <author>
+      <name></name>
+      <email>none</email>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;fix for validation scripts, remove mongo connection for now&lt;/pre&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/31100e238ea804d285c2b2b1b5a3a169d33de6fa</id>
+    <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commit/31100e238ea804d285c2b2b1b5a3a169d33de6fa"/>
+    <title>
+        Add files via upload
+    </title>
+    <updated>2018-01-24T20:06:25Z</updated>
+    <media:thumbnail height="30" width="30" url="https://avatars0.githubusercontent.com/u/35108931?s=30&amp;v=4"/>
+    <author>
+      <name>extraludicinc</name>
+      <uri>https://github.com/extraludicinc</uri>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;Add files via upload
+
+adding json folder&lt;/pre&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/51fe8c62763a7961694804f41f30356039d29c6c</id>
+    <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commit/51fe8c62763a7961694804f41f30356039d29c6c"/>
+    <title>
+        Delete storage.json
+    </title>
+    <updated>2018-01-24T18:05:53Z</updated>
+    <media:thumbnail height="30" width="30" url="https://avatars0.githubusercontent.com/u/35108931?s=30&amp;v=4"/>
+    <author>
+      <name>extraludicinc</name>
+      <uri>https://github.com/extraludicinc</uri>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;Delete storage.json&lt;/pre&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/de03a5fb5bfffc1f95bdba98e4c7fc6ad8ff5510</id>
+    <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commit/de03a5fb5bfffc1f95bdba98e4c7fc6ad8ff5510"/>
+    <title>
+        Merge pull request #51 from ExtraLudic/glitch
+    </title>
+    <updated>2018-01-24T17:39:21Z</updated>
+    <media:thumbnail height="30" width="30" url="https://avatars2.githubusercontent.com/u/11821504?s=30&amp;v=4"/>
+    <author>
+      <name>esalling23</name>
+      <uri>https://github.com/esalling23</uri>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;Merge pull request #51 from ExtraLudic/glitch
+
+added validation script to get around bot.replyinteractive bugs&lt;/pre&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/0538ef1fda0b69ce76c43449405cb0b731571d8b</id>
+    <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commit/0538ef1fda0b69ce76c43449405cb0b731571d8b"/>
+    <title>
+        added validation script to get around bot.replyinteractive bugs
+    </title>
+    <updated>2018-01-24T17:38:44Z</updated>
+    <media:thumbnail height="30" width="30" url="https://1.gravatar.com/avatar/334c4a4c42fdb79d7ebc3e73b517e6f8?d=https%3A%2F%2Fassets-cdn.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png&amp;r=g&amp;s=30"/>
+    <author>
+      <name></name>
+      <email>none</email>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;added validation script to get around bot.replyinteractive bugs&lt;/pre&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/7647794c4c3344924a9834c3dd6eb31667502d6a</id>
+    <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commit/7647794c4c3344924a9834c3dd6eb31667502d6a"/>
+    <title>
+        Merge pull request #42 from ExtraLudic/glitch
+    </title>
+    <updated>2018-01-22T20:26:07Z</updated>
+    <media:thumbnail height="30" width="30" url="https://avatars0.githubusercontent.com/u/35108931?s=30&amp;v=4"/>
+    <author>
+      <name>extraludicinc</name>
+      <uri>https://github.com/extraludicinc</uri>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;Merge pull request #42 from ExtraLudic/glitch
+
+replace all web.chat.deletes with correct data&lt;/pre&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/af87c46f6d4556c8716b0abd6f60a89be8053d8b</id>
+    <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commit/af87c46f6d4556c8716b0abd6f60a89be8053d8b"/>
+    <title>
+        replace all web.chat.deletes with correct data
+    </title>
+    <updated>2018-01-22T20:25:46Z</updated>
+    <media:thumbnail height="30" width="30" url="https://1.gravatar.com/avatar/334c4a4c42fdb79d7ebc3e73b517e6f8?d=https%3A%2F%2Fassets-cdn.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png&amp;r=g&amp;s=30"/>
+    <author>
+      <name></name>
+      <email>none</email>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;replace all web.chat.deletes with correct data&lt;/pre&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/ded9d64203df96feaaed71026856643896fce503</id>
+    <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commit/ded9d64203df96feaaed71026856643896fce503"/>
+    <title>
+        Merge pull request #41 from ExtraLudic/glitch
+    </title>
+    <updated>2018-01-22T20:19:27Z</updated>
+    <media:thumbnail height="30" width="30" url="https://avatars2.githubusercontent.com/u/11821504?s=30&amp;v=4"/>
+    <author>
+      <name>esalling23</name>
+      <uri>https://github.com/esalling23</uri>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;Merge pull request #41 from ExtraLudic/glitch
+
+switch web.chat.delete to bot.api.chat.delete due to errors&lt;/pre&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/79e101c2bc47c1e52313acf9366ff05a7364a0a0</id>
+    <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commit/79e101c2bc47c1e52313acf9366ff05a7364a0a0"/>
+    <title>
+        switch web.chat.delete to bot.api.chat.delete due to errors
+    </title>
+    <updated>2018-01-22T20:18:50Z</updated>
+    <media:thumbnail height="30" width="30" url="https://1.gravatar.com/avatar/334c4a4c42fdb79d7ebc3e73b517e6f8?d=https%3A%2F%2Fassets-cdn.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png&amp;r=g&amp;s=30"/>
+    <author>
+      <name></name>
+      <email>none</email>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;switch web.chat.delete to bot.api.chat.delete due to errors&lt;/pre&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/8ba88808610e344442ed51735d1e3045d3d85302</id>
+    <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commit/8ba88808610e344442ed51735d1e3045d3d85302"/>
+    <title>
+        Merge pull request #37 from ExtraLudic/glitch
+    </title>
+    <updated>2018-01-22T18:57:23Z</updated>
+    <media:thumbnail height="30" width="30" url="https://avatars2.githubusercontent.com/u/11821504?s=30&amp;v=4"/>
+    <author>
+      <name>esalling23</name>
+      <uri>https://github.com/esalling23</uri>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;Merge pull request #37 from ExtraLudic/glitch
+
+fix for interactive messaging galaxy identification&lt;/pre&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/95bc65356b2c53fe2cd44434c86eca2009484f66</id>
+    <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commit/95bc65356b2c53fe2cd44434c86eca2009484f66"/>
+    <title>
+        fix for interactive messaging galaxy identification
+    </title>
+    <updated>2018-01-22T18:56:44Z</updated>
+    <media:thumbnail height="30" width="30" url="https://1.gravatar.com/avatar/334c4a4c42fdb79d7ebc3e73b517e6f8?d=https%3A%2F%2Fassets-cdn.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png&amp;r=g&amp;s=30"/>
+    <author>
+      <name></name>
+      <email>none</email>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;fix for interactive messaging galaxy identification&lt;/pre&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/2dd195a3899f0a722def887b1abaef9ceff01b31</id>
+    <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commit/2dd195a3899f0a722def887b1abaef9ceff01b31"/>
+    <title>
+        Merge pull request #33 from ExtraLudic/glitch
+    </title>
+    <updated>2018-01-22T18:04:59Z</updated>
+    <media:thumbnail height="30" width="30" url="https://avatars2.githubusercontent.com/u/11821504?s=30&amp;v=4"/>
+    <author>
+      <name>esalling23</name>
+      <uri>https://github.com/esalling23</uri>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;Merge pull request #33 from ExtraLudic/glitch
+
+Fix for bot onboarding messages&lt;/pre&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/a6ba557b0128f8cb662cc84fd44bf49f04dc6160</id>
+    <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commit/a6ba557b0128f8cb662cc84fd44bf49f04dc6160"/>
+    <title>
+        Fix for bot onboarding messages
+    </title>
+    <updated>2018-01-22T18:04:30Z</updated>
+    <media:thumbnail height="30" width="30" url="https://1.gravatar.com/avatar/334c4a4c42fdb79d7ebc3e73b517e6f8?d=https%3A%2F%2Fassets-cdn.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png&amp;r=g&amp;s=30"/>
+    <author>
+      <name></name>
+      <email>none</email>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;Fix for bot onboarding messages&lt;/pre&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/a355456b1fec3fc2d172c2e37c33575de48aef31</id>
+    <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commit/a355456b1fec3fc2d172c2e37c33575de48aef31"/>
+    <title>
+        Merge pull request #31 from ExtraLudic/glitch
+    </title>
+    <updated>2018-01-22T17:46:30Z</updated>
+    <media:thumbnail height="30" width="30" url="https://avatars2.githubusercontent.com/u/11821504?s=30&amp;v=4"/>
+    <author>
+      <name>esalling23</name>
+      <uri>https://github.com/esalling23</uri>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;Merge pull request #31 from ExtraLudic/glitch
+
+room one is always open&lt;/pre&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/1e9b63acb951dbe77d6f603e040f783610433f3a</id>
+    <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commit/1e9b63acb951dbe77d6f603e040f783610433f3a"/>
+    <title>
+        room one is always open
+    </title>
+    <updated>2018-01-22T17:45:58Z</updated>
+    <media:thumbnail height="30" width="30" url="https://1.gravatar.com/avatar/334c4a4c42fdb79d7ebc3e73b517e6f8?d=https%3A%2F%2Fassets-cdn.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png&amp;r=g&amp;s=30"/>
+    <author>
+      <name></name>
+      <email>none</email>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;room one is always open&lt;/pre&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/cfb514448f71c31eca652839d3d83c28ef8fd818</id>
+    <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commit/cfb514448f71c31eca652839d3d83c28ef8fd818"/>
+    <title>
+        Merge pull request #29 from ExtraLudic/glitch
+    </title>
+    <updated>2018-01-22T17:44:11Z</updated>
+    <media:thumbnail height="30" width="30" url="https://avatars0.githubusercontent.com/u/35108931?s=30&amp;v=4"/>
+    <author>
+      <name>extraludicinc</name>
+      <uri>https://github.com/extraludicinc</uri>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;Merge pull request #29 from ExtraLudic/glitch
+
+Glitch updates for onboarding&lt;/pre&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Grit::Commit/d6ef46bdbd4cdf4864cef6697615e4dcb0e611a2</id>
+    <link type="text/html" rel="alternate" href="https://github.com/ExtraLudic/labyrinth/commit/d6ef46bdbd4cdf4864cef6697615e4dcb0e611a2"/>
+    <title>
+        onboarding complete with generation working
+    </title>
+    <updated>2018-01-22T17:43:40Z</updated>
+    <media:thumbnail height="30" width="30" url="https://1.gravatar.com/avatar/334c4a4c42fdb79d7ebc3e73b517e6f8?d=https%3A%2F%2Fassets-cdn.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png&amp;r=g&amp;s=30"/>
+    <author>
+      <name></name>
+      <email>none</email>
+    </author>
+    <content type="html">
+      &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;onboarding complete with generation working&lt;/pre&gt;
+    </content>
+  </entry>
+</feed>

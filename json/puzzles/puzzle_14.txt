@@ -1,0 +1,1 @@
+Jan and Sven have a rematch in Jenga since the last game they played ended in a draw. This time they use the normal Jenga rules with this addition: Jan can only pull blocks from the center of a level, while Sven can only pull from the sides. This time, Sven wins the game. How many levels high is the tower when the game is over?

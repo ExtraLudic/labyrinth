@@ -7,12 +7,12 @@ function findGalaxy(controller, teamId, num) {
   controller.storage.teams.get(teamId, function(err, team) {
     var thesePuzzles = _.pluck(team.puzzles, "roomId");
     var thisPuzzle = thesePuzzles.indexOf(num.toString());
-    console.log(thisPuzzle, team.puzzles[thisPuzzle]);
+    // console.log(thisPuzzle, team.puzzles[thisPuzzle]);
     if (thisPuzzle >= 0) 
       galaxy = team.puzzles[thisPuzzle].galaxy;
   });
   
-  console.log(galaxy);
+  // console.log(galaxy);
   
   return galaxy;
 };
@@ -38,7 +38,7 @@ module.exports = function(controller) {
     });
 
     var names = _.pluck(puzzles, "name");
-    console.log(puzzles, names);
+    // console.log(puzzles, names);
     
 
     var mapPromises = names.map(validate);
@@ -46,33 +46,35 @@ module.exports = function(controller) {
     var results = Promise.all(mapPromises);
 
     results.then(puzzleArray => {
-      console.log(puzzleArray);
+      // console.log(puzzleArray);
     });
   });
   
 
   var validate = function(name) {
     
-    console.log(name, "validation");
+    // console.log(name, "validation");
         
     controller.studio.validate(name, 'user_response', function(convo, next) {
-      // console.log(convo);
+      // console.log(convo.transcript[1].team);
         var bot = convo.context.bot;
         var user = convo.context.user;
         var channel = convo.context.channel;
         var response = convo.extractResponse('user_response');
-        var team = convo.transcript[1].team.id;
+        var team = convo.transcript[1].team.id ? convo.transcript[1].team.id : convo.transcript[1].team;
+      
+      var galaxy = findGalaxy(controller, team, response.match(/\d+/));
       
         console.log(response, "is the response");
             
-        if (response.match(/\d+/)) {
+        if (response.match(/\d+/) && galaxy) {
       
-          var thread = findGalaxy(controller, team, response.match(/\d+/)).replace("_", " ")
+          var thread = galaxy.replace("_", " ")
                       + ": Room " 
                       + response.match(/\d+/)
                       + " Key";
 
-          var door = findGalaxy(controller, team, response.match(/\d+/))
+          var door = galaxy
                     + "_Room_" + response.match(/\d+/);
 
           var puzzle = findPuzzle(controller, team, door);
