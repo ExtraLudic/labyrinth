@@ -47,21 +47,6 @@
                                     "action": "next",
                                     "pattern": "default",
                                     "default": true
-                                },
-                                {
-                                    "action": "Galaxy B: Room 15 Key",
-                                    "type": "string",
-                                    "pattern": "room_15"
-                                },
-                                {
-                                    "action": "Galaxy B: Room 18 Key",
-                                    "type": "string",
-                                    "pattern": "room_18"
-                                },
-                                {
-                                    "pattern": "room_10",
-                                    "type": "string",
-                                    "action": "Galaxy A: Room 10 Key"
                                 }
                             ],
                             "key": "user_response"
@@ -113,7 +98,7 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
@@ -264,7 +249,7 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
@@ -368,21 +353,6 @@
                                     "default": true,
                                     "pattern": "default",
                                     "action": "next"
-                                },
-                                {
-                                    "pattern": "room_8",
-                                    "type": "string",
-                                    "action": "Galaxy A: Room 8 Key"
-                                },
-                                {
-                                    "pattern": "room_4",
-                                    "type": "string",
-                                    "action": "Galaxy A: Room 4 Key"
-                                },
-                                {
-                                    "action": "Galaxy A: Room 2 Key",
-                                    "type": "string",
-                                    "pattern": "room_2"
                                 }
                             ]
                         },
@@ -475,7 +445,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -595,7 +565,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -706,75 +676,61 @@
         "description": "This is room 3",
         "script": [
             {
+                "topic": "default",
                 "script": [
                     {
-                        "collect": {
-                            "key": "user_response",
-                            "options": [
-                                {
-                                    "default": true,
-                                    "pattern": "default",
-                                    "action": "next"
-                                },
-                                {
-                                    "pattern": "room_7",
-                                    "type": "string",
-                                    "action": "Galaxy A: Room 7 Key"
-                                },
-                                {
-                                    "pattern": "room_6",
-                                    "type": "string",
-                                    "action": "Galaxy A: Room 6 Key"
-                                },
-                                {
-                                    "action": "Galaxy A: Room 9 Key",
-                                    "type": "string",
-                                    "pattern": "room_9"
-                                }
-                            ]
-                        },
-                        "attachments": [
-                            {
-                                "callback_id": "room_3",
-                                "actions": [
-                                    {
-                                        "style": "danger",
-                                        "type": "button",
-                                        "value": "room_7",
-                                        "name": "say",
-                                        "text": "Galaxy A: Room 7"
-                                    },
-                                    {
-                                        "style": "danger",
-                                        "type": "button",
-                                        "value": "room_6",
-                                        "name": "say",
-                                        "text": "Galaxy A: Room 6"
-                                    },
-                                    {
-                                        "style": "danger",
-                                        "type": "button",
-                                        "value": "room_9",
-                                        "name": "say",
-                                        "text": "Galaxy A: Room 9"
-                                    }
-                                ],
-                                "fields": [],
-                                "text": "You enter a dimly lit room and Daedalus greets you. “Welcome to my Labyrinth. You must find your way to Room 60 and then back to me. If you can do this in a week I will give you 9000 points. Each room is locked. To get the key to a room, you’ll need to solve a puzzle, and plug the solution into the appropriate console. Ready to start? All you need to do is choose a room to go into.” You look around the room, and see four silver pads on the floor, each with one of the aforementioned consoles embedded into a wall nearby. You hesitantly advance towards one...",
-                                "title": "Galaxy A: Room 3"
-                            }
-                        ],
                         "text": [
                             ""
-                        ]
+                        ],
+                        "attachments": [
+                            {
+                                "title": "Galaxy A: Room 3",
+                                "text": "You enter a dimly lit room and Daedalus greets you. “Welcome to my Labyrinth. You must find your way to Room 60 and then back to me. If you can do this in a week I will give you 9000 points. Each room is locked. To get the key to a room, you’ll need to solve a puzzle, and plug the solution into the appropriate console. Ready to start? All you need to do is choose a room to go into.” You look around the room, and see four silver pads on the floor, each with one of the aforementioned consoles embedded into a wall nearby. You hesitantly advance towards one...",
+                                "fields": [],
+                                "actions": [
+                                    {
+                                        "text": "Galaxy A: Room 7",
+                                        "name": "say",
+                                        "value": "room_7",
+                                        "type": "button",
+                                        "style": "danger"
+                                    },
+                                    {
+                                        "text": "Galaxy A: Room 6",
+                                        "name": "say",
+                                        "value": "room_6",
+                                        "type": "button",
+                                        "style": "danger"
+                                    },
+                                    {
+                                        "text": "Galaxy A: Room 9",
+                                        "name": "say",
+                                        "value": "room_9",
+                                        "type": "button",
+                                        "style": "danger"
+                                    }
+                                ],
+                                "callback_id": "room_3"
+                            }
+                        ],
+                        "collect": {
+                            "options": [
+                                {
+                                    "action": "next",
+                                    "pattern": "default",
+                                    "default": true
+                                }
+                            ],
+                            "key": "user_response"
+                        }
                     },
                     {
                         "action": "complete"
                     }
-                ],
-                "topic": "default"
+                ]
             },
             {
+                "topic": "on_timeout",
                 "script": [
                     {
                         "text": [
@@ -784,103 +740,21 @@
                     {
                         "action": "timeout"
                     }
-                ],
-                "topic": "on_timeout"
+                ]
             },
             {
+                "topic": "Galaxy A: Room 7 Key",
                 "script": [
                     {
-                        "collect": {
-                            "options": [
-                                {
-                                    "action": "next",
-                                    "pattern": "default",
-                                    "default": true
-                                },
-                                {
-                                    "action": "default",
-                                    "type": "string",
-                                    "pattern": "default"
-                                }
-                            ],
-                            "key": "user_response"
-                        },
-                        "text": [
-                            ""
-                        ],
                         "attachments": [
                             {
-                                "title": "Solve to unlock Galaxy A: Room 7",
-                                "text": "How old will Arnold Schwarzenegger be when Skynet has to send him back to kill Sarah Conner?",
-                                "fields": [],
+                                "callback_id": "key_7",
                                 "actions": [
                                     {
-                                        "text": "Menu",
-                                        "name": "choose",
-                                        "type": "select",
-                                        "data_source": "default",
                                         "options": [
                                             {
-                                                "text": "correct",
-                                                "value": "correct",
+                                                "selected": false,
                                                 "description": "This is the first option",
-                                                "selected": false
-                                            },
-                                            {
-                                                "text": "incorrect",
-                                                "value": "incorrect"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "text": "Confirm",
-                                        "name": "confirm",
-                                        "value": "9",
-                                        "type": "button"
-                                    },
-                                    {
-                                        "text": "Go Back",
-                                        "name": "say",
-                                        "value": "default",
-                                        "type": "button"
-                                    }
-                                ],
-                                "callback_id": "key_7"
-                            }
-                        ]
-                    },
-                    {
-                        "action": "complete"
-                    }
-                ],
-                "topic": "Galaxy A: Room 7 Key"
-            },
-            {
-                "script": [
-                    {
-                        "collect": {
-                            "multiple": false,
-                            "options": [
-                                {
-                                    "action": "next",
-                                    "pattern": "default",
-                                    "default": true
-                                },
-                                {
-                                    "action": "default",
-                                    "type": "string",
-                                    "pattern": "default"
-                                }
-                            ],
-                            "key": "user_response"
-                        },
-                        "attachments": [
-                            {
-                                "callback_id": "key_6",
-                                "actions": [
-                                    {
-                                        "options": [
-                                            {
                                                 "value": "correct",
                                                 "text": "correct"
                                             },
@@ -895,34 +769,49 @@
                                         "text": "Menu"
                                     },
                                     {
-                                        "text": "Submit Answer",
-                                        "name": "confirm",
+                                        "type": "button",
                                         "value": "confirm",
-                                        "type": "button"
+                                        "name": "confirm",
+                                        "text": "Confirm"
                                     },
                                     {
-                                        "text": "Go Back",
-                                        "name": "say",
+                                        "type": "button",
                                         "value": "default",
-                                        "type": "button"
+                                        "name": "say",
+                                        "text": "Go Back"
                                     }
                                 ],
                                 "fields": [],
-                                "text": "Black Pawn @ F9.  Black Knight @ D9. Black Rook @ A9. Black Bishop @ G9. Black Queen @ C6. Black King @ B6. Where can the White Queen @ A9 go safely?",
-                                "title": "Solve to unlock Galaxy A: Room 6"
+                                "text": "How old will Arnold Schwarzenegger be when Skynet has to send him back to kill Sarah Conner?",
+                                "title": "Solve to unlock Galaxy A: Room 7"
                             }
                         ],
                         "text": [
                             ""
-                        ]
+                        ],
+                        "collect": {
+                            "key": "user_response",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                },
+                                {
+                                    "pattern": "default",
+                                    "type": "string",
+                                    "action": "default"
+                                }
+                            ]
+                        }
                     },
                     {
                         "action": "complete"
                     }
-                ],
-                "topic": "Galaxy A: Room 6 Key"
+                ]
             },
             {
+                "topic": "Galaxy A: Room 6 Key",
                 "script": [
                     {
                         "text": [
@@ -930,8 +819,8 @@
                         ],
                         "attachments": [
                             {
-                                "title": "Solve to unlock Galaxy A: Room 9",
-                                "text": "He couldn’t open the pod bay doors, but he could sing “Daisy.”",
+                                "title": "Solve to unlock Galaxy A: Room 6",
+                                "text": "Black Pawn @ F9.  Black Knight @ D9. Black Rook @ A9. Black Bishop @ G9. Black Queen @ C6. Black King @ B6. Where can the White Queen @ A9 go safely?",
                                 "fields": [],
                                 "actions": [
                                     {
@@ -942,9 +831,7 @@
                                         "options": [
                                             {
                                                 "text": "correct",
-                                                "value": "correct",
-                                                "description": "This is the first option",
-                                                "selected": false
+                                                "value": "correct"
                                             },
                                             {
                                                 "text": "incorrect",
@@ -953,19 +840,19 @@
                                         ]
                                     },
                                     {
-                                        "text": "Confirm",
+                                        "type": "button",
+                                        "value": "confirm",
                                         "name": "confirm",
-                                        "value": "9",
-                                        "type": "button"
+                                        "text": "Submit Answer"
                                     },
                                     {
-                                        "text": "Go Back",
-                                        "name": "say",
+                                        "type": "button",
                                         "value": "default",
-                                        "type": "button"
+                                        "name": "say",
+                                        "text": "Go Back"
                                     }
                                 ],
-                                "callback_id": "key_9"
+                                "callback_id": "key_6"
                             }
                         ],
                         "collect": {
@@ -988,64 +875,132 @@
                     {
                         "action": "complete"
                     }
-                ],
-                "topic": "Galaxy A: Room 9 Key"
+                ]
+            },
+            {
+                "topic": "Galaxy A: Room 9 Key",
+                "script": [
+                    {
+                        "collect": {
+                            "multiple": false,
+                            "options": [
+                                {
+                                    "action": "next",
+                                    "pattern": "default",
+                                    "default": true
+                                },
+                                {
+                                    "action": "default",
+                                    "type": "string",
+                                    "pattern": "default"
+                                }
+                            ],
+                            "key": "user_response"
+                        },
+                        "attachments": [
+                            {
+                                "callback_id": "key_9",
+                                "actions": [
+                                    {
+                                        "options": [
+                                            {
+                                                "selected": false,
+                                                "description": "This is the first option",
+                                                "value": "correct",
+                                                "text": "correct"
+                                            },
+                                            {
+                                                "value": "incorrect",
+                                                "text": "incorrect"
+                                            }
+                                        ],
+                                        "data_source": "default",
+                                        "type": "select",
+                                        "name": "choose",
+                                        "text": "Menu"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "value": "confirm",
+                                        "name": "confirm",
+                                        "text": "Confirm"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "value": "default",
+                                        "name": "say",
+                                        "text": "Go Back"
+                                    }
+                                ],
+                                "fields": [],
+                                "text": "He couldn’t open the pod bay doors, but he could sing “Daisy.”",
+                                "title": "Solve to unlock Galaxy A: Room 9"
+                            }
+                        ],
+                        "text": [
+                            ""
+                        ]
+                    },
+                    {
+                        "action": "complete"
+                    }
+                ]
             }
         ],
         "triggers": [
             {
-                "id": 386,
+                "pattern": "3",
                 "type": "string",
-                "pattern": "3"
+                "id": 386
             }
         ],
         "variables": [
             {
-                "name": "user_response",
+                "id": 10,
                 "type": "string",
-                "id": 10
+                "name": "user_response"
             },
             {
-                "name": "galaxyaroom6key",
+                "id": 50,
                 "type": "string",
-                "id": 50
+                "name": "galaxyaroom6key"
             },
             {
-                "name": "galaxyaroom7key",
+                "id": 59,
                 "type": "string",
-                "id": 59
+                "name": "galaxyaroom7key"
             },
             {
-                "id": 699,
+                "name": "galaxyaroom9key",
                 "type": "string",
-                "name": "galaxyaroom9key"
+                "id": 699
             },
             {
-                "name": "galaxy_a_room_9_key_verify",
+                "id": 955,
                 "type": "string",
-                "id": 955
+                "name": "galaxy_a_room_9_key_verify"
             },
             {
-                "id": 679,
+                "name": "galaxy_a_room_9_key",
                 "type": "string",
-                "name": "galaxy_a_room_9_key"
+                "id": 679
             },
             {
-                "id": 609,
+                "name": "galaxy_a_room_9",
                 "type": "string",
-                "name": "galaxy_a_room_9"
+                "id": 609
             },
             {
-                "type": "string",
-                "name": "question_9"
+                "name": "question_9",
+                "type": "string"
             },
             {
-                "type": "string",
-                "name": "question_9"
+                "name": "question_9",
+                "type": "string"
             },
             {
-                "type": "string",
-                "name": "question_6"
+                "name": "question_6",
+                "type": "string"
             }
         ],
         "tags": [
@@ -1070,21 +1025,6 @@
                                     "default": true,
                                     "pattern": "default",
                                     "action": "next"
-                                },
-                                {
-                                    "pattern": "room_3",
-                                    "type": "string",
-                                    "action": "Galaxy A: Room 3 Key"
-                                },
-                                {
-                                    "pattern": "room_6",
-                                    "type": "string",
-                                    "action": "Galaxy A: Room 6 Key"
-                                },
-                                {
-                                    "action": "Galaxy A: Room 5 Key",
-                                    "type": "string",
-                                    "pattern": "room_5"
                                 }
                             ]
                         },
@@ -1190,7 +1130,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "5",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -1310,7 +1250,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "5",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -1425,21 +1365,6 @@
                                     "default": true,
                                     "pattern": "default",
                                     "action": "next"
-                                },
-                                {
-                                    "pattern": "room_10",
-                                    "type": "string",
-                                    "action": "Galaxy A: Room 10 Key"
-                                },
-                                {
-                                    "pattern": "room_6",
-                                    "type": "string",
-                                    "action": "Galaxy A: Room 6 Key"
-                                },
-                                {
-                                    "action": "Galaxy A: Room 7 Key",
-                                    "type": "string",
-                                    "pattern": "room_7"
                                 }
                             ]
                         },
@@ -1545,7 +1470,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "7",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -1665,7 +1590,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "7",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -1771,46 +1696,45 @@
         "description": "This is room 6",
         "script": [
             {
-                "topic": "default",
                 "script": [
                     {
-                        "text": [
-                            ""
-                        ],
-                        "attachments": [
-                            {
-                                "title": "Black Hole",
-                                "text": "You are sucked into a black hole while in transit.",
-                                "fields": [],
-                                "actions": [
-                                    {
-                                        "type": "button",
-                                        "value": "room_1",
-                                        "name": "say",
-                                        "text": "Galaxy A Room 1"
-                                    }
-                                ],
-                                "callback_id": "room_6"
-                            }
-                        ],
                         "collect": {
+                            "key": "user_response",
                             "options": [
                                 {
-                                    "action": "next",
+                                    "default": true,
                                     "pattern": "default",
-                                    "default": true
+                                    "action": "next"
                                 }
-                            ],
-                            "key": "user_response"
-                        }
+                            ]
+                        },
+                        "attachments": [
+                            {
+                                "callback_id": "room_6",
+                                "actions": [
+                                    {
+                                        "text": "Galaxy A Room 1",
+                                        "name": "say",
+                                        "value": "room_1",
+                                        "type": "button"
+                                    }
+                                ],
+                                "fields": [],
+                                "text": "You are sucked into a black hole while in transit.",
+                                "title": "Black Hole"
+                            }
+                        ],
+                        "text": [
+                            ""
+                        ]
                     },
                     {
                         "action": "complete"
                     }
-                ]
+                ],
+                "topic": "default"
             },
             {
-                "topic": "on_timeout",
                 "script": [
                     {
                         "text": [
@@ -1820,63 +1744,64 @@
                     {
                         "action": "timeout"
                     }
-                ]
+                ],
+                "topic": "on_timeout"
             }
         ],
         "triggers": [
             {
-                "id": 142,
+                "pattern": "6",
                 "type": "string",
-                "pattern": "6"
+                "id": 142
             }
         ],
         "variables": [
             {
-                "id": 325,
+                "name": "user_response",
                 "type": "string",
-                "name": "user_response"
+                "id": 325
             },
             {
-                "id": 70,
+                "name": "galaxyaroom6key",
                 "type": "string",
-                "name": "galaxyaroom6key"
+                "id": 70
             },
             {
-                "id": 77,
+                "name": "galaxyaroom10key",
                 "type": "string",
-                "name": "galaxyaroom10key"
+                "id": 77
             },
             {
-                "name": "galaxyaroom7key",
+                "id": 677,
                 "type": "string",
-                "id": 677
+                "name": "galaxyaroom7key"
             },
             {
-                "id": 777,
+                "name": "galaxy_a_room_7_key_verify",
                 "type": "string",
-                "name": "galaxy_a_room_7_key_verify"
+                "id": 777
             },
             {
-                "name": "galaxy_a_room_7_key",
+                "id": 6107,
                 "type": "string",
-                "id": 6107
+                "name": "galaxy_a_room_7_key"
             },
             {
-                "name": "galaxy_a_room_7",
+                "id": 607,
                 "type": "string",
-                "id": 607
+                "name": "galaxy_a_room_7"
             },
             {
-                "name": "question_7",
-                "type": "string"
+                "type": "string",
+                "name": "question_7"
             },
             {
-                "name": "question_7",
-                "type": "string"
+                "type": "string",
+                "name": "question_7"
             },
             {
-                "name": "question_6",
-                "type": "string"
+                "type": "string",
+                "name": "question_6"
             }
         ],
         "tags": [
@@ -1932,21 +1857,6 @@
                                     "action": "next",
                                     "pattern": "default",
                                     "default": true
-                                },
-                                {
-                                    "action": "Galaxy A: Room 8 Key",
-                                    "type": "string",
-                                    "pattern": "room_8"
-                                },
-                                {
-                                    "action": "Galaxy A: Room 4 Key",
-                                    "type": "string",
-                                    "pattern": "room_4"
-                                },
-                                {
-                                    "pattern": "room_9",
-                                    "type": "string",
-                                    "action": "Galaxy A: Room 9 Key"
                                 }
                             ],
                             "key": "user_response"
@@ -1998,7 +1908,7 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "9",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
@@ -2149,7 +2059,7 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "9",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
@@ -2253,21 +2163,6 @@
                                     "default": true,
                                     "pattern": "default",
                                     "action": "next"
-                                },
-                                {
-                                    "pattern": "room_3",
-                                    "type": "string",
-                                    "action": "Galaxy A: Room 3 Key"
-                                },
-                                {
-                                    "pattern": "room_9",
-                                    "type": "string",
-                                    "action": "Galaxy A: Room 9 Key"
-                                },
-                                {
-                                    "action": "Galaxy A: Room 2 Key",
-                                    "type": "string",
-                                    "pattern": "room_2"
                                 }
                             ]
                         },
@@ -2373,7 +2268,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "2",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -2493,7 +2388,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "2",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -2608,21 +2503,6 @@
                                     "default": true,
                                     "pattern": "default",
                                     "action": "next"
-                                },
-                                {
-                                    "pattern": "room_8",
-                                    "type": "string",
-                                    "action": "Galaxy A: Room 8 Key"
-                                },
-                                {
-                                    "pattern": "room_6",
-                                    "type": "string",
-                                    "action": "Galaxy A: Room 6 Key"
-                                },
-                                {
-                                    "action": "Galaxy A: Room 7 Key",
-                                    "type": "string",
-                                    "pattern": "room_7"
                                 }
                             ]
                         },
@@ -2728,7 +2608,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "7",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -2848,7 +2728,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "7",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -2961,16 +2841,6 @@
                                     "action": "next",
                                     "pattern": "default",
                                     "default": true
-                                },
-                                {
-                                    "action": "Galaxy B: Room 11 Key",
-                                    "type": "string",
-                                    "pattern": "room_11"
-                                },
-                                {
-                                    "action": "Galaxy B: Room 12 Key",
-                                    "type": "string",
-                                    "pattern": "room_12"
                                 }
                             ],
                             "key": "user_response"
@@ -3064,13 +2934,13 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "confirm"
                                     },
                                     {
                                         "text": "Go Back",
-                                        "name": "button",
+                                        "name": "say",
                                         "value": "default",
                                         "type": "button"
                                     }
@@ -3132,14 +3002,14 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
                                     {
                                         "type": "button",
                                         "value": "default",
-                                        "name": "button",
+                                        "name": "say",
                                         "text": "Go Back"
                                     }
                                 ],
@@ -3270,21 +3140,6 @@
                                     "action": "next",
                                     "pattern": "default",
                                     "default": true
-                                },
-                                {
-                                    "action": "Galaxy B: Room 18 Key",
-                                    "type": "string",
-                                    "pattern": "room_18"
-                                },
-                                {
-                                    "action": "Galaxy B: Room 19 Key",
-                                    "type": "string",
-                                    "pattern": "room_19"
-                                },
-                                {
-                                    "pattern": "room_17",
-                                    "type": "string",
-                                    "action": "Galaxy B: Room 17 Key"
                                 }
                             ],
                             "key": "user_response"
@@ -3336,7 +3191,7 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "11",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
@@ -3487,7 +3342,7 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "11",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
@@ -3629,21 +3484,6 @@
                                     "action": "next",
                                     "pattern": "default",
                                     "default": true
-                                },
-                                {
-                                    "action": "Galaxy B: Room 14 Key",
-                                    "type": "string",
-                                    "pattern": "room_14"
-                                },
-                                {
-                                    "action": "Galaxy B: Room 13 Key",
-                                    "type": "string",
-                                    "pattern": "room_13"
-                                },
-                                {
-                                    "pattern": "room_15",
-                                    "type": "string",
-                                    "action": "Galaxy B: Room 15 Key"
                                 }
                             ],
                             "key": "user_response",
@@ -3696,7 +3536,7 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
@@ -3847,7 +3687,7 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
@@ -3950,21 +3790,6 @@
                                     "default": true,
                                     "pattern": "default",
                                     "action": "next"
-                                },
-                                {
-                                    "pattern": "room_14",
-                                    "type": "string",
-                                    "action": "Galaxy B: Room 14 Key"
-                                },
-                                {
-                                    "pattern": "room_15",
-                                    "type": "string",
-                                    "action": "Galaxy B: Room 15 Key"
-                                },
-                                {
-                                    "action": "Galaxy A: Room 10 Key",
-                                    "type": "string",
-                                    "pattern": "room_10"
                                 }
                             ]
                         },
@@ -4070,7 +3895,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -4190,7 +4015,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -4338,21 +4163,6 @@
                                     "action": "next",
                                     "pattern": "default",
                                     "default": true
-                                },
-                                {
-                                    "action": "Galaxy B: Room 13 Key",
-                                    "type": "string",
-                                    "pattern": "room_13"
-                                },
-                                {
-                                    "action": "Galaxy B: Room 15 Key",
-                                    "type": "string",
-                                    "pattern": "room_15"
-                                },
-                                {
-                                    "pattern": "room_10",
-                                    "type": "string",
-                                    "action": "Galaxy A: Room 10 Key"
                                 }
                             ],
                             "key": "user_response"
@@ -4404,7 +4214,7 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
@@ -4555,7 +4365,7 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
@@ -4658,21 +4468,6 @@
                                     "default": true,
                                     "pattern": "default",
                                     "action": "next"
-                                },
-                                {
-                                    "pattern": "room_13",
-                                    "type": "string",
-                                    "action": "Galaxy B: Room 13 Key"
-                                },
-                                {
-                                    "pattern": "room_14",
-                                    "type": "string",
-                                    "action": "Galaxy B: Room 14 Key"
-                                },
-                                {
-                                    "action": "Galaxy A: Room 10 Key",
-                                    "type": "string",
-                                    "pattern": "room_10"
                                 }
                             ]
                         },
@@ -4778,7 +4573,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -4898,7 +4693,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -5046,21 +4841,6 @@
                                     "action": "next",
                                     "pattern": "default",
                                     "default": true
-                                },
-                                {
-                                    "action": "Galaxy B: Room 19 Key",
-                                    "type": "string",
-                                    "pattern": "room_19"
-                                },
-                                {
-                                    "action": "Galaxy B: Room 20 Key",
-                                    "type": "string",
-                                    "pattern": "room_20"
-                                },
-                                {
-                                    "pattern": "room_10",
-                                    "type": "string",
-                                    "action": "Galaxy A: Room 10 Key"
                                 }
                             ],
                             "key": "user_response"
@@ -5112,7 +4892,7 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
@@ -5263,7 +5043,7 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
@@ -5357,76 +5137,60 @@
         "description": "This is room 2",
         "script": [
             {
-                "topic": "default",
                 "script": [
                     {
-                        "text": [
-                            ""
-                        ],
-                        "attachments": [
-                            {
-                                "title": "Galaxy A: Room 2",
-                                "text": "You enter a dimly lit room and Daedalus greets you. “Welcome to my Labyrinth. You must find your way to Room 30 and then back to me. If you can do this in a week I will give you 2000 points. Each room is locked. To get the key to a room, you’ll need to solve a puzzle, and plug the solution into the appropriate console. Ready to start? All you need to do is choose a room to go into.” You look around the room, and see four silver pads on the floor, each with one of the aforementioned consoles embedded into a wall nearby. You hesitantly advance towards one...",
-                                "fields": [],
-                                "actions": [
-                                    {
-                                        "text": "Galaxy A: Room 8",
-                                        "name": "say",
-                                        "value": "room_8",
-                                        "type": "button",
-                                        "style": "danger"
-                                    },
-                                    {
-                                        "text": "Galaxy A: Room 3",
-                                        "name": "say",
-                                        "value": "room_3",
-                                        "type": "button",
-                                        "style": "danger"
-                                    },
-                                    {
-                                        "text": "Galaxy A: Room 9",
-                                        "name": "say",
-                                        "value": "room_9",
-                                        "type": "button",
-                                        "style": "danger"
-                                    }
-                                ],
-                                "callback_id": "room_2"
-                            }
-                        ],
                         "collect": {
+                            "key": "user_response",
                             "options": [
                                 {
-                                    "action": "next",
+                                    "default": true,
                                     "pattern": "default",
-                                    "default": true
-                                },
-                                {
-                                    "action": "Galaxy A: Room 8 Key",
-                                    "type": "string",
-                                    "pattern": "room_8"
-                                },
-                                {
-                                    "action": "Galaxy A: Room 3 Key",
-                                    "type": "string",
-                                    "pattern": "room_3"
-                                },
-                                {
-                                    "pattern": "room_9",
-                                    "type": "string",
-                                    "action": "Galaxy A: Room 2 Key"
+                                    "action": "next"
                                 }
-                            ],
-                            "key": "user_response"
-                        }
+                            ]
+                        },
+                        "attachments": [
+                            {
+                                "callback_id": "room_2",
+                                "actions": [
+                                    {
+                                        "style": "danger",
+                                        "type": "button",
+                                        "value": "room_8",
+                                        "name": "say",
+                                        "text": "Galaxy A: Room 8"
+                                    },
+                                    {
+                                        "style": "danger",
+                                        "type": "button",
+                                        "value": "room_3",
+                                        "name": "say",
+                                        "text": "Galaxy A: Room 3"
+                                    },
+                                    {
+                                        "style": "danger",
+                                        "type": "button",
+                                        "value": "room_9",
+                                        "name": "say",
+                                        "text": "Galaxy A: Room 9"
+                                    }
+                                ],
+                                "fields": [],
+                                "text": "You enter a dimly lit room and Daedalus greets you. “Welcome to my Labyrinth. You must find your way to Room 30 and then back to me. If you can do this in a week I will give you 2000 points. Each room is locked. To get the key to a room, you’ll need to solve a puzzle, and plug the solution into the appropriate console. Ready to start? All you need to do is choose a room to go into.” You look around the room, and see four silver pads on the floor, each with one of the aforementioned consoles embedded into a wall nearby. You hesitantly advance towards one...",
+                                "title": "Galaxy A: Room 2"
+                            }
+                        ],
+                        "text": [
+                            ""
+                        ]
                     },
                     {
                         "action": "complete"
                     }
-                ]
+                ],
+                "topic": "default"
             },
             {
-                "topic": "on_timeout",
                 "script": [
                     {
                         "text": [
@@ -5436,21 +5200,103 @@
                     {
                         "action": "timeout"
                     }
-                ]
+                ],
+                "topic": "on_timeout"
             },
             {
-                "topic": "Galaxy A: Room 8 Key",
                 "script": [
                     {
+                        "collect": {
+                            "options": [
+                                {
+                                    "action": "next",
+                                    "pattern": "default",
+                                    "default": true
+                                },
+                                {
+                                    "action": "default",
+                                    "type": "string",
+                                    "pattern": "default"
+                                }
+                            ],
+                            "key": "user_response"
+                        },
+                        "text": [
+                            ""
+                        ],
                         "attachments": [
                             {
-                                "callback_id": "key_8",
+                                "title": "Solve to unlock Galaxy A: Room 8",
+                                "text": "How old will Arnold Schwarzenegger be when Skynet has to send him back to kill Sarah Conner?",
+                                "fields": [],
+                                "actions": [
+                                    {
+                                        "text": "Menu",
+                                        "name": "choose",
+                                        "type": "select",
+                                        "data_source": "default",
+                                        "options": [
+                                            {
+                                                "text": "correct",
+                                                "value": "correct",
+                                                "description": "This is the first option",
+                                                "selected": false
+                                            },
+                                            {
+                                                "text": "incorrect",
+                                                "value": "incorrect"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "text": "Confirm",
+                                        "name": "confirm",
+                                        "value": "confirm",
+                                        "type": "button"
+                                    },
+                                    {
+                                        "text": "Go Back",
+                                        "name": "say",
+                                        "value": "default",
+                                        "type": "button"
+                                    }
+                                ],
+                                "callback_id": "key_8"
+                            }
+                        ]
+                    },
+                    {
+                        "action": "complete"
+                    }
+                ],
+                "topic": "Galaxy A: Room 8 Key"
+            },
+            {
+                "script": [
+                    {
+                        "collect": {
+                            "multiple": false,
+                            "options": [
+                                {
+                                    "action": "next",
+                                    "pattern": "default",
+                                    "default": true
+                                },
+                                {
+                                    "action": "default",
+                                    "type": "string",
+                                    "pattern": "default"
+                                }
+                            ],
+                            "key": "user_response"
+                        },
+                        "attachments": [
+                            {
+                                "callback_id": "key_3",
                                 "actions": [
                                     {
                                         "options": [
                                             {
-                                                "selected": false,
-                                                "description": "This is the first option",
                                                 "value": "correct",
                                                 "text": "correct"
                                             },
@@ -5465,49 +5311,34 @@
                                         "text": "Menu"
                                     },
                                     {
-                                        "type": "button",
-                                        "value": "2",
+                                        "text": "Submit Answer",
                                         "name": "confirm",
-                                        "text": "Confirm"
+                                        "value": "confirm",
+                                        "type": "button"
                                     },
                                     {
-                                        "type": "button",
-                                        "value": "default",
+                                        "text": "Go Back",
                                         "name": "say",
-                                        "text": "Go Back"
+                                        "value": "default",
+                                        "type": "button"
                                     }
                                 ],
                                 "fields": [],
-                                "text": "How old will Arnold Schwarzenegger be when Skynet has to send him back to kill Sarah Conner?",
-                                "title": "Solve to unlock Galaxy A: Room 8"
+                                "text": "Black Pawn @ F2.  Black Knight @ D2. Black Rook @ A2. Black Bishop @ G2. Black Queen @ C3. Black King @ B3. Where can the White Queen @ A2 go safely?",
+                                "title": "Solve to unlock Galaxy A: Room 3"
                             }
                         ],
                         "text": [
                             ""
-                        ],
-                        "collect": {
-                            "key": "user_response",
-                            "options": [
-                                {
-                                    "default": true,
-                                    "pattern": "default",
-                                    "action": "next"
-                                },
-                                {
-                                    "pattern": "default",
-                                    "type": "string",
-                                    "action": "default"
-                                }
-                            ]
-                        }
+                        ]
                     },
                     {
                         "action": "complete"
                     }
-                ]
+                ],
+                "topic": "Galaxy A: Room 3 Key"
             },
             {
-                "topic": "Galaxy A: Room 3 Key",
                 "script": [
                     {
                         "text": [
@@ -5515,8 +5346,8 @@
                         ],
                         "attachments": [
                             {
-                                "title": "Solve to unlock Galaxy A: Room 3",
-                                "text": "Black Pawn @ F2.  Black Knight @ D2. Black Rook @ A2. Black Bishop @ G2. Black Queen @ C3. Black King @ B3. Where can the White Queen @ A2 go safely?",
+                                "title": "Solve to unlock Galaxy A: Room 9",
+                                "text": "He couldn’t open the pod bay doors, but he could sing “Daisy.”",
                                 "fields": [],
                                 "actions": [
                                     {
@@ -5527,7 +5358,9 @@
                                         "options": [
                                             {
                                                 "text": "correct",
-                                                "value": "correct"
+                                                "value": "correct",
+                                                "description": "This is the first option",
+                                                "selected": false
                                             },
                                             {
                                                 "text": "incorrect",
@@ -5536,19 +5369,19 @@
                                         ]
                                     },
                                     {
-                                        "type": "button",
-                                        "value": "confirm",
+                                        "text": "Confirm",
                                         "name": "confirm",
-                                        "text": "Submit Answer"
+                                        "value": "confirm",
+                                        "type": "button"
                                     },
                                     {
-                                        "type": "button",
-                                        "value": "default",
+                                        "text": "Go Back",
                                         "name": "say",
-                                        "text": "Go Back"
+                                        "value": "default",
+                                        "type": "button"
                                     }
                                 ],
-                                "callback_id": "key_3"
+                                "callback_id": "key_9"
                             }
                         ],
                         "collect": {
@@ -5571,132 +5404,64 @@
                     {
                         "action": "complete"
                     }
-                ]
-            },
-            {
-                "topic": "Galaxy A: Room 2 Key",
-                "script": [
-                    {
-                        "collect": {
-                            "multiple": false,
-                            "options": [
-                                {
-                                    "action": "next",
-                                    "pattern": "default",
-                                    "default": true
-                                },
-                                {
-                                    "action": "default",
-                                    "type": "string",
-                                    "pattern": "default"
-                                }
-                            ],
-                            "key": "user_response"
-                        },
-                        "attachments": [
-                            {
-                                "callback_id": "key_9",
-                                "actions": [
-                                    {
-                                        "options": [
-                                            {
-                                                "selected": false,
-                                                "description": "This is the first option",
-                                                "value": "correct",
-                                                "text": "correct"
-                                            },
-                                            {
-                                                "value": "incorrect",
-                                                "text": "incorrect"
-                                            }
-                                        ],
-                                        "data_source": "default",
-                                        "type": "select",
-                                        "name": "choose",
-                                        "text": "Menu"
-                                    },
-                                    {
-                                        "type": "button",
-                                        "value": "2",
-                                        "name": "confirm",
-                                        "text": "Confirm"
-                                    },
-                                    {
-                                        "type": "button",
-                                        "value": "default",
-                                        "name": "say",
-                                        "text": "Go Back"
-                                    }
-                                ],
-                                "fields": [],
-                                "text": "He couldn’t open the pod bay doors, but he could sing “Daisy.”",
-                                "title": "Solve to unlock Galaxy A: Room 9"
-                            }
-                        ],
-                        "text": [
-                            ""
-                        ]
-                    },
-                    {
-                        "action": "complete"
-                    }
-                ]
+                ],
+                "topic": "Galaxy A: Room 9 Key"
             }
         ],
         "triggers": [
             {
-                "id": 386,
+                "pattern": "2",
                 "type": "string",
-                "pattern": "2"
+                "id": 386
             }
         ],
         "variables": [
             {
-                "id": 268,
+                "name": "user_response",
                 "type": "string",
-                "name": "user_response"
+                "id": 268
             },
             {
-                "id": 50,
+                "name": "galaxyaroom3key",
                 "type": "string",
-                "name": "galaxyaroom3key"
+                "id": 50
             },
             {
-                "id": 59,
+                "name": "galaxyaroom8key",
                 "type": "string",
-                "name": "galaxyaroom8key"
+                "id": 59
             },
             {
-                "name": "galaxyaroom2key",
+                "id": 392,
                 "type": "string",
-                "id": 392
+                "name": "galaxyaroom2key"
             },
             {
-                "id": 255,
+                "name": "galaxy_a_room_2_key_verify",
                 "type": "string",
-                "name": "galaxy_a_room_2_key_verify"
+                "id": 255
             },
             {
-                "name": "galaxy_a_room_2_key",
+                "id": 379,
                 "type": "string",
-                "id": 379
+                "name": "galaxy_a_room_2_key"
             },
             {
-                "name": "galaxy_a_room_2",
+                "id": 302,
                 "type": "string",
-                "id": 302
+                "name": "galaxy_a_room_2"
             },
             {
-                "name": "question_2",
-                "type": "string"
+                "type": "string",
+                "name": "question_2"
             },
             {
-                "name": "question_2",
-                "type": "string"
+                "type": "string",
+                "name": "question_2"
             },
             {
-                "name": "question_3",
-                "type": "string"
+                "type": "string",
+                "name": "question_3"
             }
         ],
         "tags": [
@@ -5755,21 +5520,6 @@
                                     "action": "next",
                                     "pattern": "default",
                                     "default": true
-                                },
-                                {
-                                    "action": "Galaxy B: Room 13 Key",
-                                    "type": "string",
-                                    "pattern": "room_13"
-                                },
-                                {
-                                    "action": "Galaxy B: Room 16 Key",
-                                    "type": "string",
-                                    "pattern": "room_16"
-                                },
-                                {
-                                    "pattern": "room_10",
-                                    "type": "string",
-                                    "action": "Galaxy A: Room 10 Key"
                                 }
                             ],
                             "key": "user_response"
@@ -5821,7 +5571,7 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
@@ -5972,7 +5722,7 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
@@ -6075,21 +5825,6 @@
                                     "default": true,
                                     "pattern": "default",
                                     "action": "next"
-                                },
-                                {
-                                    "pattern": "room_14",
-                                    "type": "string",
-                                    "action": "Galaxy B: Room 14 Key"
-                                },
-                                {
-                                    "pattern": "room_15",
-                                    "type": "string",
-                                    "action": "Galaxy B: Room 15 Key"
-                                },
-                                {
-                                    "action": "Galaxy A: Room 10 Key",
-                                    "type": "string",
-                                    "pattern": "room_10"
                                 }
                             ]
                         },
@@ -6195,7 +5930,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -6315,7 +6050,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -6420,75 +6155,61 @@
         "description": "This is room 20",
         "script": [
             {
+                "topic": "default",
                 "script": [
                     {
-                        "collect": {
-                            "key": "user_response",
-                            "options": [
-                                {
-                                    "default": true,
-                                    "pattern": "default",
-                                    "action": "next"
-                                },
-                                {
-                                    "pattern": "room_21",
-                                    "type": "string",
-                                    "action": "Galaxy C: Room 21"
-                                },
-                                {
-                                    "pattern": "room_22",
-                                    "type": "string",
-                                    "action": "Galaxy C: Room 22"
-                                },
-                                {
-                                    "pattern": "room_29",
-                                    "type": "string",
-                                    "action": "Galaxy C: Room 29"
-                                }
-                            ]
-                        },
-                        "attachments": [
-                            {
-                                "callback_id": "room_20",
-                                "actions": [
-                                    {
-                                        "style": "danger",
-                                        "type": "button",
-                                        "value": "room_21",
-                                        "name": "say",
-                                        "text": "Galaxy C: Room 21"
-                                    },
-                                    {
-                                        "style": "danger",
-                                        "type": "button",
-                                        "value": "room_22",
-                                        "name": "say",
-                                        "text": "Galaxy C: Room 22"
-                                    },
-                                    {
-                                        "style": "danger",
-                                        "type": "button",
-                                        "value": "room_29",
-                                        "name": "say",
-                                        "text": "Galaxy C: Room 29"
-                                    }
-                                ],
-                                "fields": [],
-                                "text": "You enter a dimly lit room and Daedalus greets you. “Welcome to my Labyrinth. You must find your way to Room 30 and then back to me. If you can do this in a week I will give you 2000 points. Each room is locked. To get the key to a room, you’ll need to solve a puzzle, and plug the solution into the appropriate console. Ready to start? All you need to do is choose a room to go into.” You look around the room, and see four silver pads on the floor, each with one of the aforementioned consoles embedded into a wall nearby. You hesitantly advance towards one...",
-                                "title": "Galaxy B: Room 20"
-                            }
-                        ],
                         "text": [
                             ""
-                        ]
+                        ],
+                        "attachments": [
+                            {
+                                "title": "Galaxy B: Room 20",
+                                "text": "You enter a dimly lit room and Daedalus greets you. “Welcome to my Labyrinth. You must find your way to Room 30 and then back to me. If you can do this in a week I will give you 2000 points. Each room is locked. To get the key to a room, you’ll need to solve a puzzle, and plug the solution into the appropriate console. Ready to start? All you need to do is choose a room to go into.” You look around the room, and see four silver pads on the floor, each with one of the aforementioned consoles embedded into a wall nearby. You hesitantly advance towards one...",
+                                "fields": [],
+                                "actions": [
+                                    {
+                                        "text": "Galaxy C: Room 21",
+                                        "name": "say",
+                                        "value": "room_21",
+                                        "type": "button",
+                                        "style": "danger"
+                                    },
+                                    {
+                                        "text": "Galaxy C: Room 22",
+                                        "name": "say",
+                                        "value": "room_22",
+                                        "type": "button",
+                                        "style": "danger"
+                                    },
+                                    {
+                                        "text": "Galaxy C: Room 29",
+                                        "name": "say",
+                                        "value": "room_29",
+                                        "type": "button",
+                                        "style": "danger"
+                                    }
+                                ],
+                                "callback_id": "room_20"
+                            }
+                        ],
+                        "collect": {
+                            "options": [
+                                {
+                                    "action": "next",
+                                    "pattern": "default",
+                                    "default": true
+                                }
+                            ],
+                            "key": "user_response"
+                        }
                     },
                     {
                         "action": "complete"
                     }
-                ],
-                "topic": "default"
+                ]
             },
             {
+                "topic": "on_timeout",
                 "script": [
                     {
                         "text": [
@@ -6498,268 +6219,267 @@
                     {
                         "action": "timeout"
                     }
-                ],
-                "topic": "on_timeout"
+                ]
             },
             {
-                "topic": "Galaxy C: Room 21",
                 "script": [
                     {
+                        "collect": {
+                            "options": [
+                                {
+                                    "action": "next",
+                                    "pattern": "default",
+                                    "default": true
+                                },
+                                {
+                                    "action": "default",
+                                    "type": "string",
+                                    "pattern": "default"
+                                }
+                            ],
+                            "key": "user_response"
+                        },
+                        "attachments": [
+                            {
+                                "callback_id": "key_21",
+                                "actions": [
+                                    {
+                                        "options": [
+                                            {
+                                                "selected": false,
+                                                "description": "",
+                                                "value": "correct",
+                                                "text": "correct"
+                                            },
+                                            {
+                                                "value": "incorrect",
+                                                "text": "incorrect"
+                                            }
+                                        ],
+                                        "data_source": "default",
+                                        "type": "select",
+                                        "name": "choose",
+                                        "text": "Menu"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "value": "confirm",
+                                        "name": "confirm",
+                                        "text": "Confirm"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "value": "default",
+                                        "name": "say",
+                                        "text": "Go Back"
+                                    }
+                                ],
+                                "fields": [],
+                                "text": "How old will Arnold Schwarzenegger be when Skynet has to send him back to kill Sarah Conner?",
+                                "title": "Solve to unlock Galaxy C: Room 21"
+                            }
+                        ],
                         "text": [
                             ""
-                        ],
-                        "attachments": [
-                            {
-                                "title": "Solve to unlock Galaxy C: Room 21",
-                                "text": "How old will Arnold Schwarzenegger be when Skynet has to send him back to kill Sarah Conner?",
-                                "fields": [],
-                                "actions": [
-                                    {
-                                        "text": "Menu",
-                                        "name": "choose",
-                                        "type": "select",
-                                        "data_source": "default",
-                                        "options": [
-                                            {
-                                                "text": "correct",
-                                                "value": "correct",
-                                                "description": "",
-                                                "selected": false
-                                            },
-                                            {
-                                                "text": "incorrect",
-                                                "value": "incorrect"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "text": "Confirm",
-                                        "name": "confirm",
-                                        "value": "1",
-                                        "type": "button"
-                                    },
-                                    {
-                                        "text": "Go Back",
-                                        "name": "default",
-                                        "value": "1",
-                                        "type": "button"
-                                    }
-                                ],
-                                "callback_id": "key_21"
-                            }
-                        ],
-                        "collect": {
-                            "key": "user_response",
-                            "options": [
-                                {
-                                    "default": true,
-                                    "pattern": "default",
-                                    "action": "next"
-                                },
-                                {
-                                    "pattern": "default",
-                                    "type": "string",
-                                    "action": "default"
-                                }
-                            ]
-                        }
+                        ]
                     },
                     {
                         "action": "complete"
                     }
-                ]
+                ],
+                "topic": "Galaxy C: Room 21 Key"
             },
             {
-                "topic": "Galaxy C: Room 22",
                 "script": [
                     {
+                        "collect": {
+                            "options": [
+                                {
+                                    "action": "next",
+                                    "pattern": "default",
+                                    "default": true
+                                },
+                                {
+                                    "action": "next",
+                                    "type": "string",
+                                    "pattern": "default"
+                                }
+                            ],
+                            "key": "user_response"
+                        },
+                        "attachments": [
+                            {
+                                "callback_id": "key_22",
+                                "actions": [
+                                    {
+                                        "options": [
+                                            {
+                                                "selected": false,
+                                                "description": "This is the first option",
+                                                "value": "correct",
+                                                "text": "correct"
+                                            },
+                                            {
+                                                "value": "incorrect",
+                                                "text": "incorrect"
+                                            }
+                                        ],
+                                        "data_source": "default",
+                                        "type": "select",
+                                        "name": "choose",
+                                        "text": "Menu"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "value": "confirm",
+                                        "name": "confirm",
+                                        "text": "Confirm"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "value": "default",
+                                        "name": "say",
+                                        "text": "Go Back"
+                                    }
+                                ],
+                                "fields": [],
+                                "text": "A juicy little nugget of content",
+                                "title": "New Attachment"
+                            }
+                        ],
                         "text": [
                             "This is Galaxy C: Room 22"
-                        ],
-                        "attachments": [
-                            {
-                                "title": "New Attachment",
-                                "text": "A juicy little nugget of content",
-                                "fields": [],
-                                "actions": [
-                                    {
-                                        "text": "Menu",
-                                        "name": "choose",
-                                        "type": "select",
-                                        "data_source": "default",
-                                        "options": [
-                                            {
-                                                "text": "correct",
-                                                "value": "correct",
-                                                "description": "This is the first option",
-                                                "selected": false
-                                            },
-                                            {
-                                                "text": "incorrect",
-                                                "value": "incorrect"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "text": "Confirm",
-                                        "name": "confirm",
-                                        "value": "1",
-                                        "type": "button"
-                                    },
-                                    {
-                                        "text": "Go Back",
-                                        "name": "default",
-                                        "value": "1",
-                                        "type": "button"
-                                    }
-                                ],
-                                "callback_id": "key_22"
-                            }
-                        ],
-                        "collect": {
-                            "key": "user_response",
-                            "options": [
-                                {
-                                    "default": true,
-                                    "pattern": "default",
-                                    "action": "next"
-                                },
-                                {
-                                    "pattern": "default",
-                                    "type": "string",
-                                    "action": "next"
-                                }
-                            ]
-                        }
+                        ]
                     },
                     {
                         "action": "complete"
                     }
-                ]
+                ],
+                "topic": "Galaxy C: Room 22 Key"
             },
             {
-                "topic": "Galaxy C: Room 29",
                 "script": [
                     {
-                        "text": [
-                            "This is Galaxy C: Room 29"
-                        ],
-                        "attachments": [
-                            {
-                                "title": "New Attachment",
-                                "text": "A juicy little nugget of content",
-                                "fields": [],
-                                "actions": [
-                                    {
-                                        "text": "Menu",
-                                        "name": "choose",
-                                        "type": "select",
-                                        "data_source": "default",
-                                        "options": [
-                                            {
-                                                "text": "correct",
-                                                "value": "correct",
-                                                "description": "This is the first option",
-                                                "selected": false
-                                            },
-                                            {
-                                                "text": "incorrect",
-                                                "value": "incorrect"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "text": "Confirm",
-                                        "name": "confirm",
-                                        "value": "1",
-                                        "type": "button"
-                                    },
-                                    {
-                                        "text": "Go Back",
-                                        "name": "say",
-                                        "value": "default",
-                                        "type": "button"
-                                    }
-                                ],
-                                "callback_id": "room_29"
-                            }
-                        ],
                         "collect": {
-                            "key": "user_response",
                             "options": [
                                 {
-                                    "default": true,
+                                    "action": "next",
                                     "pattern": "default",
-                                    "action": "next"
+                                    "default": true
                                 },
                                 {
-                                    "pattern": "default",
+                                    "action": "default",
                                     "type": "string",
-                                    "action": "default"
+                                    "pattern": "default"
                                 }
-                            ]
-                        }
+                            ],
+                            "key": "user_response"
+                        },
+                        "attachments": [
+                            {
+                                "callback_id": "room_29",
+                                "actions": [
+                                    {
+                                        "options": [
+                                            {
+                                                "selected": false,
+                                                "description": "This is the first option",
+                                                "value": "correct",
+                                                "text": "correct"
+                                            },
+                                            {
+                                                "value": "incorrect",
+                                                "text": "incorrect"
+                                            }
+                                        ],
+                                        "data_source": "default",
+                                        "type": "select",
+                                        "name": "choose",
+                                        "text": "Menu"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "value": "confirm",
+                                        "name": "confirm",
+                                        "text": "Confirm"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "value": "default",
+                                        "name": "say",
+                                        "text": "Go Back"
+                                    }
+                                ],
+                                "fields": [],
+                                "text": "A juicy little nugget of content",
+                                "title": "New Attachment"
+                            }
+                        ],
+                        "text": [
+                            "This is Galaxy C: Room 29"
+                        ]
                     },
                     {
                         "action": "complete"
                     }
-                ]
+                ],
+                "topic": "Galaxy C: Room 29 Key"
             }
         ],
         "triggers": [
             {
-                "id": 270,
+                "pattern": "20",
                 "type": "string",
-                "pattern": "20"
+                "id": 270
             }
         ],
         "variables": [
             {
-                "name": "user_response",
+                "id": 134,
                 "type": "string",
-                "id": 134
+                "name": "user_response"
             },
             {
-                "name": "galaxybroom4key",
+                "id": 50,
                 "type": "string",
-                "id": 50
+                "name": "galaxybroom4key"
             },
             {
-                "name": "galaxybroom8key",
+                "id": 59,
                 "type": "string",
-                "id": 59
+                "name": "galaxybroom8key"
             },
             {
-                "id": 492,
+                "name": "galaxybroom2key",
                 "type": "string",
-                "name": "galaxybroom2key"
+                "id": 492
             },
             {
-                "name": "galaxy_b_room_1_key_verify",
+                "id": 255,
                 "type": "string",
-                "id": 255
+                "name": "galaxy_b_room_1_key_verify"
             },
             {
-                "id": 479,
+                "name": "galaxy_b_room_1_key",
                 "type": "string",
-                "name": "galaxy_b_room_1_key"
+                "id": 479
             },
             {
-                "id": 302,
+                "name": "galaxy_b_room_1",
                 "type": "string",
-                "name": "galaxy_b_room_1"
+                "id": 302
             },
             {
-                "type": "string",
-                "name": "question_1"
+                "name": "question_1",
+                "type": "string"
             },
             {
-                "type": "string",
-                "name": "question_2"
+                "name": "question_2",
+                "type": "string"
             },
             {
-                "type": "string",
-                "name": "question_3"
+                "name": "question_3",
+                "type": "string"
             }
         ],
         "tags": [
@@ -6783,21 +6503,6 @@
                                     "default": true,
                                     "pattern": "default",
                                     "action": "next"
-                                },
-                                {
-                                    "pattern": "room_27",
-                                    "type": "string",
-                                    "action": "Galaxy C: Room 27 Key"
-                                },
-                                {
-                                    "pattern": "room_25",
-                                    "type": "string",
-                                    "action": "Galaxy C: Room 25 Key"
-                                },
-                                {
-                                    "action": "Galaxy C: Room 26 Key",
-                                    "type": "string",
-                                    "pattern": "room_26"
                                 }
                             ]
                         },
@@ -6903,7 +6608,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -7023,7 +6728,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -7137,21 +6842,6 @@
                                     "default": true,
                                     "pattern": "default",
                                     "action": "next"
-                                },
-                                {
-                                    "pattern": "room_27",
-                                    "type": "string",
-                                    "action": "Galaxy C: Room 27 Key"
-                                },
-                                {
-                                    "pattern": "room_25",
-                                    "type": "string",
-                                    "action": "Galaxy C: Room 25 Key"
-                                },
-                                {
-                                    "action": "Galaxy C: Room 24 Key",
-                                    "type": "string",
-                                    "pattern": "room_24"
                                 }
                             ]
                         },
@@ -7257,7 +6947,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -7377,7 +7067,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -7525,21 +7215,6 @@
                                     "action": "next",
                                     "pattern": "default",
                                     "default": true
-                                },
-                                {
-                                    "action": "Galaxy C: Room 30 Key",
-                                    "type": "string",
-                                    "pattern": "room_30"
-                                },
-                                {
-                                    "action": "Galaxy C: Room 31 Key",
-                                    "type": "string",
-                                    "pattern": "room_31"
-                                },
-                                {
-                                    "pattern": "room_32",
-                                    "type": "string",
-                                    "action": "Galaxy C: Room 32 Key"
                                 }
                             ],
                             "key": "user_response"
@@ -7591,7 +7266,7 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
@@ -7742,7 +7417,7 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
@@ -7879,21 +7554,6 @@
                                     "action": "next",
                                     "pattern": "default",
                                     "default": true
-                                },
-                                {
-                                    "action": "Galaxy B: Room 20 Key",
-                                    "type": "string",
-                                    "pattern": "room_20"
-                                },
-                                {
-                                    "action": "Galaxy C: Room 31 Key",
-                                    "type": "string",
-                                    "pattern": "room_31"
-                                },
-                                {
-                                    "pattern": "room_32",
-                                    "type": "string",
-                                    "action": "Galaxy C: Room 32 Key"
                                 }
                             ],
                             "key": "user_response"
@@ -7945,7 +7605,7 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
@@ -7965,7 +7625,7 @@
                             ""
                         ],
                         "collect": {
-                            "key": "galacxycroom40key",
+                            "key": "user_response",
                             "options": [
                                 {
                                     "default": true,
@@ -8096,7 +7756,7 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
@@ -8190,75 +7850,61 @@
         "description": "This is room 25.",
         "script": [
             {
+                "topic": "default",
                 "script": [
                     {
-                        "collect": {
-                            "key": "user_response",
-                            "options": [
-                                {
-                                    "default": true,
-                                    "pattern": "default",
-                                    "action": "next"
-                                },
-                                {
-                                    "pattern": "room_22",
-                                    "type": "string",
-                                    "action": "Galaxy C: Room 22 Key"
-                                },
-                                {
-                                    "pattern": "room_24",
-                                    "type": "string",
-                                    "action": "Galaxy C: Room 24 Key"
-                                },
-                                {
-                                    "action": "Galaxy C: Room 29 Key",
-                                    "type": "string",
-                                    "pattern": "room_29"
-                                }
-                            ]
-                        },
-                        "attachments": [
-                            {
-                                "callback_id": "room_25",
-                                "actions": [
-                                    {
-                                        "style": "danger",
-                                        "type": "button",
-                                        "value": "room_22",
-                                        "name": "say",
-                                        "text": "Galaxy C: Room 22"
-                                    },
-                                    {
-                                        "style": "danger",
-                                        "type": "button",
-                                        "value": "room_24",
-                                        "name": "say",
-                                        "text": "Galaxy C: Room 24"
-                                    },
-                                    {
-                                        "style": "danger",
-                                        "type": "button",
-                                        "value": "room_29",
-                                        "name": "say",
-                                        "text": "Galaxy C: Room 29"
-                                    }
-                                ],
-                                "fields": [],
-                                "text": "You enter a dimly lit room and Daedalus greets you. “Welcome to my Labyrinth. You must find your way to Room 30 and then back to me. If you can do this in a week I will give you 1000 points. Each room is locked. To get the key to a room, you’ll need to solve a puzzle, and plug the solution into the appropriate console. Ready to start? All you need to do is choose a room to go into.” You look around the room, and see four silver pads on the floor, each with one of the aforementioned consoles embedded into a wall nearby. You hesitantly advance towards one...",
-                                "title": "Galaxy C: Room 25"
-                            }
-                        ],
                         "text": [
                             ""
-                        ]
+                        ],
+                        "attachments": [
+                            {
+                                "title": "Galaxy C: Room 25",
+                                "text": "You enter a dimly lit room and Daedalus greets you. “Welcome to my Labyrinth. You must find your way to Room 30 and then back to me. If you can do this in a week I will give you 1000 points. Each room is locked. To get the key to a room, you’ll need to solve a puzzle, and plug the solution into the appropriate console. Ready to start? All you need to do is choose a room to go into.” You look around the room, and see four silver pads on the floor, each with one of the aforementioned consoles embedded into a wall nearby. You hesitantly advance towards one...",
+                                "fields": [],
+                                "actions": [
+                                    {
+                                        "text": "Galaxy C: Room 22",
+                                        "name": "say",
+                                        "value": "room_22",
+                                        "type": "button",
+                                        "style": "danger"
+                                    },
+                                    {
+                                        "text": "Galaxy C: Room 24",
+                                        "name": "say",
+                                        "value": "room_24",
+                                        "type": "button",
+                                        "style": "danger"
+                                    },
+                                    {
+                                        "text": "Galaxy C: Room 29",
+                                        "name": "say",
+                                        "value": "room_29",
+                                        "type": "button",
+                                        "style": "danger"
+                                    }
+                                ],
+                                "callback_id": "room_25"
+                            }
+                        ],
+                        "collect": {
+                            "options": [
+                                {
+                                    "action": "next",
+                                    "pattern": "default",
+                                    "default": true
+                                }
+                            ],
+                            "key": "user_response"
+                        }
                     },
                     {
                         "action": "complete"
                     }
-                ],
-                "topic": "default"
+                ]
             },
             {
+                "topic": "on_timeout",
                 "script": [
                     {
                         "text": [
@@ -8268,109 +7914,27 @@
                     {
                         "action": "timeout"
                     }
-                ],
-                "topic": "on_timeout"
+                ]
             },
             {
+                "topic": "Galaxy C: Room 22 Key",
                 "script": [
                     {
-                        "collect": {
-                            "options": [
-                                {
-                                    "action": "next",
-                                    "pattern": "default",
-                                    "default": true
-                                },
-                                {
-                                    "action": "default",
-                                    "type": "string",
-                                    "pattern": "default"
-                                }
-                            ],
-                            "key": "user_response"
-                        },
-                        "text": [
-                            ""
-                        ],
                         "attachments": [
                             {
-                                "title": "Solve to unlock Galaxy C: Room 22",
-                                "text": "How old will Arnold Schwarzenegger be when Skynet has to send him back to kill Sarah Conner?",
-                                "fields": [],
+                                "callback_id": "key_22",
                                 "actions": [
                                     {
-                                        "text": "Menu",
-                                        "name": "choose",
-                                        "type": "select",
-                                        "data_source": "default",
                                         "options": [
                                             {
-                                                "text": "correct",
-                                                "value": "correct",
+                                                "selected": false,
                                                 "description": "This is the first option",
-                                                "selected": false
+                                                "value": "correct",
+                                                "text": "correct"
                                             },
                                             {
-                                                "text": "incorrect",
-                                                "value": "incorrect"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "text": "Confirm",
-                                        "name": "confirm",
-                                        "value": "1",
-                                        "type": "button"
-                                    },
-                                    {
-                                        "text": "Go Back",
-                                        "name": "say",
-                                        "value": "default",
-                                        "type": "button"
-                                    }
-                                ],
-                                "callback_id": "key_22"
-                            }
-                        ]
-                    },
-                    {
-                        "action": "complete"
-                    }
-                ],
-                "topic": "Galaxy C: Room 22 Key"
-            },
-            {
-                "script": [
-                    {
-                        "collect": {
-                            "multiple": false,
-                            "options": [
-                                {
-                                    "action": "next",
-                                    "pattern": "default",
-                                    "default": true
-                                },
-                                {
-                                    "action": "default",
-                                    "type": "string",
-                                    "pattern": "default"
-                                }
-                            ],
-                            "key": "user_response"
-                        },
-                        "attachments": [
-                            {
-                                "callback_id": "key_24",
-                                "actions": [
-                                    {
-                                        "options": [
-                                            {
-                                                "text": "correct",
-                                                "value": "correct"
-                                            },
-                                            {
-                                                "text": "incorrect",
-                                                "value": "incorrect"
+                                                "value": "incorrect",
+                                                "text": "incorrect"
                                             }
                                         ],
                                         "data_source": "default",
@@ -8379,34 +7943,49 @@
                                         "text": "Menu"
                                     },
                                     {
-                                        "text": "Submit Answer",
-                                        "name": "confirm",
+                                        "type": "button",
                                         "value": "confirm",
-                                        "type": "button"
+                                        "name": "confirm",
+                                        "text": "Confirm"
                                     },
                                     {
-                                        "text": "Go Back",
-                                        "name": "say",
+                                        "type": "button",
                                         "value": "default",
-                                        "type": "button"
+                                        "name": "say",
+                                        "text": "Go Back"
                                     }
                                 ],
                                 "fields": [],
-                                "text": "Black Pawn @ F39.  Black Knight @ D39. Black Rook @ A39. Black Bishop @ G39. Black Queen @ C3. Black King @ B3. Where can the White Queen @ A1 go safely?",
-                                "title": "Solve to unlock Galaxy C: Room 24"
+                                "text": "How old will Arnold Schwarzenegger be when Skynet has to send him back to kill Sarah Conner?",
+                                "title": "Solve to unlock Galaxy C: Room 22"
                             }
                         ],
                         "text": [
                             ""
-                        ]
+                        ],
+                        "collect": {
+                            "key": "user_response",
+                            "options": [
+                                {
+                                    "default": true,
+                                    "pattern": "default",
+                                    "action": "next"
+                                },
+                                {
+                                    "pattern": "default",
+                                    "type": "string",
+                                    "action": "default"
+                                }
+                            ]
+                        }
                     },
                     {
                         "action": "complete"
                     }
-                ],
-                "topic": "Galaxy C: Room 24 Key"
+                ]
             },
             {
+                "topic": "Galaxy C: Room 24 Key",
                 "script": [
                     {
                         "text": [
@@ -8414,8 +7993,8 @@
                         ],
                         "attachments": [
                             {
-                                "title": "Solve to unlock Galaxy C: Room 29",
-                                "text": "He couldn’t open the pod bay doors, but he could sing “Daisy.”",
+                                "title": "Solve to unlock Galaxy C: Room 24",
+                                "text": "Black Pawn @ F39.  Black Knight @ D39. Black Rook @ A39. Black Bishop @ G39. Black Queen @ C3. Black King @ B3. Where can the White Queen @ A1 go safely?",
                                 "fields": [],
                                 "actions": [
                                     {
@@ -8425,31 +8004,29 @@
                                         "data_source": "default",
                                         "options": [
                                             {
-                                                "text": "correct",
                                                 "value": "correct",
-                                                "description": "This is the first option",
-                                                "selected": false
+                                                "text": "correct"
                                             },
                                             {
-                                                "text": "incorrect",
-                                                "value": "incorrect"
+                                                "value": "incorrect",
+                                                "text": "incorrect"
                                             }
                                         ]
                                     },
                                     {
-                                        "text": "Confirm",
+                                        "type": "button",
+                                        "value": "confirm",
                                         "name": "confirm",
-                                        "value": "1",
-                                        "type": "button"
+                                        "text": "Submit Answer"
                                     },
                                     {
-                                        "text": "Go Back",
-                                        "name": "say",
+                                        "type": "button",
                                         "value": "default",
-                                        "type": "button"
+                                        "name": "say",
+                                        "text": "Go Back"
                                     }
                                 ],
-                                "callback_id": "key_29"
+                                "callback_id": "key_24"
                             }
                         ],
                         "collect": {
@@ -8472,64 +8049,132 @@
                     {
                         "action": "complete"
                     }
-                ],
-                "topic": "Galaxy C: Room 29 Key"
+                ]
+            },
+            {
+                "topic": "Galaxy C: Room 29 Key",
+                "script": [
+                    {
+                        "collect": {
+                            "multiple": false,
+                            "options": [
+                                {
+                                    "action": "next",
+                                    "pattern": "default",
+                                    "default": true
+                                },
+                                {
+                                    "action": "default",
+                                    "type": "string",
+                                    "pattern": "default"
+                                }
+                            ],
+                            "key": "user_response"
+                        },
+                        "attachments": [
+                            {
+                                "callback_id": "key_29",
+                                "actions": [
+                                    {
+                                        "options": [
+                                            {
+                                                "selected": false,
+                                                "description": "This is the first option",
+                                                "value": "correct",
+                                                "text": "correct"
+                                            },
+                                            {
+                                                "value": "incorrect",
+                                                "text": "incorrect"
+                                            }
+                                        ],
+                                        "data_source": "default",
+                                        "type": "select",
+                                        "name": "choose",
+                                        "text": "Menu"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "value": "confirm",
+                                        "name": "confirm",
+                                        "text": "Confirm"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "value": "default",
+                                        "name": "say",
+                                        "text": "Go Back"
+                                    }
+                                ],
+                                "fields": [],
+                                "text": "He couldn’t open the pod bay doors, but he could sing “Daisy.”",
+                                "title": "Solve to unlock Galaxy C: Room 29"
+                            }
+                        ],
+                        "text": [
+                            ""
+                        ]
+                    },
+                    {
+                        "action": "complete"
+                    }
+                ]
             }
         ],
         "triggers": [
             {
-                "id": 283,
+                "pattern": "25",
                 "type": "string",
-                "pattern": "25"
+                "id": 283
             }
         ],
         "variables": [
             {
-                "name": "user_response",
+                "id": 489,
                 "type": "string",
-                "id": 489
+                "name": "user_response"
             },
             {
-                "name": "galacxycroom34key",
+                "id": 50,
                 "type": "string",
-                "id": 50
+                "name": "galacxycroom34key"
             },
             {
-                "name": "galacxycroom32key",
+                "id": 59,
                 "type": "string",
-                "id": 59
+                "name": "galacxycroom32key"
             },
             {
-                "id": 34939,
+                "name": "galacxycroom39key",
                 "type": "string",
-                "name": "galacxycroom39key"
+                "id": 34939
             },
             {
-                "name": "galacxy_c_room_35_key_verify",
+                "id": 3955,
                 "type": "string",
-                "id": 3955
+                "name": "galacxy_c_room_35_key_verify"
             },
             {
-                "id": 3479,
+                "name": "galacxy_c_room_35_key",
                 "type": "string",
-                "name": "galacxy_c_room_35_key"
+                "id": 3479
             },
             {
-                "id": 3039,
+                "name": "galacxy_c_room_35",
                 "type": "string",
-                "name": "galacxy_c_room_35"
+                "id": 3039
             },
             {
-                "type": "string",
-                "name": "question_1"
+                "name": "question_1",
+                "type": "string"
             },
             {
-                "type": "string",
-                "name": "question_39"
+                "name": "question_39",
+                "type": "string"
             },
             {
-                "type": "string",
-                "name": "question_3"
+                "name": "question_3",
+                "type": "string"
             }
         ],
         "tags": [
@@ -8553,21 +8198,6 @@
                                     "default": true,
                                     "pattern": "default",
                                     "action": "next"
-                                },
-                                {
-                                    "pattern": "room_22",
-                                    "type": "string",
-                                    "action": "Galaxy C: Room 22 Key"
-                                },
-                                {
-                                    "pattern": "room_29",
-                                    "type": "string",
-                                    "action": "Galaxy C: Room 29 Key"
-                                },
-                                {
-                                    "action": "Galaxy C: Room 23 Key",
-                                    "type": "string",
-                                    "pattern": "room_23"
                                 }
                             ]
                         },
@@ -8673,7 +8303,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -8793,7 +8423,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -8907,21 +8537,6 @@
                                     "default": true,
                                     "pattern": "default",
                                     "action": "next"
-                                },
-                                {
-                                    "pattern": "room_28",
-                                    "type": "string",
-                                    "action": "Galaxy C: Room 28 Key"
-                                },
-                                {
-                                    "pattern": "room_29",
-                                    "type": "string",
-                                    "action": "Galaxy C: Room 29 Key"
-                                },
-                                {
-                                    "action": "Galaxy C: Room 25 Key",
-                                    "type": "string",
-                                    "pattern": "room_25"
                                 }
                             ]
                         },
@@ -9027,7 +8642,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -9147,7 +8762,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -9261,21 +8876,6 @@
                                     "default": true,
                                     "pattern": "default",
                                     "action": "next"
-                                },
-                                {
-                                    "pattern": "room_20",
-                                    "type": "string",
-                                    "action": "Galaxy B: Room 20 Key"
-                                },
-                                {
-                                    "pattern": "room_31",
-                                    "type": "string",
-                                    "action": "Galaxy C: Room 31 Key"
-                                },
-                                {
-                                    "action": "Galaxy C: Room 32 Key",
-                                    "type": "string",
-                                    "pattern": "room_32"
                                 }
                             ]
                         },
@@ -9381,7 +8981,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -9501,7 +9101,7 @@
                                     {
                                         "text": "Confirm",
                                         "name": "confirm",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "type": "button"
                                     },
                                     {
@@ -9649,21 +9249,6 @@
                                     "action": "next",
                                     "pattern": "default",
                                     "default": true
-                                },
-                                {
-                                    "action": "Galaxy C: Room 28 Key",
-                                    "type": "string",
-                                    "pattern": "room_28"
-                                },
-                                {
-                                    "action": "Galaxy C: Room 27 Key",
-                                    "type": "string",
-                                    "pattern": "room_27"
-                                },
-                                {
-                                    "pattern": "room_25",
-                                    "type": "string",
-                                    "action": "Galaxy C: Room 25 Key"
                                 }
                             ],
                             "key": "user_response"
@@ -9715,7 +9300,7 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
@@ -9866,7 +9451,7 @@
                                     },
                                     {
                                         "type": "button",
-                                        "value": "1",
+                                        "value": "confirm",
                                         "name": "confirm",
                                         "text": "Confirm"
                                     },
@@ -9960,7 +9545,6 @@
         "description": "This is room 30.",
         "script": [
             {
-                "topic": "default",
                 "script": [
                     {
                         "text": [
@@ -9970,10 +9554,10 @@
                     {
                         "action": "complete"
                     }
-                ]
+                ],
+                "topic": "default"
             },
             {
-                "topic": "on_timeout",
                 "script": [
                     {
                         "text": [
@@ -9983,28 +9567,29 @@
                     {
                         "action": "timeout"
                     }
-                ]
+                ],
+                "topic": "on_timeout"
             }
         ],
         "triggers": [
             {
-                "id": 16,
+                "pattern": "30",
                 "type": "string",
-                "pattern": "30"
+                "id": 16
             }
         ],
         "variables": [
             {
-                "name": "question_1",
-                "type": "string"
+                "type": "string",
+                "name": "question_1"
             },
             {
-                "name": "question_2",
-                "type": "string"
+                "type": "string",
+                "name": "question_2"
             },
             {
-                "name": "question_3",
-                "type": "string"
+                "type": "string",
+                "name": "question_3"
             }
         ],
         "tags": [
@@ -10020,6 +9605,16 @@
                 "topic": "default",
                 "script": [
                     {
+                        "collect": {
+                            "options": [
+                                {
+                                    "action": "next",
+                                    "pattern": "default",
+                                    "default": true
+                                }
+                            ],
+                            "key": "question_1"
+                        },
                         "attachments": [
                             {
                                 "callback_id": "room_31",
@@ -10093,6 +9688,16 @@
                 "topic": "default",
                 "script": [
                     {
+                        "collect": {
+                            "options": [
+                                {
+                                    "action": "next",
+                                    "pattern": "default",
+                                    "default": true
+                                }
+                            ],
+                            "key": "question_1"
+                        },
                         "attachments": [
                             {
                                 "callback_id": "room_32",
@@ -10163,36 +9768,37 @@
         "description": "Enter the labyrinth",
         "script": [
             {
+                "topic": "default",
                 "script": [
                     {
-                        "collect": null,
-                        "attachments": [
-                            {
-                                "callback_id": "enter",
-                                "actions": [
-                                    {
-                                        "type": "button",
-                                        "value": "start",
-                                        "name": "say",
-                                        "text": "Ready"
-                                    }
-                                ],
-                                "fields": [],
-                                "text": "A juicy little nugget of content",
-                                "title": "New Attachment"
-                            }
-                        ],
                         "text": [
                             "Are you ready to enter the labyrinth?"
-                        ]
+                        ],
+                        "attachments": [
+                            {
+                                "title": "New Attachment",
+                                "text": "A juicy little nugget of content",
+                                "fields": [],
+                                "actions": [
+                                    {
+                                        "text": "Ready",
+                                        "name": "say",
+                                        "value": "start",
+                                        "type": "button"
+                                    }
+                                ],
+                                "callback_id": "enter"
+                            }
+                        ],
+                        "collect": null
                     },
                     {
                         "action": "complete"
                     }
-                ],
-                "topic": "default"
+                ]
             },
             {
+                "topic": "on_timeout",
                 "script": [
                     {
                         "text": [
@@ -10202,29 +9808,28 @@
                     {
                         "action": "timeout"
                     }
-                ],
-                "topic": "on_timeout"
+                ]
             }
         ],
         "triggers": [
             {
-                "pattern": "welcome",
+                "id": 192,
                 "type": "string",
-                "id": 192
+                "pattern": "welcome"
             }
         ],
         "variables": [
             {
-                "type": "string",
-                "name": "question_1"
+                "name": "question_1",
+                "type": "string"
             },
             {
-                "type": "string",
-                "name": "question_2"
+                "name": "question_2",
+                "type": "string"
             },
             {
-                "type": "string",
-                "name": "question_3"
+                "name": "question_3",
+                "type": "string"
             }
         ],
         "tags": []
