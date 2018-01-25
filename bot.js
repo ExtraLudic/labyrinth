@@ -132,7 +132,6 @@ if (!process.env.clientId || !process.env.clientSecret) {
 
   var normalizedPath = require("path").join(__dirname, "skills");
   require("fs").readdirSync(normalizedPath).forEach(function(file) {
-    console.log(file);
     require("./skills/" + file)(controller);
   });
 

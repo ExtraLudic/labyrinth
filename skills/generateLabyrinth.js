@@ -14,6 +14,8 @@ module.exports = function(controller) {
   var promises = [];
       
   controller.on("generate", function(options) {
+    
+    console.log(options.message, options.team);
         
     if (options.user) user = options.user;
     if (options.channel) channel = options.channel;
@@ -23,7 +25,6 @@ module.exports = function(controller) {
     if (!user) user = options.message.user;
     if (!team) team = options.message.team;
     
-    console.log(options.message, options.team);
     
     // console.log(bot);
     controller.storage.teams.get(team, function(err, teamData) {
@@ -53,12 +54,13 @@ module.exports = function(controller) {
               console.log("There was an error: ", err);
             }
             
-            console.log(teamSaved, "is the team data we saved");
+            // console.log(teamSaved, "is the team data we saved");
             // Check the team to make sure it was updated
          
             // Team should have a puzzles object now attached
             controller.storage.teams.get(teamSaved, function(err, teamUpdated) {
-              console.log("updated: ", teamUpdated.puzzles);
+              // console.log("updated: ", teamUpdated.puzzles);
+              validation(teamUpdated.puzzles, teamUpdated.id);
               if (options.forced) {
                 options.bot.reply(options.message, {
                   'text': "Nice, you have updated your team's puzzles with completely fresh data!"
@@ -126,6 +128,46 @@ module.exports = function(controller) {
         }).catch((err) => { console.log("Error in") });
 
       };
+    
+    function validation(arr, teamId) {
+      var newArr = _.map(arr, function(item) {
+        if (item == undefined) {
+          var ind = arr.indexOf(item);
+          
+          controller.studio.getScripts().then(function(list) {
+            var puzzles = _.reject(list, function(puzzle) {
+              return !_.contains(puzzle.tags, pullTag);
+            });
+
+            var names = _.pluck(puzzles, "name");
+            _.each(names, function(name) {
+              if (name.contains(ind)) {
+                var thisPuzzle = name;
+                
+                pd(name).then(res => {
+                  return res;
+                });
+              }
+            });
+          });
+          
+        } else {
+          return item;
+        }
+      });
+      
+      console.log(newArr);
+      
+      controller.storage.teams.get(teamId, function(err, team) {
+        team.puzzles = newArr;
+        
+        controller.storage.teams.save(team, function(err, teamUpdated) {
+          console.log(teamUpdated);
+        });
+      });
+    }
+    
+    
     
   }); // End on event
   
