@@ -29,7 +29,7 @@ module.exports = function(controller) {
       
       console.log(teamData, "is the gotten team" );
 
-      request("https://raw.githubusercontent.com/ExtraLudic/labyrinth/master/json/debugScripts.json", function(err, response, body){
+      request("https://raw.githubusercontent.com/ExtraLudic/labyrinth/json/json/debugScripts.json", function(err, response, body){
     
         var teamPuzzles = [];
 
