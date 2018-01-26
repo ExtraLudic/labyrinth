@@ -1,0 +1,11 @@
+Lang’s Cell
+~Veins of silver pulse eerily all around in this room. Are they meant to be traveled across? You tap your foot against one, and find yourself on the other end of the room, with a long strip of silver behind you. SIGURD is kneeling next to where you just appeared, and looks up briefly.
+
+"Player. Hello. Just examining the travel lines here--experimental technology--Daedalus told me about it. Apparently, it's a way of transferring data faster than any method currently known to the world. Faster even than fiber optics. It's all but instantaneous, but..."
+
+SIGURD straightens up and shakes their head.
+
+"Prohibitively expensive. It seems as though it transported you across the entire room, but the actual processor running this Labyrinth has only a couple micrometers of the material. It's far too expensive to be of any use to humanity for now."
+
+SIGURD seems lost in thought, so you leave them be and approach the doors out of this room.
+
