@@ -93,16 +93,5 @@ module.exports = function(controller) {
       });
         
     }); // End team get
-    
-    
   }); // End on event
-  
-  
-     
 }
-
-var requestJson = function() {
-  
-  
-}
-

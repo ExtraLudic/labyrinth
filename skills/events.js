@@ -42,22 +42,12 @@ module.exports = function(controller) {
           // console.log(message.event.text.match(/#[a-z0-9_]+/g));
           controller.trigger('message_tagged', [bot, message, message.event.text.match(/#[a-z0-9_]+/g)]);
         } else {
-          
-          // delete the message without a tag
-//           web.chat.delete(message.ts, message.channel).then((res) => {
-            
-//              console.log(res + " was deleted bc it was not tagged");
-
-//           }).catch((err) => { console.log(err) });
-          
           // trigger the tagging script in botkit studio
           controller.studio.runTrigger(bot, 'tagging', message.user, message.channel).catch(function(err) {
               bot.reply(message, 'I experienced an error with a request to Botkit Studio: ' + err);
           });
           
         }
-      } else {
-        
       }
         
 
@@ -170,18 +160,10 @@ module.exports = function(controller) {
     // console.log("map event message: " + JSON.stringify(options.message));
     // Based on the format of "message", set the teamId
     var teamId;
-    if (options.team) {
-        teamId = options.team.id
-    } else if (options.message.team_id) {
-        console.log("using the team_id");
-        teamId = options.message.team_id;
-    } else if (options.message.team.id) {
-        console.log("using team object");
-        teamId = options.message.team.id;
-    } else {
-        console.log("just using the team");
-        teamId = options.message.team;
-    }
+
+    teamId = (options.team) ? options.team.id : 
+      ((options.message.team_id) ? options.message.team_id : 
+          ((options,message.team.id) ? options.message.team.id : options.message.team));
 
     var mapLink = "/" + teamId + "/map";
     // console.log(mapLink, "is the map link for this team" );
@@ -241,16 +223,7 @@ module.exports = function(controller) {
           
           // Based on the format of "message", set the teamId
           var teamId;
-          if (message.team_id) {
-              console.log("using the team_id");
-              teamId = message.team_id;
-          } else if (message.team.id) {
-              console.log("using team object");
-              teamId = message.team.id;
-          } else {
-              console.log("just using the team");
-              teamId = message.team;
-          }
+          teamId = (message.team_id) ? message.team_id : ((message.team.id) ? message.team.id : message.team);
           
           // Find team to check puzzles data                   
           controller.storage.teams.get(teamId, function(err, team) {
