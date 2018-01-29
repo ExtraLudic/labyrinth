@@ -28,7 +28,7 @@ function populateArray(arr){
    		 return parseInt(a[1]) - parseInt(b[1]);
 	});
 	//console.log(listDir);
-	console.log(sortDir);
+	//console.log(sortDir);
 	for(var i = 0; i < sortDir.length; i++){
 
 		var populateArr = fs.readFileSync('./'+ arr.name + "/" + sortDir[i] , 'utf-8');
@@ -40,6 +40,7 @@ function populateArray(arr){
 	
 populateArray(key);
 populateArray(puzzle);
+//console.log(puzzle);
 populateArray(description);
 
 //console.log(description);
@@ -71,7 +72,7 @@ var rk = function randomizeKeys(key){
             "value": value
              };
 
-		objectFormat.text = list;
+		objectFormat.text = currentElement;
 		return objectFormat;
 	});
 	formattedList[0].value = 'correct';
@@ -82,7 +83,7 @@ var rk = function randomizeKeys(key){
 
 var randomKeys = key.map(rk);
 
-console.log(randomKeys);
+//console.log(randomKeys);
 
 // END OF STEP TWO. KEYS ARE NOW RANDOM.
 
@@ -95,7 +96,7 @@ var sd = function splitDescriptions(description){
 
 var titleDescription = description.map(sd);
 
-//console.log(titleDescription[0]);
+console.log(titleDescription[1]);
 
 
 
@@ -111,8 +112,10 @@ function addContent(studioScriptParsed){
 				//console.log(studioScriptParsed[i].script[j].script[v].attachments[0]);
 				if (studioScriptParsed[i].script[j].script[v].attachments){
 					for(var s = 1; s < 33; s++){
-						var arrayIndex = s-1;
-						var titleDescriptionArr = titleDescription[arrayIndex];
+						var descriptionArrayIndex = s-1;
+						var puzzleKeyArrayIndex = s-2;
+						var titleDescriptionArr = titleDescription[s];       // THIS IS CHANGED TO S INSTEAD OF DescriptionArray becasue there is some hidden file giving 0s
+					//	console.log(titleDescription);
 						
 						//console.log('s'+s);
 					    // ADD CODE ABOUT ROOM DESCRIPTIONS HERE. ATTACHMENTS[0].text.
@@ -126,8 +129,8 @@ function addContent(studioScriptParsed){
 							//console.log('xxxxxxxxxxxxxxxxxxxx');
 
 							
-					        studioScriptParsed[i].script[j].script[v].attachments[0].actions[0].options = randomKeys[arrayIndex];
-					        studioScriptParsed[i].script[j].script[v].attachments[0].text = puzzle[arrayIndex];
+					        studioScriptParsed[i].script[j].script[v].attachments[0].actions[0].options = randomKeys[puzzleKeyArrayIndex];
+					        studioScriptParsed[i].script[j].script[v].attachments[0].text = puzzle[puzzleKeyArrayIndex];
 				        }
 					}
 				}	
