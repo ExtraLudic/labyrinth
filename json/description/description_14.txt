@@ -1,0 +1,10 @@
+Darrow’s Cell~
+A burst of sound greets your ears as you appear in the center of a massive party. This ballroom is lavishly decorated in art-deco style, and the partygoers match, each dressed in to the nines in formal evening wear that look torn from the pages of the Great Gatsby. Servants offer you champagne and hors d'oeuvres. If you look at any of them too closely, however, you can see that their faces are flat textures, and their hands are a single polygon with fused fingers. However, a much-more detailed model is walking towards you now.
+
+"Player! How great to see you again."
+
+"What? Don't tell me you don't recognize me--I was one of the Personalities from that other room! BENEDICT. I was the happy one, remember? I thought I'd just drop by and pick up some hors d'oeuvres to celebrate getting out of there. Thanks for that, again."
+
+They wink and depart, leaving you wondering which path to take.
+
+

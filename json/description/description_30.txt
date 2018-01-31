@@ -1,0 +1,10 @@
+Shelly’s Cell~
+This room's floor is covered by black marble lumps that rise and fall in a slightly lumpy, moundlike fashion. Each lump seems to glow slightly, as though there's something inside, and when you place your hand on one, it feels warm. 
+
+BENEDICT is standing with the other personalities. He walks over and claps you on the back.
+
+"Hey, you completed the puzzle! Well done, man. And how's that old egg doing...? Oh, wow, look at that! Did you get the code, then? If so, you know what to do with it! And if not, well... keep going! Anyway, I hope you enjoyed this little adventure. It'll be much bigger in the final game, believe me."
+
+"...Oh, you want to know what I do for Daedalus? Heh heh... well, I guess you'll have to play again later to find out!"
+
+END PART 1. CONGRATULATIONS ON COMPLETING THE PROTOTYPE PUZZLE!

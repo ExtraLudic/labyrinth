@@ -49,9 +49,6 @@ module.exports = function(controller) {
                 tries: 0, 
                 roomId: name.match(/\d+/)[0]
               };
-              
-              if (thisPuzzle.roomId == 1)
-                thisPuzzle.locked = false;
 
               _.each(section.script, function(thread) {
                 if (thread.topic.match(/\d+/))
@@ -96,16 +93,5 @@ module.exports = function(controller) {
       });
         
     }); // End team get
-    
-    
   }); // End on event
-  
-  
-     
 }
-
-var requestJson = function() {
-  
-  
-}
-
